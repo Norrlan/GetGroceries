@@ -11,17 +11,14 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-
 import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link AsdaFragment#newInstance} factory method to
+ * Use the {@link IcelandFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AsdaFragment extends Fragment
-{
+public class IcelandFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -32,8 +29,7 @@ public class AsdaFragment extends Fragment
     private String mParam1;
     private String mParam2;
 
-    public AsdaFragment()
-    {
+    public IcelandFragment() {
         // Required empty public constructor
     }
 
@@ -43,12 +39,11 @@ public class AsdaFragment extends Fragment
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment AsdaFragment.
+     * @return A new instance of fragment IcelandFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static AsdaFragment newInstance(String param1, String param2)
-    {
-        AsdaFragment fragment = new AsdaFragment();
+    public static IcelandFragment newInstance(String param1, String param2) {
+        IcelandFragment fragment = new IcelandFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -57,50 +52,64 @@ public class AsdaFragment extends Fragment
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState)
-    {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-        // default fragment on start
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState)
     {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_asda, container, false);
+        return inflater.inflate(R.layout.fragment_iceland, container, false);
     }
 
     @Override
     public void onViewCreated (View view, Bundle savedInstanceState)
     {
         super.onViewCreated(view, savedInstanceState);
-        ListView listView = view.findViewById(R.id.asda_list);
+        ListView listView = view.findViewById(R.id.ice_list);
 
-        ArrayList<String> aisles = CategoryList.getInstance().asdaAisles; // Get the List from CategoryList singleton
+        ArrayList<String> aisles = CategoryList3.getInstance().getIceAisles(); // Get the List from CategoryList singleton
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>
                 (
-                getContext(),
-                android.R.layout.simple_list_item_1, aisles
-        );
+                        getContext(),
+                        android.R.layout.simple_list_item_1, aisles
+                );
         listView.setAdapter(adapter);
 
-        listView.setOnItemClickListener((parent, view1, position, id) ->
-        {
+        listView.setOnItemClickListener((parent, view1, position, id) -> {
             String selectedAisle = aisles.get(position);
             Toast.makeText(getContext(), "Clicked: " + selectedAisle, Toast.LENGTH_SHORT).show();
 
             // The Category Fragements
-            ((MainActivity) getActivity()).openFragment(new AsdaFruitFragment());
-            ((MainActivity) getActivity()).openFragment(new AsdaBakeryFragment());
-            ((MainActivity) getActivity()).openFragment(new AsdaFFoodFragment());
-            ((MainActivity) getActivity()).openFragment(new AsdaLaundryFragment());
-        });
+            Fragment nextFragment = null;
 
+            // replace with fragments for Iceland later
+            switch (selectedAisle) {
+                case "Fruit":
+                    nextFragment = new AsdaFruitFragment();
+                    break;
+                case "Bakery":
+                    nextFragment = new AsdaBakeryFragment();
+                    break;
+                case "Frozen Food":
+                    nextFragment = new AsdaFFoodFragment();
+                    break;
+                case "Laundry":
+                    nextFragment = new AsdaLaundryFragment();
+                    break;
+            }
+
+            if (nextFragment != null) {
+                ((MainActivity) getActivity()).openFragment(nextFragment);
+            }
+        });
     }
 
 
