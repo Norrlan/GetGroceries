@@ -1,0 +1,10 @@
+# Android/Gradle
+.gradle/
+build/
+caches/
+local.properties
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
