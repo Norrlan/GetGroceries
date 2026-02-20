@@ -96,6 +96,13 @@ public class HomeFragment extends Fragment {
             ((MainActivity) getActivity()).openFragment(new IcelandFragment());
         });
 
+        //User profile Icon - top right corer
+        ImageView profilefragment = view.findViewById(R.id.profileicon);
+        profilefragment.setOnClickListener(v ->
+                {
+                    ((MainActivity) getActivity()).openFragment(new ProfileFragment());
+                });
+
 
     }
 

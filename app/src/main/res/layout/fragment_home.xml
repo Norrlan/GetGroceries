@@ -26,7 +26,7 @@
     <!-- TODO: Store cards containing the superakerts for price tracking across stores -->
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/profileicon"
         android:layout_width="42dp"
         android:layout_height="40dp"
         android:layout_marginStart="136dp"
