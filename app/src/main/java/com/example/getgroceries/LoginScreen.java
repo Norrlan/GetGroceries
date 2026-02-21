@@ -74,25 +74,44 @@ public class LoginScreen extends AppCompatActivity
         String value = field.getText().toString().trim();
 
         // Prevent user from leaving emtpy fields
-        if (value.isEmpty()) {
-            field.setError("This field is required");
+        if (value.isEmpty())
+        {
+            if (type.equals("email"))
+            {
+                field.setError("Email is required");
+            } else if (type.equals("password"))
+            {
+                field.setError("Password is required");
+            } else
+            {
+                field.setError("This field is required");
+            }
             return false;
         }
-
         // Email validation
         if (type.equals("email"))
-
-
-            // Password validation
-            if (type.equals("password")) {
-                if (value.length() < 8) {
-                    field.setError("Password must be at least 8 characters");
-                    return false;
-                }
+        {
+            String emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
+            if (!value.matches(emailRegex))
+            {
+                field.setError("Enter a valid email address");
+                return false;
             }
+        }
+
+        // Password validation
+        if (type.equals("password"))
+        {
+            if (value.length() < 8)
+            {
+                field.setError("Password must be at least 8 characters");
+                return false;
+            }
+        }
 
         return true;
     }
+
 
     // method for login.
     public void login(String email, String password)
@@ -127,10 +146,8 @@ public class LoginScreen extends AppCompatActivity
         EditText email= findViewById(R.id.Email2);
         EditText password = findViewById(R.id.Password2);
         // validate email and password
-        if (!validateField(email, "email"))
-            return;
-        if (!validateField(email, "password"))
-            return;
+        if (!validateField(email, "email"));
+        if (!validateField(password, "password"));
         // login after validation
         String semail = email.getText().toString().trim();
         String spassword = password.getText().toString().trim();
