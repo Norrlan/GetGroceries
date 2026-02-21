@@ -10,6 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -17,6 +20,7 @@ import android.widget.ImageView;
  * create an instance of this fragment.
  */
 public class ProfileFragment extends Fragment {
+    private FirebaseAuth mAuth;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -64,6 +68,7 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_profile, container, false);
     }
@@ -72,19 +77,32 @@ public class ProfileFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState)
     {
         super.onViewCreated(view, savedInstanceState);
-        // Reset Password button leads to the forgotten password screen
         Button resetPasswordBtn = view.findViewById(R.id.resetPasswordBtn);
-        resetPasswordBtn.setOnClickListener(v -> {
-            Intent intent = new Intent(getActivity(), ForgottenPassword.class);
-            startActivity(intent);
+        //Logout button logs user out. Takes user to the Login Screen after.
+        Button logoutbtn = view.findViewById(R.id.logoutBtn);
+        logoutbtn.setOnClickListener(v ->
+        {
+                    signOut();
         });
+        resetPasswordBtn.setOnClickListener(v ->
+        {
+            Intent intent = new Intent(getActivity(), ForgottenPassword.class);
+            startActivity(intent); // takes user to the forgotten passwrod screen
+        });
+    }
 
-
-
+    public void  signOut ()// method to make user logout.
+    {
+        mAuth.signOut();
+        Intent intent = new Intent(getActivity(), LoginScreen.class);
+        startActivity(intent);
+        // Prevent user from going back to the Login Screen
+        getActivity().finish();
 
 
 
 
     }
+
 
 }
