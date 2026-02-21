@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -58,17 +59,18 @@ public class ProfileFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        mAuth = FirebaseAuth.getInstance();
+        /*
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        }*/
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
-
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_profile, container, false);
     }
@@ -77,9 +79,18 @@ public class ProfileFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState)
     {
         super.onViewCreated(view, savedInstanceState);
+        // in the Profile screen, display the logged in users email
+        EditText Emailfield = view.findViewById(R.id.EmailAddressField);
         Button resetPasswordBtn = view.findViewById(R.id.resetPasswordBtn);
         //Logout button logs user out. Takes user to the Login Screen after.
         Button logoutbtn = view.findViewById(R.id.logoutBtn);
+        FirebaseUser user = mAuth.getCurrentUser();
+        // get logged in users email
+        if (user!= null)
+        {
+            String Email = user.getEmail();
+            Emailfield.setText(Email);
+        }
         logoutbtn.setOnClickListener(v ->
         {
                     signOut();
@@ -98,9 +109,6 @@ public class ProfileFragment extends Fragment {
         startActivity(intent);
         // Prevent user from going back to the Login Screen
         getActivity().finish();
-
-
-
 
     }
 
