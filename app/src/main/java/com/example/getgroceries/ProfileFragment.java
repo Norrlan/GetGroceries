@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -93,7 +95,11 @@ public class ProfileFragment extends Fragment {
         }
         logoutbtn.setOnClickListener(v ->
         {
-                    signOut();
+            signOut();
+            Toast.makeText(getActivity(),"logout sucessful",Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getActivity(), LoginScreen.class);
+            startActivity(intent);
+            getActivity().finish();
         });
         resetPasswordBtn.setOnClickListener(v ->
         {

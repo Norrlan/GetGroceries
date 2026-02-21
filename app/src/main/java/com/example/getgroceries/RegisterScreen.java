@@ -32,7 +32,8 @@ public class RegisterScreen extends AppCompatActivity
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) ->
+        {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
@@ -45,6 +46,9 @@ public class RegisterScreen extends AppCompatActivity
             startActivity(intent);
         });
     }
+
+    // method for input validation (email adn password)
+
 
     // Register user with email + password
     public void register(String email, String password)
@@ -86,11 +90,58 @@ public class RegisterScreen extends AppCompatActivity
                 });
     }
 
+    private boolean validateField(EditText field, String type)
+    {
+
+        String value = field.getText().toString().trim();
+
+        // Prevent user from leaving emtpy fields
+        if (value.isEmpty())
+        {
+            if (type.equals("email"))
+            {
+                field.setError("Email is required");
+            } else if (type.equals("password"))
+            {
+                field.setError("Password is required");
+            } else
+            {
+                field.setError("This field is required");
+            }
+            return false;
+        }
+            // Email validation
+            if (type.equals("email"))
+            {
+                String emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
+                if (!value.matches(emailRegex))
+                {
+                    field.setError("Enter a valid email address");
+                    return false;
+                }
+            }
+
+            // Password validation
+            if (type.equals("password"))
+            {
+                if (value.length() < 8)
+                {
+                    field.setError("Password must be at least 8 characters");
+                    return false;
+                }
+            }
+
+        return true;
+    }
+
     // Register button handler
     public void clickedregisterbtn(View view)
     {
         EditText email = findViewById(R.id.emailField);
         EditText password = findViewById(R.id.passwordField);
+        // validate email and password
+        if (!validateField(email, "email"));
+        if (!validateField(password, "password"));
 
         String sEmail = email.getText().toString().trim();
         String sPassword = password.getText().toString().trim();

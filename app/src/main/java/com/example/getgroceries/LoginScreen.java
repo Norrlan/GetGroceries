@@ -67,20 +67,34 @@ public class LoginScreen extends AppCompatActivity
 
 
     }
+    // method for input validation (email adn password)
+    private boolean validateField(EditText field, String type)
+    {
 
-//    @Override
-//    public void onStart()
-//    {
-//        super.onStart();
-//        FirebaseUser currentUser = mAuth.getCurrentUser();
-//        if (currentUser != null)
-//        {
-//            startActivity(new Intent(this, MainActivity.class));
-//            finish();
-//        }
-//    }
+        String value = field.getText().toString().trim();
 
-    //Method for users to sign in with their email and password
+        // Prevent user from leaving emtpy fields
+        if (value.isEmpty()) {
+            field.setError("This field is required");
+            return false;
+        }
+
+        // Email validation
+        if (type.equals("email"))
+
+
+            // Password validation
+            if (type.equals("password")) {
+                if (value.length() < 8) {
+                    field.setError("Password must be at least 8 characters");
+                    return false;
+                }
+            }
+
+        return true;
+    }
+
+    // method for login.
     public void login(String email, String password)
     {
         if (email.isEmpty() || password.isEmpty())
@@ -112,7 +126,12 @@ public class LoginScreen extends AppCompatActivity
     {
         EditText email= findViewById(R.id.Email2);
         EditText password = findViewById(R.id.Password2);
-
+        // validate email and password
+        if (!validateField(email, "email"))
+            return;
+        if (!validateField(email, "password"))
+            return;
+        // login after validation
         String semail = email.getText().toString().trim();
         String spassword = password.getText().toString().trim();
 
