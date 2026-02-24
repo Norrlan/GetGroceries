@@ -67,60 +67,42 @@ public class LoginScreen extends AppCompatActivity
 
 
     }
-    // method for input validation (email adn password)
-    private boolean validateField(EditText field, String type)
+
+    // validateInfo function takes email and password as parameters
+    // set valid format for the email and pssword field
+    //reference: https://www.youtube.com/watch?v=3-lQy24Xjtk&list=PLm1nH2wfylLiBDVQKbUnEyoWxKzQxYzUd&index=4&t=191s
+   
+    private  boolean validateInfo (String email, String password)
     {
-
-        String value = field.getText().toString().trim();
-
-        // Prevent user from leaving emtpy fields
-        if (value.isEmpty())
+        if (!email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"))
         {
-            if (type.equals("email"))
-            {
-                field.setError("Email is required");
-            } else if (type.equals("password"))
-            {
-                field.setError("Password is required");
-            } else
-            {
-                field.setError("This field is required");
-            }
-            return false;
-        }
-        // Email validation
-        if (type.equals("email"))
+            return  false;
+        } else if (!password.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\\W).{8,16}$"))
         {
-            String emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
-            if (!value.matches(emailRegex))
-            {
-                field.setError("Enter a valid email address");
-                return false;
-            }
+             return false;
         }
-
-        // Password validation
-        if (type.equals("password"))
-        {
-            if (value.length() < 8)
-            {
-                field.setError("Password must be at least 8 characters");
-                return false;
-            }
-        }
-
         return true;
     }
 
 
     // method for login.
-    public void login(String email, String password)
-    {
-        if (email.isEmpty() || password.isEmpty())
+
+    /*
+        // Didnt need it cause the validation field handles it all:
+          // Empty field prevention
+        if (semail.isEmpty())
         {
-            Toast.makeText(LoginScreen.this, "Enter email  and password", Toast.LENGTH_SHORT).show();
-            return;
+            email.setError("This field is required!");
         }
+
+        if (spassword.isEmpty())
+        {
+            password.setError("This field is required!");
+        }
+
+        */
+    public void login(String email, String password) // Login Function
+    {
                         // Logic for users to  Log in with email + password
                         mAuth.signInWithEmailAndPassword(email, password)
                                 .addOnCompleteListener(authTask ->
@@ -138,26 +120,30 @@ public class LoginScreen extends AppCompatActivity
                                 });
 
     }
-
-
     //method for the Login Button.
     public void clickedloginbtn (View view)
     {
         EditText email= findViewById(R.id.Email2);
         EditText password = findViewById(R.id.Password2);
-        // validate email and password
-        if (!validateField(email, "email"));
-        if (!validateField(password, "password"));
+
         // login after validation
+
         String semail = email.getText().toString().trim();
         String spassword = password.getText().toString().trim();
 
+
+        // Call validateInfor function on this button
+        if (!validateInfo(semail,spassword))
+        {
+            email.setError("Invalid email");
+            password.setError("Invalid password ");
+            return;
+        }
+
+
         login(semail,spassword);
 
-
     }
-
-
 
 
 
