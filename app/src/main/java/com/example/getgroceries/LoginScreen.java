@@ -85,8 +85,6 @@ public class LoginScreen extends AppCompatActivity
     }
 
 
-    // method for login.
-
     /*
         // Didnt need it cause the validation field handles it all:
           // Empty field prevention
@@ -99,8 +97,52 @@ public class LoginScreen extends AppCompatActivity
         {
             password.setError("This field is required!");
         }
+           private boolean validateField(EditText field, String type)
+    {
+
+        String value = field.getText().toString().trim();
+
+        // Prevent user from leaving emtpy fields
+        if (value.isEmpty())
+        {
+            if (type.equals("email"))
+            {
+                field.setError("Email is required");
+            } else if (type.equals("password"))
+            {
+                field.setError("Password is required");
+            } else
+            {
+                field.setError("This field is required");
+            }
+            return false;
+        }
+            // Email validation
+            if (type.equals("email"))
+            {
+                String emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
+                if (!value.matches(emailRegex))
+                {
+                    field.setError("Enter a valid email address");
+                    return false;
+                }
+            }
+
+            // Password validation
+            if (type.equals("password"))
+            {
+                if (value.length() < 8)
+                {
+                    field.setError("Password must be at least 8 characters");
+                    return false;
+                }
+            }
+
+        return true;
+    }
 
         */
+    // method for login.
     public void login(String email, String password) // Login Function
     {
                         // Logic for users to  Log in with email + password

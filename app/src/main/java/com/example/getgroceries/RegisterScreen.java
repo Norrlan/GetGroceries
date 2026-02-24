@@ -39,7 +39,7 @@ public class RegisterScreen extends AppCompatActivity
             return insets;
         });
 
-        // "Login" hyperlink
+        // Login hyperlink
         TextView loginLink = findViewById(R.id.loginlink);
         loginLink.setOnClickListener(v -> {
             Intent intent = new Intent(RegisterScreen.this, LoginScreen.class);
@@ -48,6 +48,19 @@ public class RegisterScreen extends AppCompatActivity
     }
 
     // method for input validation (email adn password)
+    private  boolean validateInfo (String email, String password)
+    {
+        if (!email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"))
+        {
+            // Email regex:a username, an "@" symbol, a domain name, and a top-level domain, a digit, and is about 9 characters
+            return  false;
+        } else if (!password.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\\W).{8,16}$"))
+        {
+            // Password regex :at least one digit, one lowercase letter, one uppercase letter, one special character, and is 8-16 characters long.
+            return false;
+        }
+        return true;
+    }
 
 
     // Register user with email + password
@@ -90,61 +103,22 @@ public class RegisterScreen extends AppCompatActivity
                 });
     }
 
-    private boolean validateField(EditText field, String type)
-    {
-
-        String value = field.getText().toString().trim();
-
-        // Prevent user from leaving emtpy fields
-        if (value.isEmpty())
-        {
-            if (type.equals("email"))
-            {
-                field.setError("Email is required");
-            } else if (type.equals("password"))
-            {
-                field.setError("Password is required");
-            } else
-            {
-                field.setError("This field is required");
-            }
-            return false;
-        }
-            // Email validation
-            if (type.equals("email"))
-            {
-                String emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
-                if (!value.matches(emailRegex))
-                {
-                    field.setError("Enter a valid email address");
-                    return false;
-                }
-            }
-
-            // Password validation
-            if (type.equals("password"))
-            {
-                if (value.length() < 8)
-                {
-                    field.setError("Password must be at least 8 characters");
-                    return false;
-                }
-            }
-
-        return true;
-    }
-
     // Register button handler
     public void clickedregisterbtn(View view)
     {
         EditText email = findViewById(R.id.emailField);
         EditText password = findViewById(R.id.passwordField);
-        // validate email and password
-        if (!validateField(email, "email"));
-        if (!validateField(password, "password"));
 
         String sEmail = email.getText().toString().trim();
         String sPassword = password.getText().toString().trim();
+
+        // Call validateInfor function on this button
+        if (!validateInfo(sEmail,sPassword))
+        {
+            email.setError("Invalid email");
+            password.setError("Invalid password ");
+            return;
+        }
 
         register(sEmail, sPassword);
     }
