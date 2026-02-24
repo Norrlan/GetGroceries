@@ -12,7 +12,9 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-
+// I changes the Ebay picture to coop.
+// I have gone too far to start changing every instance whe re I have written Ebay in to Coop.
+// Apologies for the future confusion
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link EbayFragment#newInstance} factory method to
@@ -92,7 +94,7 @@ public class EbayFragment extends Fragment {
 
             // replace with fragments for ebay later
             switch (selectedAisle) {
-                case "Fruit":
+                case "Drinks":
                     nextFragment = new AsdaFruitFragment();
                     break;
                 case "Bakery":
@@ -101,7 +103,7 @@ public class EbayFragment extends Fragment {
                 case "Frozen Food":
                     nextFragment = new AsdaFFoodFragment();
                     break;
-                case "Laundry":
+                case "Snacks"://
                     nextFragment = new AsdaLaundryFragment();
                     break;
             }

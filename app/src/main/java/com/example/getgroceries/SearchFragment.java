@@ -12,8 +12,10 @@ import android.view.ViewGroup;
  * A simple {@link Fragment} subclass.
  * Use the {@link SearchFragment#newInstance} factory method to
  * create an instance of this fragment.
+ * Reference for Search View: https://developer.android.com/develop/ui/views/search/search-dialog accessed: 24/02/2026
  */
-public class SearchFragment extends Fragment {
+public class SearchFragment extends Fragment
+{
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -24,7 +26,8 @@ public class SearchFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public SearchFragment() {
+    public SearchFragment()
+    {
         // Required empty public constructor
     }
 
@@ -37,7 +40,8 @@ public class SearchFragment extends Fragment {
      * @return A new instance of fragment SearchFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static SearchFragment newInstance(String param1, String param2) {
+    public static SearchFragment newInstance(String param1, String param2)
+    {
         SearchFragment fragment = new SearchFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
@@ -47,9 +51,11 @@ public class SearchFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
+        if (getArguments() != null)
+        {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
@@ -57,7 +63,8 @@ public class SearchFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+                             Bundle savedInstanceState)
+    {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_search, container, false);
     }

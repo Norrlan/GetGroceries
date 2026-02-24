@@ -9,10 +9,11 @@ public class CategoryList
     private static CategoryList getInstance = null;
     public CategoryList()
     {
-        asdaAisles.add("Fruit");
+        asdaAisles.add("Drinks");// Fruit
+        asdaAisles.add("Snacks");// Bakery
+        asdaAisles.add("Frozen Food");//
         asdaAisles.add("Bakery");
-        asdaAisles.add("Frozen Food");
-        asdaAisles.add("Laundry");
+        asdaAisles.add("Canned Food");
     }
     public static CategoryList getInstance()
     {

@@ -8,10 +8,11 @@ public class CategoryList3
     private static CategoryList3 getInstance = null;
     public CategoryList3()
     {
-        IceAisles.add("Fruit");
+        IceAisles.add("Drinks");//Fruit
         IceAisles.add("Bakery");
         IceAisles.add("Frozen Food");
-        IceAisles.add("Laundry");
+        IceAisles.add("Snacks");// Laundry
+        IceAisles.add("Canned Foods");
     }
     public static CategoryList3 getInstance()
     {

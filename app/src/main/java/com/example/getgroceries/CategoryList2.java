@@ -8,10 +8,11 @@ public class CategoryList2
     private static CategoryList2 getInstance = null;
     public CategoryList2()
     {
-        ebayAisles.add("Fruit");
+        ebayAisles.add("Drinks");
         ebayAisles.add("Bakery");
         ebayAisles.add("Frozen Food");
-        ebayAisles.add("Laundry");
+        ebayAisles.add("Snacks");// Laundry
+        ebayAisles.add("Canned Food");
     }
     public static CategoryList2 getInstance()
     {
