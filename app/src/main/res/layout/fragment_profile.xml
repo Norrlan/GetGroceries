@@ -4,31 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/greyblack"
+    android:background="#f5f5f5"
     tools:context=".ProfileFragment"
     >
 
     <!-- TODO: Update blank fragment layout -->
 
-
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="#0f4812"
+        android:background="@color/lime_green"
         android:minHeight="?attr/actionBarSize"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        />
-
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Profile"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@id/toolbar"
         app:layout_constraintEnd_toEndOf="parent"
@@ -43,7 +40,7 @@
         android:layout_height="25dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="20dp"
-        android:src="@drawable/white_arrow"
+        android:src="@drawable/arrow_back_24"
         app:layout_constraintEnd_toEndOf="@+id/toolbar"
         app:layout_constraintHorizontal_bias="0.022"
         app:layout_constraintStart_toStartOf="parent"
@@ -51,49 +48,55 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/profileCard"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="300dp"
+        android:layout_height="403dp"
         android:background="@drawable/userprofile_card"
         android:padding="24dp"
         android:scaleType="centerInside"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.476"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
-        app:layout_constraintVertical_bias="0.386">
+        app:layout_constraintVertical_bias="0.388">
 
 
         <EditText
             android:id="@+id/EmailAddressField"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="213dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="28dp"
+            android:background="@drawable/textfield_outline"
             android:hint="Show email address"
             android:inputType="textEmailAddress"
             android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="0.512"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/resetPasswordBtn"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            style="@style/BlackButton_LimeText"
+            android:layout_width="213dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="48dp"
             android:text="Reset Password"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.512"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/EmailAddressField" />
 
         <Button
             android:id="@+id/logoutBtn"
-            android:layout_width="299dp"
-            android:layout_height="35dp"
-            android:layout_marginTop="24dp"
+            style="@style/BlackButton_LimeText"
+            android:layout_width="213dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="60dp"
             android:text="Logout"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.512"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/resetPasswordBtn" />
     </androidx.constraintlayout.widget.ConstraintLayout>
