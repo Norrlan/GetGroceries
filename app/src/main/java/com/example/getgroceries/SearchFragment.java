@@ -40,7 +40,7 @@ public class SearchFragment extends Fragment {
 
         switch (position) {
             case 0:
-                fragment = new DrinksFragment();
+                fragment = new DrinksSubcategoryFragment();
                 break;
             case 1:
                 fragment = new SnacksFragment();
