@@ -70,7 +70,7 @@ public class SearchFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+                             Bundle savedsInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_search, container, false);
 
@@ -85,21 +85,30 @@ public class SearchFragment extends Fragment {
                 R.drawable.canfood,
                 R.drawable.condiment
         );
+        List<String> categoryLabels = Arrays.asList(
+                "Drinks",
+                "Snacks",
+                "Bakery",
+                "Frozen Food",
+                "Canned Food",
+                "Condiments"
+        );
 
-        Searchadapter adapter = new Searchadapter(categoryImages, position -> {
+        Searchadapter adapter = new Searchadapter(categoryImages, categoryLabels, position -> {
             openCategory(position);
+
         });
 
         categoryRecycler.setAdapter(adapter);
         categoryRecycler.setLayoutManager(new GridLayoutManager(getContext(), 2));
 
-        // SEARCH RESULTS RECYCLER
+        // Search results recycler
         RecyclerView searchResultsRecycler = view.findViewById(R.id.search_results_recycler);
         SearchResultsAdapter resultsAdapter = new SearchResultsAdapter(new ArrayList<>());
         searchResultsRecycler.setAdapter(resultsAdapter);
         searchResultsRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        // SEARCH BAR
+        // Search Bar
         SearchView searchView = view.findViewById(R.id.searchbar);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override

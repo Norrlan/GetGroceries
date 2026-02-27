@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="12dp"
+    android:gravity="center"
+    android:background="@android:color/white"
+    android:elevation="4dp"
+    android:layout_margin="8dp">
+
+    <ImageView
+        android:id="@+id/category_image"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/drinks_card" />
+
+    <TextView
+        android:id="@+id/category_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Drinks"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:paddingTop="6dp"
+        android:textColor="@android:color/black" />
+
+</LinearLayout>
