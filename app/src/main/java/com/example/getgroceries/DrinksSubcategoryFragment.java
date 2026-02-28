@@ -14,6 +14,7 @@ import java.util.List;
 
 public class DrinksSubcategoryFragment extends Fragment {
 
+    private List<SubCategoryModel> subcategories;
     public DrinksSubcategoryFragment() {
         // Required empty public constructor
     }
@@ -32,7 +33,7 @@ public class DrinksSubcategoryFragment extends Fragment {
 
         RecyclerView recyclerView = view.findViewById(R.id.subcategory_recycler);
 
-        List<SubCategoryModel> subcategories = Arrays.asList(
+        subcategories = Arrays.asList(
                 new SubCategoryModel("Energy Drinks", R.drawable.redbull),
                 new SubCategoryModel("Tea, Coffee & Beverages", R.drawable.cocoadrinks),
                 new SubCategoryModel("Beer, Wine and Spirits", R.drawable.beerpacket),
@@ -51,13 +52,16 @@ public class DrinksSubcategoryFragment extends Fragment {
         return view;
     }
     private void openSubcategory(int position) {
-        // TODO: Navigate to the product list for this subcategory
-        // Example:
-        // Fragment fragment = new DrinksProductsFragment();
-        // requireActivity().getSupportFragmentManager()
-        //         .beginTransaction()
-        //         .replace(R.id.fragment_container, fragment)
-        //         .addToBackStack(null)
-        //         .commit();
+        String title = subcategories.get(position).name;
+
+
+        ProductListFragment fragment = ProductListFragment.newInstance(position, title);
+
+        requireActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container, fragment)
+                .addToBackStack(null)
+                .commit();
     }
+
 }

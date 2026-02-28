@@ -8,14 +8,15 @@ package com.example.getgroceries;
 public class ProductModel
 {
  String name;
- String imageUrl;
+ String detail;
  int imageId;
  //String price; incase we find API containing the prices for Grocery items
- String store;
+ //String store; for store comparison. the APIs i have do not provide the store name.
  public ProductModel (String name, String price, int imageId)
  {
      this.name = name;
      this.imageId = imageId;
+     this.detail = detail;
      //this.price = price;
  }
 }

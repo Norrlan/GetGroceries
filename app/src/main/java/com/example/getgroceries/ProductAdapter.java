@@ -34,9 +34,11 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     {
         ProductModel p = products.get(position);
         holder.name.setText(p.name);
+        holder.detail.setText(p.detail);
+        // description of the item e.g: how many mls it has might add quantity.
         holder.image.setImageResource(p.imageId);
         holder.saveButton.setOnClickListener(v ->{
-
+        // save to list logic goes in here.
         });
     }
 
@@ -61,7 +63,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             super(itemView);
             image = itemView.findViewById(R.id.product_image);
             name = itemView.findViewById(R.id.product_name);
-            detail = itemView.findViewById(R.id.product_detail);
+            detail = itemView.findViewById(R.id.product_description);
             saveButton = itemView.findViewById(R.id.save_button);
         }
     }
