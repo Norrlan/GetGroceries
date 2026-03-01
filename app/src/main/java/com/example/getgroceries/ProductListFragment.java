@@ -70,7 +70,7 @@ private String subcategoryTitle;
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         return view;
     }
-
+// placeholder lists
     private List<ProductModel> loadSubcategoryProduct(int subcategoryIndex)
     {
         switch (subcategoryIndex)

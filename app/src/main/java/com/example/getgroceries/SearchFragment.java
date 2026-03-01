@@ -18,6 +18,7 @@ import java.util.List;
 
 public class SearchFragment extends Fragment {
 
+   // placeholder lists
     private List<String> allProducts = Arrays.asList(
             "Bakery",
             "Drinks",
@@ -34,7 +35,6 @@ public class SearchFragment extends Fragment {
             "Eggs",
             "Butter"
     );
-
     private void openCategory(int position) {
         Fragment fragment;
 
@@ -43,19 +43,19 @@ public class SearchFragment extends Fragment {
                 fragment = new DrinksSubcategoryFragment();
                 break;
             case 1:
-                fragment = new SnacksFragment();
+                fragment = new SnacksSubcategoryFragment();
                 break;
             case 2:
-                fragment = new BakeryFragment();
+                fragment = new BakerySubcategoryFragment();
                 break;
             case 3:
-                fragment = new FrozenFragment();
+                fragment = new FrozenSubcategoryFragment();
                 break;
             case 4:
-                fragment = new CannedFoodFragment();
+                fragment = new CannedSubcategoryFragment();
                 break;
             case 5:
-                fragment = new CondimentsFragment();
+                fragment = new CondimentsSubcategoryFragment();
                 break;
             default:
                 return;
@@ -76,7 +76,7 @@ public class SearchFragment extends Fragment {
 
         // Category Cards
         RecyclerView categoryRecycler = view.findViewById(R.id.category_recycler);
-
+// These are all the categories & that will be used by each store
         List<Integer> categoryImages = Arrays.asList(
                 R.drawable.drinks_card,
                 R.drawable.snacks,

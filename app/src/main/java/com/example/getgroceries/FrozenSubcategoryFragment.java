@@ -12,30 +12,30 @@ import android.view.ViewGroup;
 import java.util.Arrays;
 import java.util.List;
 
-public class DrinksSubcategoryFragment extends Fragment
-{
 
+public class FrozenSubcategoryFragment extends Fragment {
     private List<SubCategoryModel> subcategories;
-    public DrinksSubcategoryFragment() {
+
+    public FrozenSubcategoryFragment() {
         // Required empty public constructor
     }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
 
-        View view = inflater.inflate(R.layout.fragment_drinks_subcategory, container, false);
+        View view = inflater.inflate(R.layout.fragment_frozen_subcategory, container, false);
 
-        RecyclerView recyclerView = view.findViewById(R.id.subcategory_recycler);
+        RecyclerView recyclerView = view.findViewById(R.id.subcategory4);
 // These are the subcategories that will be used under the category for each store
-        subcategories = Arrays.asList(
-                new SubCategoryModel("Energy Drinks", R.drawable.redbull),
+        subcategories = Arrays.asList(new SubCategoryModel("Energy Drinks", R.drawable.redbull),
                 new SubCategoryModel("Tea, Coffee & Beverages", R.drawable.cocoadrinks),
                 new SubCategoryModel("Beer, Wine and Spirits", R.drawable.beerpacket),
                 new SubCategoryModel("Soft Drinks", R.drawable.cokeimg),
@@ -52,8 +52,7 @@ public class DrinksSubcategoryFragment extends Fragment
 
         return view;
     }
-    private void openSubcategory(int position)
-    {
+    private void openSubcategory(int position) {
         String title = subcategories.get(position).name;
 
 
@@ -65,5 +64,4 @@ public class DrinksSubcategoryFragment extends Fragment
                 .addToBackStack(null)
                 .commit();
     }
-
 }

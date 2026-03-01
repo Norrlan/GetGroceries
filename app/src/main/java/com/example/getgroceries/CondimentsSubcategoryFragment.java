@@ -12,11 +12,11 @@ import android.view.ViewGroup;
 import java.util.Arrays;
 import java.util.List;
 
-public class DrinksSubcategoryFragment extends Fragment
-{
 
+public class CondimentsSubcategoryFragment extends Fragment
+{
     private List<SubCategoryModel> subcategories;
-    public DrinksSubcategoryFragment() {
+    public CondimentsSubcategoryFragment() {
         // Required empty public constructor
     }
 
@@ -30,9 +30,9 @@ public class DrinksSubcategoryFragment extends Fragment
                              Bundle savedInstanceState)
     {
 
-        View view = inflater.inflate(R.layout.fragment_drinks_subcategory, container, false);
+        View view = inflater.inflate(R.layout.fragment_condiments_subcategory, container, false);
 
-        RecyclerView recyclerView = view.findViewById(R.id.subcategory_recycler);
+        RecyclerView recyclerView = view.findViewById(R.id.subcategory_recyler_7);
 // These are the subcategories that will be used under the category for each store
         subcategories = Arrays.asList(
                 new SubCategoryModel("Energy Drinks", R.drawable.redbull),
@@ -52,6 +52,7 @@ public class DrinksSubcategoryFragment extends Fragment
 
         return view;
     }
+
     private void openSubcategory(int position)
     {
         String title = subcategories.get(position).name;
@@ -65,5 +66,4 @@ public class DrinksSubcategoryFragment extends Fragment
                 .addToBackStack(null)
                 .commit();
     }
-
 }
