@@ -7,7 +7,8 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity
+{
 
     BottomNavigationView bottomNav;
 
@@ -59,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
     {
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,fragment).addToBackStack(null)
                 .commit();
+
 
     }
 
