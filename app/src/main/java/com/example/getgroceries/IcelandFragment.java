@@ -92,17 +92,23 @@ public class IcelandFragment extends Fragment {
 
             // replace with fragments for Iceland later
             switch (selectedAisle) {
-                case "Fruit":
-                    nextFragment = new AsdaFruitFragment();
+                case "Drinks":
+                    nextFragment = new DrinksSubcategoryFragment();
                     break;
                 case "Bakery":
-                    nextFragment = new AsdaBakeryFragment();
+                    nextFragment = new BakerySubcategoryFragment();
                     break;
                 case "Frozen Food":
-                    nextFragment = new AsdaFFoodFragment();
+                    nextFragment = new FrozenSubcategoryFragment();
                     break;
-                case "Laundry":
-                    nextFragment = new AsdaLaundryFragment();
+                case "Snacks":
+                    nextFragment = new SnacksSubcategoryFragment();
+                    break;
+                case "Canned Food":
+                    nextFragment = new CannedSubcategoryFragment();
+                    break;
+                case  "Condiments":
+                    nextFragment = new CondimentsSubcategoryFragment();
                     break;
             }
 

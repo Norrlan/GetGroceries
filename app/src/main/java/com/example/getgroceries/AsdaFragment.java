@@ -91,17 +91,43 @@ public class AsdaFragment extends Fragment
 
         listView.setOnItemClickListener((parent, view1, position, id) ->
         {
+
             String selectedAisle = aisles.get(position);
             Toast.makeText(getContext(), "Clicked: " + selectedAisle, Toast.LENGTH_SHORT).show();
 
-            // The Category Fragements
-            ((MainActivity) getActivity()).openFragment(new AsdaFruitFragment());
-            ((MainActivity) getActivity()).openFragment(new AsdaBakeryFragment());
-            ((MainActivity) getActivity()).openFragment(new AsdaFFoodFragment());
-            ((MainActivity) getActivity()).openFragment(new AsdaLaundryFragment());
+            Fragment nextFragment = null;
+
+            switch (selectedAisle) {
+                case "Drinks":
+                    nextFragment = new DrinksSubcategoryFragment();
+                    break;
+                case "Bakery":
+                    nextFragment = new BakerySubcategoryFragment();
+                    break;
+                case "Frozen Food":
+                    nextFragment = new FrozenSubcategoryFragment();
+                    break;
+                case "Snacks":
+                    nextFragment = new SnacksSubcategoryFragment();
+                    break;
+                case "Canned Food":
+                    nextFragment = new CannedSubcategoryFragment();
+                    break;
+                case "Condiments":
+                    nextFragment = new CondimentsSubcategoryFragment();
+                    break;
+            }
+
+            if (nextFragment != null) {
+                ((MainActivity) getActivity()).openFragment(nextFragment);
+
+            }
         });
 
-    }
+
+
+
+        }
 
 
 }

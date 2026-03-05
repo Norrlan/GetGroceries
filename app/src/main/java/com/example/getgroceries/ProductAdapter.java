@@ -61,13 +61,13 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
                     0.0   // Replace with real price later
             );
 
-            // Step 1: Ask user: new list or existing list?
+            // Ask user: new list or existing list?
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
             builder.setTitle("Save to List")
                     .setMessage("Do you want to create a new list or add to an existing one?")
                     .setPositiveButton("New List", (dialog, which) -> {
 
-                        // Step 2A: Create new list dialog
+                        // S Create new list dialog
                         EditText input = new EditText(context);
                         input.setHint("List name");
 
@@ -87,7 +87,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
                     })
                     .setNegativeButton("Existing List", (dialog, which) -> {
 
-                        // Step 2B: Choose existing list
+                        // Choose existing list
                         List<UserList> allLists = listsView.getLists().getValue();
 
                         if (allLists == null || allLists.isEmpty()) {

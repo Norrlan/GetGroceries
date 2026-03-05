@@ -85,7 +85,8 @@ public class EbayFragment extends Fragment {
                 );
         listView.setAdapter(adapter);
 
-        listView.setOnItemClickListener((parent, view1, position, id) -> {
+        listView.setOnItemClickListener((parent, view1, position, id) ->
+        {
             String selectedAisle = aisles.get(position);
             Toast.makeText(getContext(), "Clicked: " + selectedAisle, Toast.LENGTH_SHORT).show();
 
@@ -95,16 +96,22 @@ public class EbayFragment extends Fragment {
             // replace with fragments for ebay later
             switch (selectedAisle) {
                 case "Drinks":
-                    nextFragment = new AsdaFruitFragment();
+                    nextFragment = new DrinksSubcategoryFragment();
                     break;
                 case "Bakery":
-                    nextFragment = new AsdaBakeryFragment();
+                    nextFragment = new BakerySubcategoryFragment();
                     break;
                 case "Frozen Food":
-                    nextFragment = new AsdaFFoodFragment();
+                    nextFragment = new FrozenSubcategoryFragment();
                     break;
-                case "Snacks"://
-                    nextFragment = new AsdaLaundryFragment();
+                case "Snacks":
+                    nextFragment = new SnacksSubcategoryFragment();
+                    break;
+                case "Canned Food":
+                    nextFragment = new CannedSubcategoryFragment();
+                    break;
+                case  "Condiments":
+                    nextFragment = new CondimentsSubcategoryFragment();
                     break;
             }
 
