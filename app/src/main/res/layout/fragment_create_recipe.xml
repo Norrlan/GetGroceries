@@ -1,135 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#F5F6FA">
+    android:padding="20dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <!-- Header -->
-    <LinearLayout
+    <TextView
+        android:text="Create Recipe"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <EditText
+        android:id="@+id/recipe_input"
+        android:hint="Enter recipe name"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/lime_green"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:padding="16dp">
+        android:layout_height="wrap_content"/>
 
-        <ImageButton
-            android:id="@+id/btnBack"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:src="@drawable/arrow_back_24"
-            android:padding="6dp"
-            android:contentDescription="Back"/>
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="New Recipe"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:textColor="#FFFFFF"
-            android:layout_marginStart="12dp"/>
-    </LinearLayout>
-
-    <!-- Content -->
-    <ScrollView
+    <Button
+        android:id="@+id/generate_button"
+        android:text="Generate Recipe"
+        android:layout_marginTop="16dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="20dp"
-        android:fillViewport="true">
+        android:layout_height="wrap_content"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+    <ProgressBar
+        android:id="@+id/loading_bar"
+        android:visibility="gone"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="What would you like to cook?"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:textColor="#1A237E"
-                android:layout_marginBottom="6dp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Enter a recipe name and we'll fetch the ingredients and steps for you."
-                android:textSize="13sp"
-                android:textColor="#78909C"
-                android:lineSpacingMultiplier="1.4"
-                android:layout_marginBottom="28dp"/>
-
-            <!-- Search field -->
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="e.g. Chicken Alfredo"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_marginBottom="16dp">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etRecipeName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textCapSentences"
-                    android:imeOptions="actionSearch"
-                    android:textSize="15sp"
-                    android:textColor="#263238"/>
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <!-- Generate button -->
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnGenerate"
-                android:layout_width="match_parent"
-                android:layout_height="52dp"
-                android:text="Generate Recipe"
-                android:textColor="@color/black"
-                android:textSize="15sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="24dp"/>
-
-            <!-- Loading indicator -->
-            <LinearLayout
-                android:id="@+id/layoutLoading"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:visibility="gone"
-                android:layout_marginTop="32dp">
-
-                <ProgressBar
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:indeterminateTint="#1A237E"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Fetching recipe..."
-                    android:textSize="13sp"
-                    android:textColor="#78909C"
-                    android:layout_marginTop="12dp"/>
-            </LinearLayout>
-
-            <!-- Error message -->
-            <TextView
-                android:id="@+id/tvError"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:textSize="13sp"
-                android:textColor="#C62828"
-                android:gravity="center"
-                android:visibility="gone"
-                android:layout_marginTop="16dp"/>
-
-        </LinearLayout>
-    </ScrollView>
 </LinearLayout>
