@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:padding="12dp"
+    android:background="?attr/selectableItemBackground">
+
+    <!-- Checkbox circle -->
+    <CheckBox
+        android:id="@+id/cbIngredient"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_marginEnd="12dp"/>
+
+    <!-- Amount + unit -->
+    <TextView
+        android:id="@+id/tvAmount"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:text="2 lbs"
+        android:textSize="12sp"
+        android:textColor="#8AB4D4"
+        android:gravity="end"
+        android:layout_marginEnd="12dp"
+        android:fontFamily="monospace"/>
+
+    <!-- Ingredient name -->
+    <TextView
+        android:id="@+id/tvIngredientName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Ground Beef"
+        android:textSize="15sp"
+        android:textColor="#E0E6EF"/>
+
+    <!-- Optional ingredient image -->
+    <ImageView
+        android:id="@+id/imgIngredient"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:scaleType="centerCrop"
+        android:visibility="gone"/>
+
+</LinearLayout>
