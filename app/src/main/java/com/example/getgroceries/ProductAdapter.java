@@ -22,10 +22,12 @@ import java.util.List;
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder>
 {
     private List<ProductModel> products;
+    private FragmentActivity activity;
 
-    public ProductAdapter(List<ProductModel> products)
+    public ProductAdapter(List<ProductModel> products, FragmentActivity activity)
     {
         this.products = products;
+        this.activity = activity;
     }
 
     @NonNull
@@ -51,8 +53,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             Context context = v.getContext();
 
             // Get ViewModel from Activity
-            ListsView listsView = new ViewModelProvider((FragmentActivity) context)
+            ListsView listsView = new ViewModelProvider(activity)
                     .get(ListsView.class);
+
 
             // Build the ListItem from the product
             ListItem item = new ListItem(

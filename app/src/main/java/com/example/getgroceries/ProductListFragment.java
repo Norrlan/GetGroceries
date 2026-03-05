@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -56,18 +57,22 @@ private String subcategoryTitle;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
-
         View view = inflater.inflate(R.layout.fragment_product_list, container, false);
 
         TextView titleView = view.findViewById(R.id.product_title);
         titleView.setText(subcategoryTitle);
+
         RecyclerView recyclerView = view.findViewById(R.id.product_recycler);
 
-        List <ProductModel> productModels = loadSubcategoryProduct(subcategoryIndex);
+        // Load the correct products for this subcategory
+        List<ProductModel> productModels = loadSubcategoryProduct(subcategoryIndex);
 
-        ProductAdapter productAdapter = new ProductAdapter(productModels);
+        // Pass requireActivity() so ProductAdapter can use ViewModel safely
+        ProductAdapter productAdapter = new ProductAdapter(productModels, requireActivity());
+
         recyclerView.setAdapter(productAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
         return view;
     }
 // placeholder lists
