@@ -16,6 +16,7 @@
         android:textSize="22sp"
         android:textStyle="bold"
         android:padding="16dp"
+        android:layout_marginTop="15dp"
         android:text="Products" />
 
     <androidx.recyclerview.widget.RecyclerView

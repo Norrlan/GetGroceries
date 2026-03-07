@@ -4,26 +4,26 @@
     android:orientation="vertical"
     android:padding="20dp"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    >
 
     <TextView
-        android:text="Create Recipe"
+        android:text="Create Recipes"
         android:textSize="24sp"
         android:textStyle="bold"
         android:layout_marginBottom="16dp"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/lime_green"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
     <EditText
         android:id="@+id/recipe_input"
+        android:background="@color/white"
         android:hint="Enter recipe name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-    <Button
-        android:id="@+id/generate_button"
-        android:text="Generate Recipe"
-        android:layout_marginTop="16dp"
+        android:textColorHint="@color/black"
+        android:textColor="@color/black"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
@@ -34,5 +34,14 @@
         android:layout_marginTop="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/generate_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@color/lime_green"
+        android:text="Generate Recipe"
+        android:textColor="@color/black" />
 
 </LinearLayout>
