@@ -4,8 +4,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -49,20 +51,27 @@ public class RecipeDetailsFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view,
-                              @Nullable Bundle savedInstanceState) {
+                              @Nullable Bundle savedInstanceState)
+    {
         super.onViewCreated(view, savedInstanceState);
 
         TextView title = view.findViewById(R.id.recipe_title);
         RecyclerView ingredientsRecycler = view.findViewById(R.id.ingredients_recycler);
         RecyclerView stepsRecycler = view.findViewById(R.id.steps_recycler);
+        //Save Button
+        Button saveButton = view.findViewById(R.id.btnSaveRecipe);
 
-        // Set title
+        saveButton.setOnClickListener(v -> {
+            Toast.makeText(getContext(), "Recipe saved!", Toast.LENGTH_SHORT).show();
+
+            // TODO: Save recipe to database or shared preferences
+        });
+
+
         title.setText(recipeName);
 
 
-        // -----------------------------
-        // PLACEHOLDER INGREDIENTS
-        // -----------------------------
+        // Placeholder Ingredients
         List<IngredientModel> ingredients = Arrays.asList(
                 new IngredientModel("2 lbs", "Chicken Breast"),
                 new IngredientModel("1 cup", "Heavy Cream"),
@@ -70,21 +79,19 @@ public class RecipeDetailsFragment extends Fragment {
                 new IngredientModel("1 tbsp", "Butter"),
                 new IngredientModel("1 tsp", "Garlic Powder")
         );
-
-        // -----------------------------
-        // PLACEHOLDER STEPS
-        // -----------------------------
+        // Placeholder Steps
         List<RecipeSteps> steps = Arrays.asList(
                 new RecipeSteps(1, "Prepare Ingredients", "Chop chicken and gather all ingredients."),
                 new RecipeSteps(2, "Cook Chicken", "Season chicken and cook until golden brown."),
                 new RecipeSteps(3, "Make Alfredo Sauce", "Add cream and butter, simmer until thick."),
                 new RecipeSteps(4, "Combine", "Mix pasta with sauce and chicken."),
                 new RecipeSteps(5, "Serve", "Plate and garnish with parsley.")
+
         );
 
-        // -----------------------------
-        // SETUP RECYCLERS
-        // -----------------------------
+
+        // Setup Recycler
+
         ingredientsRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
         stepsRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
 
