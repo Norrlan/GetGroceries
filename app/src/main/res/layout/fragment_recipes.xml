@@ -81,7 +81,6 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="24dp"
         android:src="@drawable/ic_add"
-        app:backgroundTint="@color/lime_green"
-        app:elevation="6dp"/>
+        android:contentDescription="Add Recipe" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
