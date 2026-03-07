@@ -40,7 +40,7 @@ public class RegisterScreen extends AppCompatActivity
         });
 
         // Login hyperlink
-        TextView loginLink = findViewById(R.id.loginlink);
+        TextView loginLink = findViewById(R.id.loginLink);
         loginLink.setOnClickListener(v -> {
             Intent intent = new Intent(RegisterScreen.this, LoginScreen.class);
             startActivity(intent);
