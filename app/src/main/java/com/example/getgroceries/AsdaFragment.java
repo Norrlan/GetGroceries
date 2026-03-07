@@ -97,7 +97,9 @@ public class AsdaFragment extends Fragment
 
             Fragment nextFragment = null;
 
-            switch (selectedAisle) {
+            switch (selectedAisle)  // The Categories that will be used for the Asda Store
+                    // API will fetch data into these Categories
+            {
                 case "Drinks":
                     nextFragment = new DrinksSubcategoryFragment();
                     break;
