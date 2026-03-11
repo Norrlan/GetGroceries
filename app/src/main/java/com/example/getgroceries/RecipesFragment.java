@@ -11,10 +11,12 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-public class RecipesFragment extends Fragment {
+public class RecipesFragment extends Fragment
+{
 
     public RecipesFragment() {
         // Required empty public constructor
+        // X-Rapid Api Key: febfb97138msh1eaa457ca4ea420p1c9263jsn440b109d0eed
     }
 
     @Override

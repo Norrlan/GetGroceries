@@ -1,4 +1,5 @@
 package com.example.getgroceries;
+// for displaying steps after they have been fetched in RecipeSteps.java
 
 import android.view.LayoutInflater;
 import android.view.View;

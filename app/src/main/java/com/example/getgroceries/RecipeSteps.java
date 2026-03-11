@@ -1,5 +1,5 @@
 package com.example.getgroceries;
-
+// Recipe steps data model for the recipe steps that will be fetch recipe stpes as a response from the API
 public class RecipeSteps
 {
     public int number;

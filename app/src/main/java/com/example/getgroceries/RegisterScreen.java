@@ -47,19 +47,74 @@ public class RegisterScreen extends AppCompatActivity
         });
     }
 
-    // method for input validation (email adn password)
-    private  boolean validateInfo (String email, String password)
+    // method for input validation  for email and password
+    private  boolean validateInfo (EditText emailField, EditText passwordField)
     {
-        if (!email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"))
-        {
-            // Email regex:a username, an "@" symbol, a domain name, and a top-level domain, a digit, and is about 9 characters
-            return  false;
-        } else if (!password.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\\W).{8,16}$"))
-        {
-            // Password regex :at least one digit, one lowercase letter, one uppercase letter, one special character, and is 8-16 characters long.
+        String email = emailField.getText().toString().trim();
+        String password = passwordField.getText().toString().trim();
+
+        // Empty
+        if (email.isEmpty()) {
+            emailField.setError("Email is required");
             return false;
         }
+
+        // Spaces
+        if (email.contains(" ")) {
+            emailField.setError("Email cannot contain spaces");
+            return false;
+        }
+
+        // Lowercase only
+        if (!email.equals(email.toLowerCase())) {
+            emailField.setError("Email must be in lowercase");
+            return false;
+        }
+
+        // Must contain @
+        if (!email.contains("@")) {
+            emailField.setError("Email must contain '@'");
+            return false;
+        }
+
+        // Length 8–16
+        if (email.length() < 8 || email.length() > 16) {
+            emailField.setError("Email must be 8–16 characters long");
+            return false;
+        }
+
+         // Empty
+        if (password.isEmpty()) {
+            passwordField.setError("Password is required");
+            return false;
+        }
+
+        // Spaces
+        if (password.contains(" ")) {
+            passwordField.setError("Password cannot contain spaces");
+            return false;
+        }
+
+        // Length 8–16
+        if (password.length() < 8 || password.length() > 16) {
+            passwordField.setError("Password must be 8–16 characters long");
+            return false;
+        }
+
+        // At least 1 uppercase
+        if (!password.matches(".*[A-Z].*")) {
+            passwordField.setError("Password must contain at least one uppercase letter");
+            return false;
+        }
+
+        // At least 1 special character
+        if (!password.matches(".*[!@#$%^&*()_+=<>?/{}~|].*")) {
+            passwordField.setError("Password must contain at least one special character");
+            return false;
+        }
+
         return true;
+
     }
 
 
@@ -104,7 +159,7 @@ public class RegisterScreen extends AppCompatActivity
     }
 
     // Register button handler
-    public void clickedregisterbtn(View view)
+    /* public void clickedregisterbtn(View view)
     {
         EditText email = findViewById(R.id.emailField);
         EditText password = findViewById(R.id.passwordField);
@@ -121,5 +176,19 @@ public class RegisterScreen extends AppCompatActivity
         }
 
         register(sEmail, sPassword);
+    }*/
+    public void clickedregisterbtn(View view)
+    {
+
+        EditText email = findViewById(R.id.emailField);
+        EditText password = findViewById(R.id.passwordField);
+
+        if (!validateInfo(email, password))
+        {
+            return;
+        }
+
+        register(email.getText().toString().trim(),
+                password.getText().toString().trim());
     }
 }

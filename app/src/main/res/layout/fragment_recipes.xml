@@ -9,8 +9,6 @@
 
     <!-- Header -->
 
-    <!-- Empty state -->
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -78,7 +76,7 @@
         android:paddingBottom="16dp"
         android:clipToPadding="false"/>
 
-    <!-- FAB -->
+    <!-- FAB Button-->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabAddRecipe"
         android:layout_width="wrap_content"
