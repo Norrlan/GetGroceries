@@ -32,8 +32,8 @@ public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.In
     public void onBindViewHolder(@NonNull IngredientViewHolder holder, int position) {
         IngredientModel ing = ingredients.get(position);
 
-        holder.quantity.setText(ing.quantity);
-        holder.name.setText(ing.name);
+        holder.quantity.setText(ing.quantity);// cannot find symbol variable
+        holder.name.setText(ing.name);// cannotfind
     }
 
     @Override
@@ -48,10 +48,10 @@ public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.In
 
         public IngredientViewHolder(@NonNull View itemView) {
             super(itemView);
-            checkBox = itemView.findViewById(R.id.cbIngredient);
-            quantity = itemView.findViewById(R.id.tvAmount);   // FIXED
-            name = itemView.findViewById(R.id.tvIngredientName);
-            image = itemView.findViewById(R.id.imgIngredient);
+            checkBox = itemView.findViewById(R.id.ingredient_checkbox);
+            quantity = itemView.findViewById(R.id.Amount);
+            name = itemView.findViewById(R.id.IngredientName);
+            //image = itemView.findViewById(R.id.imgIngredient);
         }
     }
 }

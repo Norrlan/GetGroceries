@@ -20,19 +20,20 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Saved Recipes"
-            android:textColor="@color/white"
-            android:textSize="21dp" />
+            android:layout_marginTop="24dp"
+            android:text="Recipes"
+            android:textColor="@color/lime_green"
+            android:textSize="27dp"
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:text="Recipes"
-            android:textColor="@color/white"
-            android:textSize="22dp"
-            android:textStyle="bold" />
+            android:layout_marginTop="10dp"
+            android:text="Saved Recipes"
+            android:textColor="@color/lime_green"
+            android:textSize="17dp" />
+
     </LinearLayout>
 
     <LinearLayout

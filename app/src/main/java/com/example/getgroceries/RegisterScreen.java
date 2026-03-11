@@ -77,11 +77,13 @@ public class RegisterScreen extends AppCompatActivity
             return false;
         }
 
-        // Length 8–16
-        if (email.length() < 8 || email.length() > 16) {
+        /*
+           if (email.length() < 8 || email.length() > 16) {
             emailField.setError("Email must be 8–16 characters long");
             return false;
-        }
+        }*
+        */
+
 
          // Empty
         if (password.isEmpty()) {
@@ -158,7 +160,24 @@ public class RegisterScreen extends AppCompatActivity
                 });
     }
 
-    // Register button handler
+
+    public void clickedregisterbtn(View view)
+    {
+
+        EditText email = findViewById(R.id.emailField);
+        EditText password = findViewById(R.id.passwordField);
+
+        if (!validateInfo(email, password))
+        {
+            return;
+        }
+
+        register(email.getText().toString().trim(),
+                password.getText().toString().trim());
+    }
+}
+
+// Register button handler
     /* public void clickedregisterbtn(View view)
     {
         EditText email = findViewById(R.id.emailField);
@@ -177,18 +196,3 @@ public class RegisterScreen extends AppCompatActivity
 
         register(sEmail, sPassword);
     }*/
-    public void clickedregisterbtn(View view)
-    {
-
-        EditText email = findViewById(R.id.emailField);
-        EditText password = findViewById(R.id.passwordField);
-
-        if (!validateInfo(email, password))
-        {
-            return;
-        }
-
-        register(email.getText().toString().trim(),
-                password.getText().toString().trim());
-    }
-}

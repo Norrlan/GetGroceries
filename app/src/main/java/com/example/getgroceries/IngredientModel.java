@@ -9,11 +9,13 @@ public class IngredientModel
    @SerializedName("raw_text")
    public String rawText;
 
-
-
-
-
-
+   public String quantity;
+   public String name;
+// placeholder constructor:
+public IngredientModel(String quantity, String name) {
+   this.quantity = quantity;
+   this.name = name;
+}
 
 
 }

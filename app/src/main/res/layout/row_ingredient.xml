@@ -10,14 +10,14 @@
 
     <!-- Checkbox circle -->
     <CheckBox
-        android:id="@+id/cbIngredient"
+        android:id="@+id/ingredient_checkbox"
         android:layout_width="26dp"
         android:layout_height="26dp"
         android:layout_marginEnd="12dp"/>
 
     <!-- Amount amd unit -->
     <TextView
-        android:id="@+id/tvAmount"
+        android:id="@+id/Amount"
         android:layout_width="60dp"
         android:layout_height="wrap_content"
         android:text="2 lbs"
@@ -29,7 +29,7 @@
 
 
     <TextView
-        android:id="@+id/tvIngredientName"
+        android:id="@+id/IngredientName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"

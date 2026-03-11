@@ -103,11 +103,14 @@ public class LoginScreen extends AppCompatActivity
             return false;
         }
 
-        // Email Character Length  is 8–16
-        if (email.length() < 8 || email.length() > 16) {
-            emailField.setError("Email must be 8–16 characters long");
+        // Email Character Length  is 8–20
+        /*
+        * if (email.length() < 8 || email.length() > 20) {
+            emailField.setError("Email must be 8–20 characters long");
             return false;
-        }
+        } it is flagging every email I put into it even legit ones so we dodge this
+        * */
+
 
 
         // Password Validation
@@ -124,7 +127,7 @@ public class LoginScreen extends AppCompatActivity
             return false;
         }
 
-        // Password Character Length  is 8–16
+        // Password Character Length  is 8–20
         if (password.length() < 8 || password.length() > 16) {
             passwordField.setError("Password must be 8–16 characters long");
             return false;
@@ -144,6 +147,45 @@ public class LoginScreen extends AppCompatActivity
 
         return true;
     }
+
+
+
+    // method for login.
+    public void login(String email, String password) // Login Function
+    {
+                        // Logic for users to  Log in with email + password
+                        mAuth.signInWithEmailAndPassword(email, password)
+                                .addOnCompleteListener(authTask ->
+                                {
+                                    if (authTask.isSuccessful())
+                                    {
+                                        startActivity(new Intent(this,MainActivity.class));
+                                        finish();
+                                    }
+                                    else
+                                    {
+                                        Toast.makeText(LoginScreen.this, "Authentication Failed", Toast.LENGTH_SHORT).show();
+                                    }
+
+                                });
+
+    }
+    //method for the Login Button.
+    public void clickedloginbtn(View view)
+    {
+
+        EditText email = findViewById(R.id.Email2);
+        EditText password = findViewById(R.id.Password2);
+
+        if (!validateInfo(email, password)) {
+            return;
+        }
+
+        login(email.getText().toString().trim(),
+                password.getText().toString().trim());
+    }
+
+}
 
 
 
@@ -240,41 +282,3 @@ public class LoginScreen extends AppCompatActivity
     }
 
         */
-    // method for login.
-    public void login(String email, String password) // Login Function
-    {
-                        // Logic for users to  Log in with email + password
-                        mAuth.signInWithEmailAndPassword(email, password)
-                                .addOnCompleteListener(authTask ->
-                                {
-                                    if (authTask.isSuccessful())
-                                    {
-                                        startActivity(new Intent(this,MainActivity.class));
-                                        finish();
-                                    }
-                                    else
-                                    {
-                                        Toast.makeText(LoginScreen.this, "Authentication Failed", Toast.LENGTH_SHORT).show();
-                                    }
-
-                                });
-
-    }
-    //method for the Login Button.
-    public void clickedloginbtn(View view)
-    {
-
-        EditText email = findViewById(R.id.Email2);
-        EditText password = findViewById(R.id.Password2);
-
-        if (!validateInfo(email, password)) {
-            return;
-        }
-
-        login(email.getText().toString().trim(),
-                password.getText().toString().trim());
-    }
-
-
-
-}
