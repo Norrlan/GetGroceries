@@ -163,20 +163,33 @@ public class LoginScreen extends AppCompatActivity
     public void login(String email, String password) // Login Function
     {
                         // Logic for users to  Log in with email + password
-                        mAuth.signInWithEmailAndPassword(email, password)
-                                .addOnCompleteListener(authTask ->
+        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(authTask ->
                                 {
                                     if (authTask.isSuccessful())
                                     {
-                                        startActivity(new Intent(this,MainActivity.class));
-                                        finish();
+                                        FirebaseUser user = mAuth.getCurrentUser();
+
+                                        if (user != null && user.isEmailVerified())
+                                        {
+                                            startActivity(new Intent(this, MainActivity.class));
+                                            finish();
+                                        }
+                                         // prevent unverified users from authenticating
+                                        else {
+                                            mAuth.signOut();
+                                            Toast.makeText(LoginScreen.this,
+                                                    "Verify your email!", Toast.LENGTH_SHORT).show();
+                                        }
                                     }
                                     else
                                     {
-                                        Toast.makeText(LoginScreen.this, "Authentication Failed", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(LoginScreen.this,
+                                                "Authentication failed", Toast.LENGTH_SHORT).show();
                                     }
 
                                 });
+
+
 
     }
     //method for the Login Button.

@@ -148,10 +148,18 @@ public class RegisterScreen extends AppCompatActivity
                         Toast.makeText(RegisterScreen.this,
                                 "Registration Success", Toast.LENGTH_SHORT).show();
 
+                        //Save the email and uid to Firestore
+                        UserProfile userProfile = new UserProfile(email, uid);
+                        db.collection("users").document(uid).set(profile);
+                        //send verifcation email to the users inbox
+                        user.sendEmailVerification();
+
                         // Move to HomeScreen
                         startActivity(new Intent(this, LoginScreen.class));
                         finish();
+
                     }
+
                     else
                     {
                         Toast.makeText(RegisterScreen.this,
