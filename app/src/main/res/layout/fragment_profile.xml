@@ -25,11 +25,11 @@
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="137dp"
+        android:layout_height="32dp"
         android:layout_marginEnd="152dp"
-        android:text="Profile"
         android:gravity="center"
+        android:text="User Profile"
         android:textColor="@color/black"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@id/toolbar"
@@ -39,8 +39,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/profileCard"
-        android:layout_width="300dp"
-        android:layout_height="403dp"
+        android:layout_width="275dp"
+        android:layout_height="315dp"
         android:background="@drawable/userprofile_card"
         android:padding="24dp"
         android:scaleType="centerInside"
@@ -57,31 +57,30 @@
             android:layout_width="213dp"
             android:layout_height="48dp"
             android:layout_marginStart="3dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="48dp"
             android:background="@drawable/bg_input_field"
             android:hint="Email"
             android:inputType="textEmailAddress"
             android:maxWidth="320dp"
             android:paddingStart="14dp"
             android:paddingEnd="14dp"
-            android:textColor="#0A0A0A"
+            android:textColor="@color/black"
             android:textColorHint="#BEC8D0"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.512"
+            app:layout_constraintHorizontal_bias="0.818"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/resetPasswordBtn"
-            android:backgroundTint="#5EF513"
-            android:textColor="@color/black"
             android:layout_width="213dp"
             android:layout_height="48dp"
-            android:layout_marginTop="48dp"
+            android:layout_marginTop="32dp"
+            android:backgroundTint="#5EF513"
             android:text="Reset Password"
+            android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.512"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/EmailAddressField" />
 
@@ -89,7 +88,7 @@
             android:id="@+id/logoutBtn"
             android:layout_width="213dp"
             android:layout_height="48dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="44dp"
             android:backgroundTint="#5EF513"
             android:text="Logout"
             android:textColor="@color/black"
@@ -97,6 +96,16 @@
             app:layout_constraintHorizontal_bias="0.512"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/resetPasswordBtn" />
+
+        <TextView
+            android:id="@+id/emaillabel"
+            android:layout_width="117dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="16dp"
+            android:text="Email Address"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="BottomNavActiveIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+
+        <item name="color">@color/bottom_nav_active_indicator_color</item>
+        <item name="android:width">64dp</item>
+        <item name="android:height">32dp</item>
+        <item name="android:insetLeft">8dp</item>
+        <item name="android:insetRight">8dp</item>
+        <item name="android:insetTop">4dp</item>
+        <item name="android:insetBottom">4dp</item>
+
+        <item name="shapeAppearanceOverlay">@style/BottomNavPillShape</item>
+    </style>
+
+    <style name="BottomNavPillShape">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+</resources>

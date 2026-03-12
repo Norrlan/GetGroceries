@@ -9,7 +9,8 @@
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/bottomNav" />
+        android:layout_above="@id/bottomNav"
+        />
 
     <!-- Bottom nav -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -17,6 +18,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        app:menu="@menu/bottom_nav_menu" />
+        app:menu="@menu/bottom_nav_menu"
+        app:itemIconTint="@color/lime_green"
+        app:itemActiveIndicatorStyle="@style/BottomNavActiveIndicator" />
 
 </RelativeLayout>

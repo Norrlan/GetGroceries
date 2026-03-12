@@ -38,7 +38,7 @@ public class LoginScreen extends AppCompatActivity
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
+//rgsiter tetx hyperlink
         TextView registerLink = findViewById(R.id.registerlink);
         registerLink.setOnClickListener(new View.OnClickListener()
         {
@@ -64,6 +64,15 @@ public class LoginScreen extends AppCompatActivity
 
         //Logic to make the user move to Home Screen after successful login.
         mAuth = FirebaseAuth.getInstance();
+
+        // Auto Login: User stays logged in after Login
+        FirebaseUser currentUser =mAuth.getCurrentUser();
+        if (currentUser != null)
+        {
+            startActivity(new Intent(LoginScreen.this, MainActivity.class));
+            finish();
+            return;
+        }
 
 
     }
