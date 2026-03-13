@@ -18,12 +18,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.Arrays;
 import java.util.List;
 
-public class RecipeDetailsFragment extends Fragment {
+public class RecipeDetailsFragment extends Fragment
+{
 
     private static final String ARG_RECIPE_NAME = "recipe_name";
     private String recipeName;
 
-    public static RecipeDetailsFragment newInstance(String recipeName) {
+    public static RecipeDetailsFragment newInstance(String recipeName)
+
+    {
         RecipeDetailsFragment fragment = new RecipeDetailsFragment();
         Bundle args = new Bundle();
         args.putString(ARG_RECIPE_NAME, recipeName);
@@ -32,10 +35,12 @@ public class RecipeDetailsFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
 
-        if (getArguments() != null) {
+        if (getArguments() != null)
+        {
             recipeName = getArguments().getString(ARG_RECIPE_NAME);
         }
     }
@@ -44,7 +49,8 @@ public class RecipeDetailsFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
+                             @Nullable Bundle savedInstanceState)
+    {
 
         return inflater.inflate(R.layout.fragment_recipe_details, container, false);
     }
@@ -54,7 +60,7 @@ public class RecipeDetailsFragment extends Fragment {
                               @Nullable Bundle savedInstanceState)
     {
         super.onViewCreated(view, savedInstanceState);
-
+        // Placeholder button. It doesnt save for now
         TextView title = view.findViewById(R.id.recipe_title);
         RecyclerView ingredientsRecycler = view.findViewById(R.id.ingredients_recycler);
         RecyclerView stepsRecycler = view.findViewById(R.id.steps_recycler);
@@ -70,6 +76,8 @@ public class RecipeDetailsFragment extends Fragment {
 
         title.setText(recipeName);
 
+
+        /*
 
         // Placeholder Ingredients
         List<IngredientModel> ingredients = Arrays.asList(
@@ -88,14 +96,14 @@ public class RecipeDetailsFragment extends Fragment {
                 new RecipeSteps(5, "Serve", "Plate and garnish with parsley.")
 
         );
-
+*/
 
         // Setup Recycler
 
         ingredientsRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
         stepsRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        ingredientsRecycler.setAdapter(new IngredientAdapter(ingredients));
-        stepsRecycler.setAdapter(new StepsAdapter(steps));
+        //ingredientsRecycler.setAdapter(new IngredientAdapter(ingredients));
+        //stepsRecycler.setAdapter(new StepsAdapter(steps));
     }
 }

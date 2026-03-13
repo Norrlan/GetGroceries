@@ -171,18 +171,32 @@ public class RegisterScreen extends AppCompatActivity
 
     public void clickedregisterbtn(View view)
     {
-
+        // call the fields needed
         EditText email = findViewById(R.id.emailField);
         EditText password = findViewById(R.id.passwordField);
+        EditText confirmPassword = findViewById(R.id.confirm_password);
 
         if (!validateInfo(email, password))
         {
             return;
         }
 
-        register(email.getText().toString().trim(),
-                password.getText().toString().trim());
+        // get the tetx typed in the password and the confirm password dield
+        String pwd = password.getText().toString().trim();
+        String confirmpwd = confirmPassword.getText().toString().trim();
+
+        //compare the contents in both fields together
+        // display error message if passwords do not match
+        if (!pwd.equals(confirmpwd))
+        {
+            confirmPassword.setError("Passwords do not match");
+            return;
+        }
+
+        register(email.getText().toString().trim(), pwd);
+
     }
+
 }
 
 // Register button handler

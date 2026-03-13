@@ -151,32 +151,32 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <!-- Don't have an account -->
+
+    <!-- Register link -->
     <TextView
         android:id="@+id/registertext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="72dp"
-        android:layout_marginBottom="68dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginBottom="64dp"
         android:text="Don't have an account?"
         android:textColor="@color/white"
-        android:textSize="13sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <!-- Register link -->
     <TextView
         android:id="@+id/registerlink"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="68dp"
+        android:layout_marginEnd="44dp"
         android:layout_marginBottom="68dp"
         android:text="Register"
         android:textColor="#5EF513"
+        android:textSize="16sp"
         android:textStyle="bold"
-        android:textSize="13sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
+        app:layout_constraintEnd_toEndOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
