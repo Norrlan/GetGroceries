@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.Arrays;
 import java.util.List;
 
+// This screen shows a single recipe’s details
 public class RecipeDetailsFragment extends Fragment
 {
 

@@ -11,6 +11,9 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+// Show the list of generated recipes in this fragment
+//With the API it calls API, shows list.
+
 public class RecipesFragment extends Fragment
 {
 
