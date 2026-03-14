@@ -1,24 +1,26 @@
 package com.example.getgroceries;
 
-import com.google.gson.annotations.SerializedName;
-import android.os.Bundle;
-
 // Ingredient data model for the recipe ingredients that will be fetch ingredients as a response from the API
 public class IngredientModel
 {
-   @SerializedName("raw_text")
-   public String rawText;
 
-   public String quantity;
    public String name;
-// placeholder constructor:
-public IngredientModel(String quantity, String name) {
-   this.quantity = quantity;
-   this.name = name;
+   public String amount;
+
+
+   public String getName()
+   {
+      return name;
+   }
+
+   public String getAmount()
+   {
+      return amount;
+   }
+
 }
 
 
-}
 
 
 
@@ -27,9 +29,7 @@ public IngredientModel(String quantity, String name) {
 
 
 
-
-
-//placeholder data
+// Previous placeholder data for UI demonstration
     /*
     *  public String quantity;
     public String name;

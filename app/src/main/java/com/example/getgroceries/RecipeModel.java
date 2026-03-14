@@ -1,6 +1,7 @@
-// inner model for containing actual recipe models that will be called by tbe API
+// inner model for containing actual The actual recipe that will be called by tbe API and displayed in Ui
 package com.example.getgroceries;
 import java.util.List;
+import java.lang.String;
 
 public class RecipeModel
 {
@@ -9,7 +10,7 @@ public class RecipeModel
    List <IngredientModel> ingredients;
 
     List <String> instructions;
-    NutritionModel nutritionInfo;
+    NutritionModel nutrition_info;
 
     //Getters
 
@@ -28,12 +29,8 @@ public class RecipeModel
         return instructions;
     }
 
-    public NutritionModel getNutritionInfo()
+    public NutritionModel getNutrition_info()
     {
-        return nutritionInfo;
+        return nutrition_info;
     }
-
-
-
-
 }

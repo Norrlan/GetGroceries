@@ -7,7 +7,12 @@ public class RecipeResponse
 
 RecipeModel result;
 
-// getter for result :
+RecipeModel ingredients;
+
+
+
+
+// getters for the Response :
 public RecipeModel getResult()
     {
         return result;
