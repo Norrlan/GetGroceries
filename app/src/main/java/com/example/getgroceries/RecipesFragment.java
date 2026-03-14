@@ -1,9 +1,13 @@
 package com.example.getgroceries;
 
+import static android.widget.Toast.*;
+
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -74,15 +78,20 @@ public class RecipesFragment extends Fragment
                     return;
                 }
 
-                RecipeModel recipeModel = response.body().getResult(); //'getResult()' has private access in 'com.example.getgroceries.RecipeResponse'
+                RecipeModel recipeModel = response.body().getResult();
 
                 // TODO: display recipe in UI
+                Log.d("API", "Title: " + recipeModel.getTitle());
+                Log.d("API", "Ingredients: " + recipeModel.getIngredients());
+                Log.d("API", "Instructions: " + recipeModel.getInstructions());
+                Log.d("API", "Nutrition: " + recipeModel.getNutrition_info());
             }
 
             @Override
             public void onFailure(Call<RecipeResponse> call, Throwable t)
             {
-                // TODO: show error message
+                // show error message
+                Toast.makeText(requireContext(), "API call failed: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
 
