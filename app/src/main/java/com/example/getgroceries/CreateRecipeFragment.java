@@ -14,7 +14,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-public class CreateRecipeFragment extends Fragment {
+public class CreateRecipeFragment extends Fragment
+{
 
     private EditText recipeInput;
     private Button generateButton;
@@ -38,11 +39,12 @@ public class CreateRecipeFragment extends Fragment {
                               @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        recipeInput = view.findViewById(R.id.recipe_input);// Cannot resolve symbol 'recipe_input'
-        generateButton = view.findViewById(R.id.generate_button);//Cannot resolve symbol 'generate_button'
-        loadingBar = view.findViewById(R.id.loading_bar);//Cannot resolve symbol 'loading_bar'
+        recipeInput = view.findViewById(R.id.recipe_input);
+        generateButton = view.findViewById(R.id.generate_button);
+        loadingBar = view.findViewById(R.id.loading_bar);
 
         generateButton.setOnClickListener(v -> {
+
             String recipeName = recipeInput.getText().toString().trim();
 
             if (TextUtils.isEmpty(recipeName)) {
@@ -50,29 +52,17 @@ public class CreateRecipeFragment extends Fragment {
                 return;
             }
 
-            // Show loading
+            // Show loading briefly (optional)
             loadingBar.setVisibility(View.VISIBLE);
             generateButton.setEnabled(false);
 
-            // Simulate API call (replace with real API later)
-            fetchRecipe(recipeName);
-        });
-    }
-
-    private void fetchRecipe(String recipeName) {
-        // TODO: Replace this with real API call using Retrofit
-
-        // Simulate delay for now
-        recipeInput.postDelayed(() -> {
-
-            loadingBar.setVisibility(View.GONE);
-            generateButton.setEnabled(true);
-
-            // Navigate to RecipeDetailsFragment with the recipe name
+            // Navigate immediately to RecipeDetailsFragment
             Fragment detailsFragment = RecipeDetailsFragment.newInstance(recipeName);
-
             ((MainActivity) requireActivity()).openFragment(detailsFragment);
 
-        }, 1200);
+            // Reset UI
+            loadingBar.setVisibility(View.GONE);
+            generateButton.setEnabled(true);
+        });
     }
 }

@@ -13,7 +13,7 @@ public interface RecipeApiService
 
     @Headers({
             "Content-Type: application/json",
-            "X-RapidAPI-Key: febfb97138msh1eaa457ca4ea420p1c9263jsn440b109d0eed",
+            "X-RapidAPI-Key: 7532c4cca6mshb3c38193cdd1796p1a26efjsn43fd9927dd06",
             "X-RapidAPI-Host: ai-food-recipe-generator-api-custom-diet-quick-meals.p.rapidapi.com"
 
     })

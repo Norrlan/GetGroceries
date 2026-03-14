@@ -1,32 +1,30 @@
 package com.example.getgroceries;
-// model class for nutrition
-public class NutritionModel
-{
-    Integer calories;
 
-    String protein;
-    String carbs;
+// Model class for nutrition
+public class NutritionModel {
 
-    String fats;
+    private String calories;
+    private String protein;
+    private String carbs;
+    private String fat;   // API uses "fat", not "fats"
 
-    //getters
-    public Integer getCalories()
-    {
+    // Required empty constructor for Firebase / Retrofit
+    public NutritionModel() {}
+
+    // Getters
+    public String getCalories() {
         return calories;
     }
 
-    public String getProtein()
-    {
+    public String getProtein() {
         return protein;
     }
 
-    public String getCarbs()
-    {
+    public String getCarbs() {
         return carbs;
     }
 
-    public String getFats()
-    {
-        return fats;
+    public String getFat() {
+        return fat;
     }
 }
