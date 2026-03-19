@@ -1,27 +1,34 @@
 package com.example.getgroceries;
-// Interface for the Tasty API to define API endpoints and their request types.
-
 
 import retrofit2.Call;
-import retrofit2.http.Body;
-import retrofit2.http.Headers;
-import retrofit2.http.POST;
+import retrofit2.http.GET;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
-public interface RecipeApiService
-{
+public interface RecipeApiService {
 
-    @Headers({
-            "Content-Type: application/json",
-            "X-RapidAPI-Key: 7532c4cca6mshb3c38193cdd1796p1a26efjsn43fd9927dd06",
-            "X-RapidAPI-Host: ai-food-recipe-generator-api-custom-diet-quick-meals.p.rapidapi.com"
-
-    })
-    @POST("generate")
-    Call<RecipeResponse> generateRecipe(
-            @Query("noqueue") int noQueue,
-            @Body RecipeRequest requestBody
+    // search by name, returns id + title + image
+    @GET("recipes/complexSearch")
+    Call<RecipeSearchResponse> searchRecipes(
+            @Query("query") String query,
+            @Query("number") int number,
+            @Query("apiKey") String apiKey
     );
 
+    // get recipe details by id
+    @GET("recipes/{id}/information")
+    Call<RecipeModel> getRecipeById(
+            @Path("id") int id,
+            @Query("includeNutrition") boolean includeNutrition,
+            @Query("addRecipeInstructions") boolean addRecipeInstructions,
+            @Query("apiKey") String apiKey
+    );
 
+    // Extract recipe from a website URL
+    @GET("recipes/extract")
+    Call<RecipeModel> extractRecipeFromUrl(
+            @Query("url") String url,
+            @Query("includeNutrition") boolean includeNutrition,
+            @Query("apiKey") String apiKey
+    );
 }

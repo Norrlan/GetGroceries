@@ -15,7 +15,6 @@ import androidx.fragment.app.Fragment;
 
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.Arrays;
 import java.util.List;
 
 import retrofit2.Call;
@@ -24,17 +23,20 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class RecipeDetailsFragment extends Fragment
-{
+public class RecipeDetailsFragment extends Fragment {
 
     private static final String ARG_RECIPE_NAME = "recipe_name";
+    private static final String API_KEY = "5c410c00a31c4958a650170e1db88d03";
+    private static final String BASE_URL = "https://api.spoonacular.com/";
+
     private String recipeName;
 
     private TextView titleView, ingredientsView, instructionsView, nutritionView;
     private ProgressBar loadingBar;
     private RecipeApiService recipeApiService;
 
-    public static RecipeDetailsFragment newInstance(String recipeName) {
+    public static RecipeDetailsFragment newInstance(String recipeName)
+    {
         RecipeDetailsFragment fragment = new RecipeDetailsFragment();
         Bundle args = new Bundle();
         args.putString(ARG_RECIPE_NAME, recipeName);
@@ -43,9 +45,11 @@ public class RecipeDetailsFragment extends Fragment
     }
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
+        if (getArguments() != null)
+        {
             recipeName = getArguments().getString(ARG_RECIPE_NAME);
         }
     }
@@ -54,21 +58,23 @@ public class RecipeDetailsFragment extends Fragment
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
+                             @Nullable Bundle savedInstanceState)
+    {
         return inflater.inflate(R.layout.fragment_recipe_details, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view,
-                              @Nullable Bundle savedInstanceState) {
+                              @Nullable Bundle savedInstanceState)
+    {
         super.onViewCreated(view, savedInstanceState);
 
         // Bind views
-        titleView       = view.findViewById(R.id.recipe_title);
-        ingredientsView = view.findViewById(R.id.ingredients_text);
-        instructionsView= view.findViewById(R.id.instructions_text);
-        nutritionView   = view.findViewById(R.id.nutrition_text);
-        loadingBar      = view.findViewById(R.id.loading_bar);
+        titleView        = view.findViewById(R.id.recipe_title);
+        ingredientsView  = view.findViewById(R.id.ingredients_text);
+        instructionsView = view.findViewById(R.id.instructions_text);
+        nutritionView    = view.findViewById(R.id.nutrition_text);
+        loadingBar       = view.findViewById(R.id.loading_bar);
         Button saveButton = view.findViewById(R.id.btnSaveRecipe);
 
         titleView.setText(recipeName);
@@ -88,14 +94,17 @@ public class RecipeDetailsFragment extends Fragment
                     .addOnSuccessListener(ref ->
                             Toast.makeText(getContext(),
                                     "Recipe saved!", Toast.LENGTH_SHORT).show())
-                    .addOnFailureListener(e ->
-                            Toast.makeText(getContext(),
-                                    "Failed to save recipe", Toast.LENGTH_SHORT).show());
+                    .addOnFailureListener(e -> {
+                        Toast.makeText(getContext(),
+                                "Failed: " + e.getMessage(),
+                                Toast.LENGTH_LONG).show();
+                        android.util.Log.e("FIREBASE", "Save failed", e);
+                    });
         });
 
-        // Build Retrofit instance
+        // Build Retrofit — now pointing to Spoonacular
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://ai-food-recipe-generator-api-custom-diet-quick-meals.p.rapidapi.com/")
+                .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -104,91 +113,119 @@ public class RecipeDetailsFragment extends Fragment
         callApiForRecipe();
     }
 
-    private void callApiForRecipe() {
-
+    // Spoonacular API function: search by name to get recipe id
+    // Function to call the recipe api
+    private void callApiForRecipe()
+    {
         loadingBar.setVisibility(View.VISIBLE);
 
-        List<String> ingredients   = Arrays.asList(recipeName);
-        List<String> restrictions  = Arrays.asList();
+        recipeApiService.searchRecipes(recipeName, 1, "5c410c00a31c4958a650170e1db88d03")
+                .enqueue(new Callback<RecipeSearchResponse>()
+                {
+                    // onResponse function to manage the response for the API function that lets users search by the name to get the recipe id.
 
-        RecipeRequest request = new RecipeRequest(
-                ingredients,
-                restrictions,
-                "",     // cuisine
-                "",     // meal type
-                2,      // servings
-                "en"    // language
-        );
+                    @Override
+                    public void onResponse(Call<RecipeSearchResponse> call,
+                                           Response<RecipeSearchResponse> response)
+                    {
+                        //if it cannot find the recipe after searching the toast message should tell the user its cannot find the recipe
+                        if (!response.isSuccessful()
+                                || response.body() == null
+                                || response.body().getResults() == null
+                                || response.body().getResults().isEmpty())
+                        {
 
-        Call<RecipeResponse> call = recipeApiService.generateRecipe(1, request);
-
-        call.enqueue(new Callback<RecipeResponse>() {
-
-            @Override
-            public void onResponse(Call<RecipeResponse> call,
-                                   Response<RecipeResponse> response) {
-
-                loadingBar.setVisibility(View.GONE);
-
-                if (!response.isSuccessful() || response.body() == null) {
-                    Toast.makeText(getContext(),
-                            "API Error: " + response.code(),
-                            Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                RecipeModel recipe = response.body().getResult();
-
-                if (recipe == null) {
-                    Toast.makeText(getContext(),
-                            "No recipe data returned",
-                            Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                // INGREDIENTS
-                if (recipe.getIngredients() != null
-                        && !recipe.getIngredients().isEmpty()) {
-
-                    StringBuilder sb = new StringBuilder();
-                    for (IngredientModel ing : recipe.getIngredients()) {
-                        sb.append("• ").append(ing.getName());
-                        if (ing.getAmount() != null
-                                && !ing.getAmount().isEmpty()) {
-                            sb.append(" — ").append(ing.getAmount());
+                            loadingBar.setVisibility(View.GONE); Toast.makeText(getContext(), "Recipe not found: " + recipeName, Toast.LENGTH_SHORT).show();
+                            return;
                         }
-                        sb.append("\n");
+
+                        // Get id from first result
+                        int id = response.body().getResults().get(0).getId();
+
+                        // get full details using id
+                        getRecipeDetails(id);
                     }
-                    ingredientsView.setText(sb.toString());
 
-                } else {
-                    ingredientsView.setText("No ingredients available.");
-                }
+                    // function if it fails to call the API.
+                    @Override
+                    public void onFailure(Call<RecipeSearchResponse> call, Throwable t)
+                    {
+                        loadingBar.setVisibility(View.GONE);
+                        Toast.makeText(getContext(),
+                                "Search failed: " + t.getMessage(),
+                                Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
 
-                // INSTRUCTIONS
-                if (recipe.getInstructions() != null
-                        && !recipe.getInstructions().isEmpty()) {
-                    instructionsView.setText(formatList(recipe.getInstructions()));
-                } else {
-                    instructionsView.setText("No instructions available.");
-                }
+    // Spoonacular API function: get full recipe details and display them
+    private void getRecipeDetails(int recipeId)
+    {
 
-                // NUTRITION
-                if (recipe.getNutrition_info() != null) {
-                    nutritionView.setText(formatNutrition(recipe.getNutrition_info()));
-                } else {
-                    nutritionView.setText("No nutrition info available.");
-                }
+        recipeApiService.getRecipeById(recipeId, true, true,"5c410c00a31c4958a650170e1db88d03")
+                .enqueue(new Callback<RecipeModel>()
+                {
+
+                    @Override
+                    public void onResponse(Call<RecipeModel> call, Response<RecipeModel> response)
+                    {
+
+                        loadingBar.setVisibility(View.GONE);
+
+                        if (!response.isSuccessful() || response.body() == null)
+                        {
+                            Toast.makeText(getContext(),
+                                    "Could not load recipe details",
+                                    Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+
+                        displayRecipe(response.body());
+                    }
+
+                    @Override
+                    public void onFailure(Call<RecipeModel> call, Throwable t)
+                    {
+                        loadingBar.setVisibility(View.GONE);
+                        Toast.makeText(getContext(),
+                                "Failed: " + t.getMessage(),
+                                Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    // Displays all recipe data in the UI
+    private void displayRecipe(RecipeModel recipe) {
+
+        // Title
+        titleView.setText(recipe.getTitle());
+
+        // INGREDIENTS
+        if (recipe.getIngredients() != null
+                && !recipe.getIngredients().isEmpty()) {
+            StringBuilder sb = new StringBuilder();
+            for (IngredientModel ing : recipe.getIngredients()) {
+                sb.append("• ").append(ing.getAmount()).append("\n");
             }
+            ingredientsView.setText(sb.toString());
+        } else {
+            ingredientsView.setText("No ingredients available.");
+        }
 
-            @Override
-            public void onFailure(Call<RecipeResponse> call, Throwable t) {
-                loadingBar.setVisibility(View.GONE);
-                Toast.makeText(getContext(),
-                        "Request failed: " + t.getMessage(),
-                        Toast.LENGTH_SHORT).show();
-            }
-        });
+        // INSTRUCTIONS
+        if (recipe.getInstructions() != null
+                && !recipe.getInstructions().isEmpty()) {
+            instructionsView.setText(formatList(recipe.getInstructions()));
+        } else {
+            instructionsView.setText("No instructions available.");
+        }
+
+        // NUTRITION
+        if (recipe.getNutrition_info() != null) {
+            nutritionView.setText(formatNutrition(recipe.getNutrition_info()));
+        } else {
+            nutritionView.setText("No nutrition info available.");
+        }
     }
 
     // Formats a List<String> into a bulleted string

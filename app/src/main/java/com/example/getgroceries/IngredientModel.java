@@ -1,18 +1,42 @@
 package com.example.getgroceries;
 
-public class IngredientModel {
+import com.google.gson.annotations.SerializedName;
 
+//Model for the ingredients that will be displayed in the RecipeDetailsFragment
+
+public class IngredientModel
+{
+
+   @SerializedName("name")
    public String name;
-   public String amount;
 
-   // Required empty constructor for Gson/Retrofit
+   @SerializedName("amount")
+   public double amount;
+
+   @SerializedName("unit")
+   public String unit;
+
+   @SerializedName("original")
+   public String original; // e.g. "2 cups of flour"
+
    public IngredientModel() {}
 
-   public String getName() {
+   public String getName()
+   {
       return name;
    }
 
-   public String getAmount() {
-      return amount;
+   // Returns "2.0 cups" or just the original text from the API
+   public String getAmount()
+   {
+      if (original != null && !original.isEmpty())
+      {
+         return original;
+      }
+      if (unit != null && !unit.isEmpty())
+      {
+         return amount + " " + unit;
+      }
+      return String.valueOf(amount);
    }
 }
