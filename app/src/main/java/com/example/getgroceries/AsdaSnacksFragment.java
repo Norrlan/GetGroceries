@@ -9,23 +9,22 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
-public class AsdaBakeryFragment extends Fragment
+public class AsdaSnacksFragment extends Fragment
 {
 
-    public AsdaBakeryFragment() {
+    public AsdaSnacksFragment()
+    {
         // Required empty public constructor
     }
 
-
-    public static AsdaBakeryFragment newInstance(String param1, String param2)
+    public static AsdaSnacksFragment newInstance(String param1, String param2)
     {
-        AsdaBakeryFragment fragment = new AsdaBakeryFragment();
+        AsdaSnacksFragment fragment = new AsdaSnacksFragment();
         return fragment;
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState)
-    {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
@@ -33,6 +32,6 @@ public class AsdaBakeryFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_asda_bakery, container, false);
+        return inflater.inflate(R.layout.fragment_asda_laundry, container, false);
     }
 }
