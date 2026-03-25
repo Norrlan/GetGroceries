@@ -16,17 +16,17 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="117dp"
-        android:layout_height="45dp"
+        android:layout_width="174dp"
+        android:layout_height="40dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="32dp"
         android:scaleType="centerInside"
         android:text="GetGroceries"
         android:textColor="@color/lime_green"
-        android:textSize="20dp"
+        android:textSize="25dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.554"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -34,78 +34,10 @@
         android:id="@+id/profileicon"
         android:layout_width="42dp"
         android:layout_height="40dp"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="152dp"
+        android:layout_marginTop="8dp"
         android:src="@drawable/sharp_person"
         app:layout_constraintStart_toEndOf="@+id/textView"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/selectStoreTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="157dp"
-        android:layout_marginTop="104dp"
-        android:layout_marginEnd="162dp"
-        android:gravity="center"
-        android:text="Select A Store"
-        android:textColor="@color/lime_green"
-        android:textSize="30dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.48"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/imageView6"
-        android:layout_width="262dp"
-        android:layout_height="124dp"
-        android:layout_marginTop="28dp"
-        android:background="@drawable/store_background"
-        android:padding="20dp"
-        android:scaleType="centerInside"
-        android:src="@drawable/coop"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.452"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/selectStoreTitle" />
-
-    <ImageView
-        android:id="@+id/imageView7"
-        android:layout_width="262dp"
-        android:layout_height="124dp"
-        android:layout_marginTop="32dp"
-        android:background="@drawable/store_background"
-        android:padding="20dp"
-        android:scaleType="centerInside"
-        android:src="@drawable/iceland"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.427"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imageView6" />
-
-    <ImageView
-        android:id="@+id/imageView9"
-        android:layout_width="262dp"
-        android:layout_height="124dp"
-        android:layout_marginTop="40dp"
-        android:background="@drawable/store_background"
-        android:padding="20dp"
-        android:scaleType="centerInside"
-        android:src="@drawable/asda"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.427"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imageView7" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="61dp"
-        android:layout_height="38dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
-        android:src="@drawable/g_logo"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 
