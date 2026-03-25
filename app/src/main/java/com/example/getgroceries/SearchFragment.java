@@ -40,22 +40,16 @@ public class SearchFragment extends Fragment {
 
         switch (position) {
             case 0:
-                fragment = new DrinksSubcategoryFragment();
+                fragment = new DrinksFragment();
                 break;
             case 1:
-                fragment = new SnacksSubcategoryFragment();
+                fragment = new SnacksFragment();
                 break;
             case 2:
-                fragment = new BakerySubcategoryFragment();
+                fragment = new FrozenFragment();
                 break;
             case 3:
-                fragment = new FrozenSubcategoryFragment();
-                break;
-            case 4:
-                fragment = new CannedSubcategoryFragment();
-                break;
-            case 5:
-                fragment = new CondimentsSubcategoryFragment();
+                fragment = new CondimentsFragment();
                 break;
             default:
                 return;
