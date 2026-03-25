@@ -86,7 +86,9 @@
             android:layout_height="wrap_content"
             android:nestedScrollingEnabled="false"
             android:textColor="@color/white"
-            android:paddingTop="12dp"/>
+            android:paddingTop="12dp"
+            android:paddingBottom="100dp"
+            />
 
     </LinearLayout>
 

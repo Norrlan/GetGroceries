@@ -1,16 +1,18 @@
 package com.example.getgroceries;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.SearchView;
+import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,23 +20,86 @@ import java.util.List;
 
 public class SearchFragment extends Fragment {
 
-   // placeholder lists
-    private List<String> allProducts = Arrays.asList(
-            "Bakery",
-            "Drinks",
-            "Frozen",
-            "Household",
-            "Snacks",
-            "Apple",
-            "Orange",
-            "Milk",
-            "Bread",
-            "Coke",
-            "Chicken",
-            "Rice",
-            "Eggs",
-            "Butter"
-    );
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+    {
+
+        View view = inflater.inflate(R.layout.fragment_search, container, false);
+
+        // CATEGORY RECYCLER
+
+        RecyclerView categoryRecycler = view.findViewById(R.id.rvCategories);
+
+        List<Integer> categoryImages = Arrays.asList(
+                R.drawable.drinks_card,
+                R.drawable.snacks,
+                R.drawable.frozenfood,
+                R.drawable.condiment
+        );
+
+        List<String> categoryLabels = Arrays.asList(
+                "Drinks",
+                "Snacks",
+                "Frozen",
+                "Condiments"
+        );
+
+        Searchadapter adapter = new Searchadapter(categoryImages, categoryLabels, position -> {
+            openCategory(position);
+        });
+
+        categoryRecycler.setAdapter(adapter);
+        categoryRecycler.setLayoutManager(new GridLayoutManager(getContext(), 2));
+
+        // SEARCH RESULTS RECYCLER
+
+        RecyclerView searchResultsRecycler = view.findViewById(R.id.search_results_recycler);
+        SearchResultsAdapter resultsAdapter = new SearchResultsAdapter(new ArrayList<>());
+        searchResultsRecycler.setAdapter(resultsAdapter);
+        searchResultsRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        // EMPTY STATE
+        View emptyState = view.findViewById(R.id.EmptyState);
+
+        // SEARCH BAR
+
+        TextInputEditText searchBar = view.findViewById(R.id.Search_bar);
+
+        searchBar.addTextChangedListener(new TextWatcher()
+        {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence text, int start, int before, int count)
+            {
+                String query = text.toString().trim();
+
+                if (query.isEmpty())
+                {
+                    emptyState.setVisibility(View.VISIBLE);
+                    searchResultsRecycler.setVisibility(View.GONE);
+                }
+
+                else
+                {
+                    emptyState.setVisibility(View.GONE);
+                    searchResultsRecycler.setVisibility(View.VISIBLE);
+
+                    // API search will go here later
+                    resultsAdapter.updateResults(new ArrayList<>());
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+        });
+
+        return view;
+    }
+
+    // CATEGORY NAVIGATION
+
     private void openCategory(int position) {
         Fragment fragment;
 
@@ -60,76 +125,5 @@ public class SearchFragment extends Fragment {
                 .replace(R.id.fragment_container, fragment)
                 .addToBackStack(null)
                 .commit();
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedsInstanceState) {
-
-        View view = inflater.inflate(R.layout.fragment_search, container, false);
-
-        // Category Cards
-        RecyclerView categoryRecycler = view.findViewById(R.id.category_recycler);
-// These are all the categories & that will be used by each store
-        List<Integer> categoryImages = Arrays.asList(
-                R.drawable.drinks_card,
-                R.drawable.snacks,
-                R.drawable.bakery,
-                R.drawable.frozenfood,
-                R.drawable.canfood,
-                R.drawable.condiment
-        );
-        List<String> categoryLabels = Arrays.asList(
-                "Drinks",
-                "Snacks",
-                "Bakery",
-                "Frozen Food",
-                "Canned Food",
-                "Condiments"
-        );
-
-        Searchadapter adapter = new Searchadapter(categoryImages, categoryLabels, position -> {
-            openCategory(position);
-
-        });
-
-        categoryRecycler.setAdapter(adapter);
-        categoryRecycler.setLayoutManager(new GridLayoutManager(getContext(), 2));
-
-        // Search results recycler
-        RecyclerView searchResultsRecycler = view.findViewById(R.id.search_results_recycler);
-        SearchResultsAdapter resultsAdapter = new SearchResultsAdapter(new ArrayList<>());
-        searchResultsRecycler.setAdapter(resultsAdapter);
-        searchResultsRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
-
-        // Search Bar
-        SearchView searchView = view.findViewById(R.id.searchbar);
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                filterProducts(query, resultsAdapter);
-                return true;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                filterProducts(newText, resultsAdapter);
-                return true;
-            }
-        });
-
-        return view;
-    }
-
-    private void filterProducts(String query, SearchResultsAdapter adapter) {
-        List<String> filtered = new ArrayList<>();
-
-        for (String product : allProducts) {
-            if (product.toLowerCase().contains(query.toLowerCase())) {
-                filtered.add(product);
-            }
-        }
-
-        adapter.updateResults(filtered);
     }
 }
