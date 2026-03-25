@@ -1,13 +1,13 @@
 package com.example.getgroceries;
-
+// This file contains all the categories within the Grocery API.
 
 import java.util.ArrayList;
 
-public class CategoryList
+public class GroceryCategoryList
 {
-    private static CategoryList instance;
-    private static CategoryList getInstance = null;
-    public CategoryList()
+    private static GroceryCategoryList instance;
+    private static GroceryCategoryList getInstance = null;
+    public GroceryCategoryList()
     {
         asdaAisles.add("Drinks");// Fruit
         asdaAisles.add("Snacks");// Bakery
@@ -15,11 +15,11 @@ public class CategoryList
         asdaAisles.add("Bakery");
         asdaAisles.add("Canned Food");
     }
-    public static CategoryList getInstance()
+    public static GroceryCategoryList getInstance()
     {
         if ( instance == null)
         {
-            instance = new CategoryList();
+            instance = new GroceryCategoryList();
         }
         return  instance;
     }
