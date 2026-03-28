@@ -19,8 +19,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class RegisterScreen extends AppCompatActivity
 {
-    private FirebaseAuth mAuth;
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+    private FirebaseAuth mAuth;   // Firebase Authentication instance
+    FirebaseFirestore db = FirebaseFirestore.getInstance(); // Firestore database instance
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -29,6 +30,7 @@ public class RegisterScreen extends AppCompatActivity
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_register_screen);
 
+        // Initialise Firebase Authentication and Firestore
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
@@ -39,9 +41,10 @@ public class RegisterScreen extends AppCompatActivity
             return insets;
         });
 
-        // Login hyperlink
+        // Login hyperlink: MOve the user to Login Screen when the text is clicked
         TextView loginLink = findViewById(R.id.loginLink);
-        loginLink.setOnClickListener(v -> {
+        loginLink.setOnClickListener(v ->
+        {
             Intent intent = new Intent(RegisterScreen.this, LoginScreen.class);
             startActivity(intent);
         });
@@ -109,7 +112,7 @@ public class RegisterScreen extends AppCompatActivity
             return false;
         }
 
-        // At least 1 special character
+        // Contain at least 1 special character
         if (!password.matches(".*[!@#$%^&*()_+=<>?/{}~|].*")) {
             passwordField.setError("Password must contain at least one special character");
             return false;
@@ -120,14 +123,16 @@ public class RegisterScreen extends AppCompatActivity
     }
 
 
-    // Register user with email + password
+    // Register Method: Register user with email + password
     public void register(String email, String password)
     {
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, task -> {
-
+        //Firebase method to create user with email and password
+        mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, task ->
+        {
                     if (task.isSuccessful())
                     {
+                        // Check if the user is signed in (non-null) and update UI accordingly.
+                        // if the user isnt signed in display the Toast
                         FirebaseUser user = mAuth.getCurrentUser();
                         if (user == null)
                         {
@@ -136,9 +141,10 @@ public class RegisterScreen extends AppCompatActivity
                             return;
                         }
 
+                        //get the unique id for the user.
                         String uid = user.getUid();
 
-                        // Save email + uid to Firestore
+                        // Create profile object to be used in the user profile.
                         UserProfile profile = new UserProfile(email, uid);
 
                         db.collection("users").document(uid).set(profile)
@@ -148,15 +154,14 @@ public class RegisterScreen extends AppCompatActivity
                         Toast.makeText(RegisterScreen.this,
                                 "Registration Success", Toast.LENGTH_SHORT).show();
 
-                        //Save the email and uid to Firestore
-                        UserProfile userProfile = new UserProfile(email, uid);
+                        // Creating Collection reference for firebase firestore database called users
                         db.collection("users").document(uid).set(profile);
                         //send verifcation email to the users inbox
                         user.sendEmailVerification();
 
-                        // Move to HomeScreen
+                        // Move to LoginScreen
                         startActivity(new Intent(this, LoginScreen.class));
-                        finish();
+                        finish();// close Register screen
 
                     }
 

@@ -69,6 +69,7 @@ public class LoginScreen extends AppCompatActivity
         FirebaseUser currentUser =mAuth.getCurrentUser();
         if (currentUser != null)
         {
+            // intent to move user to MainActivity screen
             startActivity(new Intent(LoginScreen.this, MainActivity.class));
             finish();
             return;
