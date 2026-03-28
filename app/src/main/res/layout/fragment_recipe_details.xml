@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <!-- Recipe Title -->
+
         <TextView
             android:id="@+id/recipe_title"
             android:textSize="24sp"
@@ -22,7 +22,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <!-- Loading Indicator -->
         <ProgressBar
             android:id="@+id/loading_bar"
             android:layout_width="wrap_content"
@@ -31,7 +30,7 @@
             android:visibility="gone"
             android:layout_marginBottom="20dp" />
 
-        <!-- Ingredients Header -->
+
         <TextView
             android:text="Ingredients"
             android:textStyle="bold"
@@ -41,7 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <!-- Ingredients Text -->
+
         <TextView
             android:id="@+id/ingredients_text"
             android:textColor="@color/white"
@@ -50,7 +49,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <!-- Instructions Header -->
+
         <TextView
             android:text="Instructions"
             android:textStyle="bold"
@@ -60,7 +59,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <!-- Instructions Text -->
+
         <TextView
             android:id="@+id/instructions_text"
             android:textColor="@color/white"
@@ -69,7 +68,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <!-- Nutrition Header -->
+
         <TextView
             android:text="Nutrition Info"
             android:textStyle="bold"
@@ -79,7 +78,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <!-- Nutrition Text -->
+
         <TextView
             android:id="@+id/nutrition_text"
             android:textColor="@color/white"
@@ -88,17 +87,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <!-- Save Button -->
+
         <Button
             android:id="@+id/btnSaveRecipe"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="196dp"
+            android:layout_height="48dp"
+            android:layout_marginBottom="40dp"
+            android:layout_gravity="center"
             android:backgroundTint="@color/lime_green"
-            android:text="Save Recipe"
-            android:textColor="@color/black"
-            android:textAllCaps="false"
             android:padding="12dp"
-            android:layout_marginBottom="40dp" />
+            android:text="Save Recipe"
+            android:textAllCaps="false"
+            android:textColor="@color/black" />
 
     </LinearLayout>
 

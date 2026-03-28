@@ -136,7 +136,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             super(itemView);
             image = itemView.findViewById(R.id.product_image);
             name = itemView.findViewById(R.id.product_name);
-            detail = itemView.findViewById(R.id.product_description);
+            detail = itemView.findViewById(R.id.product_info);
             saveButton = itemView.findViewById(R.id.save_button);
         }
     }

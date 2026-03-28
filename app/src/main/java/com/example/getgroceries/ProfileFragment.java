@@ -3,6 +3,7 @@ package com.example.getgroceries;
 import android.content.Intent;
 import android.os.Bundle;
 
+
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -18,7 +19,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 
-public class ProfileFragment extends Fragment {
+public class ProfileFragment extends Fragment
+{
     private FirebaseAuth mAuth;
 
     public ProfileFragment() {
@@ -32,25 +34,29 @@ public class ProfileFragment extends Fragment {
     {
         super.onCreate(savedInstanceState);
         mAuth = FirebaseAuth.getInstance();
-
-
     }
 
+    View view;
+
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState)
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false);
+
+         return inflater.inflate(R.layout.fragment_profile, container, false);
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState)
     {
         super.onViewCreated(view, savedInstanceState);
-        // in the Profile screen, display the logged in users email
+
+
+
+        // Display the logged in users email in the email address field
         EditText Emailfield = view.findViewById(R.id.EmailAddressField);
         Button resetPasswordBtn = view.findViewById(R.id.resetPasswordBtn);
+
         //Logout button logs user out. Takes user to the Login Screen after.
         Button logoutbtn = view.findViewById(R.id.logoutBtn);
         FirebaseUser user = mAuth.getCurrentUser();
@@ -73,6 +79,7 @@ public class ProfileFragment extends Fragment {
             Intent intent = new Intent(getActivity(), ForgottenPassword.class);
             startActivity(intent); // takes user to the forgotten passwrod screen
         });
+
     }
 
     public void  signOut ()// method to make user logout.

@@ -1,5 +1,9 @@
 package com.example.getgroceries;
 
+import android.widget.ImageView;
+
+import androidx.appcompat.app.AppCompatActivity;
+
 public class UserProfile
 {
 
@@ -12,5 +16,7 @@ public class UserProfile
         this.uid = uid;
     }
     public UserProfile() {}
+
+
 
 }

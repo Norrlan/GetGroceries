@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     android:background="@color/black">
 
-    <!-- Title -->
+
     <TextView
         android:text="Create Recipes"
         android:textSize="24sp"
@@ -19,16 +19,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
-    <!-- SECTION 1: Generate by name -->
 
-    <!-- SECTION 1: Generate by name -->
     <EditText
         android:id="@+id/recipe_input"
-        android:layout_width="333dp"
+        android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_gravity="center"
         android:background="@drawable/bg_input_field"
         android:hint="Enter recipe name"
+        android:padding="8dp"
         android:textColor="@color/black"
         android:textColorHint="@color/black" />
 
@@ -57,16 +56,15 @@
 
     <EditText
         android:id="@+id/url_input"
-        android:layout_width="349dp"
+        android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_gravity="center"
         android:background="@drawable/bg_input_field"
-        android:hint="Paste URL here"
-        android:inputType="textUri"
+        android:hint="Paste Url Here"
+        android:padding="8dp"
         android:textColor="@color/black"
         android:textColorHint="@color/black" />
 
-    <!-- Loading bar -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/extract_button"
         android:layout_width="196dp"

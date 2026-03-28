@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <!-- App Title Row -->
+
         <LinearLayout
             android:orientation="horizontal"
             android:gravity="center_vertical"
@@ -40,7 +40,7 @@
                 android:src="@drawable/sharp_person" />
         </LinearLayout>
 
-        <!-- The Search Bar -->
+
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -66,7 +66,6 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Section Title -->
         <TextView
             android:id="@+id/Home_Title"
             android:layout_width="wrap_content"
@@ -79,7 +78,6 @@
             android:textStyle="bold"
             android:paddingTop="20dp"/>
 
-        <!-- Recycler View for products -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/HomeProducts"
             android:layout_width="match_parent"

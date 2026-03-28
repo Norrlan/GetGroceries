@@ -65,57 +65,63 @@ private String subcategoryTitle;
         RecyclerView recyclerView = view.findViewById(R.id.product_recycler);
 
         // Load the correct products for this subcategory
-        List<ProductModel> productModels = loadSubcategoryProduct(subcategoryIndex);
+      //  List<ProductModel> productModels = loadSubcategoryProduct(subcategoryIndex);
 
         // Pass requireActivity() so ProductAdapter can use ViewModel safely
-        ProductAdapter productAdapter = new ProductAdapter(productModels, requireActivity());
+      //  ProductAdapter productAdapter = new ProductAdapter(productModels, requireActivity());
 
-        recyclerView.setAdapter(productAdapter);
+       // recyclerView.setAdapter(productAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         return view;
     }
 // placeholder lists
-    private List<ProductModel> loadSubcategoryProduct(int subcategoryIndex)
-    {
-        switch (subcategoryIndex)
-        {
-            case 0: // Energy Drinks Subcategory Products List
-                return Arrays.asList
-                        (new ProductModel("Red Bull 250ml", "£1.35", R.drawable.redbull),
-                        new ProductModel("Monster Energy 500ml", "£1.50", R.drawable.monster),
-                        new ProductModel("Prime Original 500ml", "£1.45", R.drawable.primedrink)
-                );
-            case 1: // Tea, Coffee & Beverages Subcategory Products List
-                return Arrays.asList(
-                        new ProductModel("Starbucks Caramel Iced Coffee", "£2.75", R.drawable.starbucks1),
-                        new ProductModel("Costa Iced Latte", "£1.80", R.drawable.costa)
-                );
-            case 2: // Beer, Wine and Spirits Subcategory Products List
-                return Arrays.asList(
-                        new ProductModel("Heineken 6-pack", "£5.00", R.drawable.heineken),
-                        new ProductModel("Smirnoff Vodka 70cl", "£14.00", R.drawable.smirnoff)
-                );
-            case 3: // Soft Drinks Subcategory Products List
-                return Arrays.asList(
-                        new ProductModel("Coca-Cola 1.5L", "£1.90", R.drawable.cokeltr),
-                        new ProductModel("Sprite 500ml", "£1.20", R.drawable.sprite)
-                );
-            case 4: // Fruit Juice Subcategory Products List
-                return Arrays.asList(
-                        new ProductModel("Tropicana Orange Juice 1L", "£2.50", R.drawable.tropicana),
-                        new ProductModel("Mango Juice 1L", "£2.00", R.drawable.mangojuice)
-                );
 
-            case 5: // Squash Subcategory Products List
-                return Arrays.asList(
-                        new ProductModel("Vimto Squash 1L", "£1.50", R.drawable.vimto),
-                        new ProductModel("Ribena Blackcurrant 1L", "£2.00", R.drawable.ribena)
-                );
-            default:
-                return new ArrayList<>();
-        }
-    }
+    /**
+     *  private List<ProductModel> loadSubcategoryProduct(int subcategoryIndex)
+     *     {
+     *         switch (subcategoryIndex)
+     *         {
+     *             case 0: // Energy Drinks Subcategory Products List
+     *                 return Arrays.asList
+     *                         (new ProductModel("Red Bull 250ml", "£1.35", R.drawable.redbull),
+     *                         new ProductModel("Monster Energy 500ml", "£1.50", R.drawable.monster),
+     *                         new ProductModel("Prime Original 500ml", "£1.45", R.drawable.primedrink)
+     *                 );
+     *             case 1: // Tea, Coffee & Beverages Subcategory Products List
+     *                 return Arrays.asList(
+     *                         new ProductModel("Starbucks Caramel Iced Coffee", "£2.75", R.drawable.starbucks1),
+     *                         new ProductModel("Costa Iced Latte", "£1.80", R.drawable.costa)
+     *                 );
+     *             case 2: // Beer, Wine and Spirits Subcategory Products List
+     *                 return Arrays.asList(
+     *                         new ProductModel("Heineken 6-pack", "£5.00", R.drawable.heineken),
+     *                         new ProductModel("Smirnoff Vodka 70cl", "£14.00", R.drawable.smirnoff)
+     *                 );
+     *             case 3: // Soft Drinks Subcategory Products List
+     *                 return Arrays.asList(
+     *                         new ProductModel("Coca-Cola 1.5L", "£1.90", R.drawable.cokeltr),
+     *                         new ProductModel("Sprite 500ml", "£1.20", R.drawable.sprite)
+     *                 );
+     *             case 4: // Fruit Juice Subcategory Products List
+     *                 return Arrays.asList(
+     *                         new ProductModel("Tropicana Orange Juice 1L", "£2.50", R.drawable.tropicana),
+     *                         new ProductModel("Mango Juice 1L", "£2.00", R.drawable.mangojuice)
+     *                 );
+     *
+     *             case 5: // Squash Subcategory Products List
+     *                 return Arrays.asList(
+     *                         new ProductModel("Vimto Squash 1L", "£1.50", R.drawable.vimto),
+     *                         new ProductModel("Ribena Blackcurrant 1L", "£2.00", R.drawable.ribena)
+     *                 );
+     *             default:
+     *                 return new ArrayList<>();
+     *         }
+     *     }
+     *
+     */
+    
+
 
 
 }

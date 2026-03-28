@@ -11,8 +11,8 @@
 
     <ImageView
         android:id="@+id/Logo2"
-        android:layout_width="105dp"
-        android:layout_height="75dp"
+        android:layout_width="73dp"
+        android:layout_height="53dp"
         android:layout_marginTop="52dp"
         android:background="@drawable/g_logo"
         android:padding="10dp"
@@ -59,6 +59,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="16dp"
             android:text="Email"
+            android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -90,6 +91,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="40dp"
             android:text="Password"
+            android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/Email2" />
 
@@ -118,17 +120,17 @@
             android:layout_width="196dp"
             android:layout_height="48dp"
             android:layout_marginStart="3dp"
-            android:layout_marginTop="52dp"
+            android:layout_marginTop="40dp"
             android:layout_marginEnd="8dp"
             android:backgroundTint="#5EF513"
             android:onClick="clickedloginbtn"
             android:text="Login"
+            android:textStyle="bold"
             android:textColor="@color/black"
             android:textSize="15sp"
-            android:textStyle="bold"
             app:cornerRadius="12dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.422"
+            app:layout_constraintHorizontal_bias="0.555"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/Password2" />
 
@@ -137,7 +139,7 @@
             android:layout_width="137dp"
             android:layout_height="25dp"
             android:layout_marginStart="56dp"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="20dp"
             android:text="Forgotten password?"
             android:textColor="#5EF513"
             android:textSize="12sp"
@@ -146,13 +148,8 @@
             app:layout_constraintTop_toBottomOf="@+id/loginbutton" />
 
 
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!-- Don't have an account -->
-
-    <!-- Register link -->
     <TextView
         android:id="@+id/registertext"
         android:layout_width="wrap_content"
