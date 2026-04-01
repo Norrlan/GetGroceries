@@ -65,37 +65,43 @@
             android:paddingTop="12dp"/>
 
         <LinearLayout
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:layout_width="match_parent"
+            android:layout_width="278dp"
             android:layout_height="wrap_content"
-            android:src="@drawable/store_background"
-            android:paddingTop="4dp">
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="35dp"
+            android:paddingTop="4dp"
+            android:paddingRight="40dp"
+            android:src="@drawable/store_background">
 
 
             <ImageView
                 android:id="@+id/store_logo"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_gravity="center"
-                android:src="@drawable/search_background"/>
+                android:layout_width="40dp"
+                android:layout_height="32dp"
+                android:layout_marginLeft="18dp"
+                android:layout_marginRight="15dp"
+                android:src="@drawable/search_background" />
 
             <ImageView
                 android:id="@+id/external_link"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:layout_marginStart="8dp"
-                android:src="@drawable/external_link"/>
+                android:layout_marginLeft="18dp"
+                android:layout_marginRight="15dp"
+                android:src="@drawable/external_link" />
 
             <TextView
                 android:id="@+id/product_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="18dp"
+                android:layout_marginRight="15dp"
                 android:text="$0.00"
-                android:textStyle="bold"
+                android:textColor="@color/black"
                 android:textSize="16sp"
-                android:layout_marginStart="12dp"
-                android:textColor="@color/black"/>
+                android:textStyle="bold" />
 
         </LinearLayout>
 
