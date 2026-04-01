@@ -1,21 +1,29 @@
 package com.example.getgroceries;
 // This class hold the product id, name, price, image that will be stored in a List on the List page
+//
 import java.util.UUID;
 
 public class ListItem
 {
     private String id;
     private String productName;
-    private Integer productImage;
-    private  Double productPrice;
+    private String productImageUrl;
+    private String productPrice;
+    private String storeLink;
+    private String productCategory;
+    private String productCurrency;
 
-    public ListItem(String productName, Integer productImage, Double productPrice)
+    public ListItem(GroceryProducts p) // ListItem constructor
     {
-        this.id = UUID.randomUUID().toString();
-        this.productName = productName;
-        this.productImage = productImage;
-        this.productPrice = productPrice;
+        this.productName = p.getNamefield();
+        this.productImageUrl = p.getImageUrl();
+        this.productPrice = p.getPricefield();
+        this.storeLink = p.getStorelink();
+        this.productCategory = p.getProductcategory();
+        this.productCurrency = p.getCurrencyfield();
     }
+
+    //Getters
 
     public String getId()
     {
@@ -27,14 +35,26 @@ public class ListItem
         return productName;
     }
 
-    public Integer getProductImage()
+    public String getProductImageUrl()
     {
-        return productImage;
+        return productImageUrl;
     }
 
-    public  Double getProductPrice()
+    public String getProductPrice()
     {
         return productPrice;
     }
+    public  String getProductCurrency()
+    {
+        return productCurrency;
+    }
+    public  String getGetStoreLink()
+    {
+        return storeLink;
+    }
 
+    public String getProductCategory()
+    {
+        return productCategory;
+    }
 }

@@ -5,6 +5,8 @@ import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +16,10 @@ import android.widget.ImageView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class HomeFragment extends Fragment {
@@ -21,6 +27,10 @@ public class HomeFragment extends Fragment {
     private FirebaseAuth mAuth;
     //initializing firestore
     private FirebaseFirestore db = FirebaseFirestore.getInstance(); // Firestore database instance
+
+    private RecyclerView recyclerView;
+    private ProductAdapter adapter;
+    private List<GroceryProducts> productsList = new ArrayList<>();
 
     public HomeFragment() {
         // Required empty public constructor
@@ -42,7 +52,6 @@ public class HomeFragment extends Fragment {
         db = FirebaseFirestore.getInstance();
 
     }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
@@ -65,31 +74,33 @@ public class HomeFragment extends Fragment {
                     ((MainActivity) getActivity()).openFragment(new ProfileFragment());
                 });
 
+        // assign the recycler view to the ID in xml
+       recyclerView = view.findViewById(R.id.HomeProducts);
+       // set the Layout manager toLinear ( I want the orientation to be vertical)
+       recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        // Testing Grocery Products Model
-        db.collection("products").document("Milk").get().addOnSuccessListener(snapshot ->
-                {
-
-                    if (snapshot.exists())
-                    {
-                        android.util.Log.d("FIREBASE_TEST", "Snapshot exists: " + snapshot.exists());
-                        GroceryProducts product = snapshot.toObject(GroceryProducts.class);
-
-                        if (product != null)
-                        {
-                            // Log one field to test mapping
-                            android.util.Log.d("FIREBASE_TEST", "HomeFragment started");
-                            android.util.Log.d("FIREBASE_TEST", "Product name: " + product.getNamefield());
-                        }
-                    }
-                })
-                .addOnFailureListener(e -> {
-                    android.util.Log.e("FIREBASE_TEST", "Error fetching document", e);
-                    android.util.Log.e("FIREBASE_TEST", "Error: ", e);
-                });
-
+       adapter = new ProductAdapter(productsList, getActivity());
+       recyclerView.setAdapter(adapter);
 
     }
+    // method to Fetch the products data from Firestore
+     private void fetchProducts()
+     {
+         //loop through the document
+         db.collection("products").get().addOnSuccessListener(queryDocumentSnapshots ->
+         {
+             productsList.clear();
+
+             for (QueryDocumentSnapshot doc: queryDocumentSnapshots)
+             {
+                 GroceryProducts products = doc.toObject(GroceryProducts.class);
+                 productsList.add(products);
+             }
+             adapter.notifyDataSetChanged(); // Notify any registered observers that the data set has changed.
+         }).addOnFailureListener(e -> android.util.Log.e("FIREBASE", "Erro loading products", e));
+     }
+
+
 
 
 }

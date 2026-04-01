@@ -1,37 +1,55 @@
 package com.example.getgroceries;
 
 public class GroceryProducts
+// This class is for 1 gorcery product stored in the Firestore database
 
 {
     //initialize fields that match the Json models I need
-    String namefield;// c
-    String productcategory; // e.g: Chilled food
-    String  pricefield;//
-    String currencyfield;// in pounds
-    String imageUrl;// for the picture of product
-    String storeName;// Amamzon or Walmart or Asda or
-    String storelink ; // direct link to the product on the website of the store
+    private String namefield;// name of the Product eg/: Pepperoni pizza
+    private String productcategory; // e.g: Chilled food
+    private String  pricefield;//
+    private String currencyfield;// in pounds
+    private String imageUrl;// for the picture of product
+    private  String storeLogo;
+    private String storeName;// Amamzon or Walmart or Asda or
+    private String storelink ; // direct link to the product on the website of the store
 
 
-   //  Empty Constructor for Firebase
-    GroceryProducts()
+
+    public GroceryProducts()
     {
 
     }
 
     //getters
-    public  String getNamefield() { return namefield; }
+    public  String getNamefield()
+    {
+        return namefield;
+    }
 
-    public  String getPricefield() {return pricefield;}
-    public String getCurrencyfield () {return currencyfield;}
-    public String getImageUrl () {return imageUrl;}
-    public String getStoreName () {return storeName;}
-    public String getStorelink () {return storelink;}
-    public String getProductcategory () {return productcategory;}
+    public  String getPricefield()
+    {
+        return pricefield;
+    }
+    public String getCurrencyfield ()
+    {return currencyfield;}
+    public String getImageUrl ()
+    {return imageUrl;}
+    public String getStoreName ()
+    {return storeName;}
+    public String getStorelink ()
+    {return storelink;}
+    public String getProductcategory ()
+    {return productcategory;}
+    public String getStoreLogo ()
+    {
+        return storeLogo;
+    }
 
     //setters
 
-    public void setNamefield(String setnamefield1) {
+    public void setNamefield(String setnamefield1)
+    {
         this.namefield = setnamefield1;
     }
     public void setPricefield (String pricefield1)
@@ -60,6 +78,9 @@ public class GroceryProducts
         this.productcategory  = productcategory1;
     }
 
+    public void  setStoreLogo(String storeLogo)
+    {this.storeLogo = storeLogo;
+    }
 
 
 }
