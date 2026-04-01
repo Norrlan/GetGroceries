@@ -82,6 +82,7 @@ public class HomeFragment extends Fragment {
        adapter = new ProductAdapter(productsList, getActivity());
        recyclerView.setAdapter(adapter);
 
+        fetchProducts();
     }
     // method to Fetch the products data from Firestore
      private void fetchProducts()

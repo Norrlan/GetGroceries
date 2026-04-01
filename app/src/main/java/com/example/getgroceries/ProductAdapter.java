@@ -58,10 +58,10 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(p.getStorelink()));
             v.getContext().startActivity(intent);
         });
-        //Use glide library to load the images from the Url.
+        //Glide library to load the images from the Url. and the store logo
         Glide.with(holder.image.getContext()).load(p.getImageUrl()).placeholder(R.drawable.condiment).into(holder.image);
-        //use glide to load the images for the store logo
-        Glide.with(holder.store.getContext()).load(p.getStoreLogo()).placeholder(R.drawable.amazon_logo).into(holder.store);
+        // Glide.with(holder.store.getContext()).load(p.getStoreLogo()).placeholder(R.drawable.amazon_logo).into(holder.store);
+        holder.store.setImageResource(p.getStoreLogo()); // method call from GroceryProducts.java
 
 
         //save button save the items to a List on click

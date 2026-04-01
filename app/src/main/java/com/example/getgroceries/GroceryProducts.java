@@ -10,8 +10,8 @@ public class GroceryProducts
     private String  pricefield;//
     private String currencyfield;// in pounds
     private String imageUrl;// for the picture of product
-    private  String storeLogo;
-    private String storeName;// Amamzon or Walmart or Asda or
+    private String storeLogo;
+    private String storeName;// Amamzon,Walmart, Asda
     private String storelink ; // direct link to the product on the website of the store
 
 
@@ -20,6 +20,7 @@ public class GroceryProducts
     {
 
     }
+
 
     //getters
     public  String getNamefield()
@@ -41,45 +42,49 @@ public class GroceryProducts
     {return storelink;}
     public String getProductcategory ()
     {return productcategory;}
-    public String getStoreLogo ()
+    public int getStoreLogo ()
     {
-        return storeLogo;
+        // make sure the logo matches the storename
+        if (storeName.equalsIgnoreCase("Amazon")) return R.drawable.amazon_logo;
+        if (storeName.equalsIgnoreCase("Walmart")) return R.drawable.walmart_logo;
+        if (storeName.equalsIgnoreCase("Asda")) return R.drawable.asda_logo;
+        return R.drawable.default_store_logo;
     }
 
     //setters
 
-    public void setNamefield(String setnamefield1)
+    public void setNamefield(String setnamefield)
     {
-        this.namefield = setnamefield1;
+        this.namefield = setnamefield;
     }
-    public void setPricefield (String pricefield1)
+    public void setPricefield (String setpricefield)
     {
-        this.pricefield = pricefield1;
+        this.pricefield = setpricefield ;
     }
-    public void setCurrencyfield(String currencyfield1)
+    public void setCurrencyfield(String setcurrencyfield)
     {
-        this.currencyfield  = currencyfield1;
+        this.currencyfield  = setcurrencyfield;
     }
-    public void setImageUrl(String imageUrl1)
+    public void setImageUrl(String setimageUrl)
     {
-        this.imageUrl = imageUrl1;
+        this.imageUrl = setimageUrl;
     }
-    public void setStoreName(String storeName1)
+    public void setStoreName(String setstoreName)
     {
-        this.storeName  = storeName1;
+        this.storeName  = setstoreName;
     }
-    public void setStorelink(String storelink1)
+    public void setStorelink(String setstorelink)
     {
-        this.storelink  = storelink1;
-    }
-
-    public void setProductcategory(String productcategory1)
-    {
-        this.productcategory  = productcategory1;
+        this.storelink  = setstorelink;
     }
 
-    public void  setStoreLogo(String storeLogo)
-    {this.storeLogo = storeLogo;
+    public void setProductcategory(String setproductcategory)
+    {
+        this.productcategory  = setproductcategory;
+    }
+
+    public void  setStoreLogo(String setstoreLogo)
+    {this.storeLogo = setstoreLogo;
     }
 
 
