@@ -11,9 +11,20 @@
         android:id="@+id/lists_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Your Lists"
+        android:text="Lists"
         android:layout_marginTop="20dp"
         android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="@color/lime_green"
+        android:paddingBottom="12dp"/>
+
+    <TextView
+        android:id="@+id/your_lists_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="My Lists"
+        android:layout_marginBottom="10dp"
+        android:textSize="18sp"
         android:textStyle="bold"
         android:textColor="@color/lime_green"
         android:paddingBottom="12dp"/>

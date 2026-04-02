@@ -92,32 +92,13 @@
             android:id="@+id/categoriesTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Shop all categories"
+            android:text="Search Results"
             android:textColor="@color/lime_green"
             android:textSize="18sp"
             android:textStyle="bold"
             android:layout_marginTop="20dp"/>
 
-        <!-- Categories RecyclerView -->
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvCategories"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:nestedScrollingEnabled="false"
-            android:paddingTop="12dp"/>
 
-
-        <TextView
-            android:id="@+id/EmptyState"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Placeholder: Choose a category."
-            android:textColor="@color/white"
-            android:gravity="center"
-            android:paddingTop="30dp"
-            android:paddingBottom="30dp"/>
-
-        <!-- Search Results RecyclerView -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/search_results_recycler"
             android:layout_width="match_parent"

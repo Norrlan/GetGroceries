@@ -45,9 +45,11 @@ public class GroceryProducts
     public int getStoreLogo ()
     {
         // make sure the logo matches the storename
-        if (storeName.equalsIgnoreCase("Amazon")) return R.drawable.amazon_logo;
+        if (storeName.equalsIgnoreCase("Amazon")) return R.drawable.amazon;
         if (storeName.equalsIgnoreCase("Walmart")) return R.drawable.walmart_logo;
         if (storeName.equalsIgnoreCase("Asda")) return R.drawable.asda_logo;
+        if(storeName.equalsIgnoreCase("Ebay"))return R.drawable.ebay;
+        if (storeName.equalsIgnoreCase("Tesco")) return  R.drawable.tesco;
         return R.drawable.default_store_logo;
     }
 

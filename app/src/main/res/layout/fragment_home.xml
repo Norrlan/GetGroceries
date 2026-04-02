@@ -40,32 +40,6 @@
                 android:src="@drawable/sharp_person" />
         </LinearLayout>
 
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            app:boxBackgroundColor="@color/white"
-            app:boxStrokeColor="@color/white"
-            app:boxStrokeWidthFocused="0dp"
-            app:boxCornerRadiusTopStart="8dp"
-            app:boxCornerRadiusTopEnd="8dp"
-            app:boxCornerRadiusBottomStart="8dp"
-            app:hintEnabled="false"
-            app:boxCornerRadiusBottomEnd="8dp">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/Search_bar_Home"
-                android:layout_height="50dp"
-                android:layout_width="match_parent"
-                android:hint="Search GetGroceries"
-                android:textColor="@color/black"
-                android:textColorHint="#99000000"
-                android:inputType="text" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
         <TextView
             android:id="@+id/Home_Title"
             android:layout_width="wrap_content"
