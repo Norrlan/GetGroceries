@@ -12,13 +12,28 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.chip.Chip;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 
-public class SearchFragment extends Fragment {
+public class SearchFragment extends Fragment
+{
+    //filters
+    private String selectedStore = null;
+    private String selectedSort = null;
+    private String selectedCategory = null;
+    private int minPrice = 0;
+    private int maxPrice = 999;
+    private String currentQuery = "";
+    private List<GroceryProducts> allProducts = new ArrayList<>();
+    private  SearchAdapterResults resultsAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -26,16 +41,16 @@ public class SearchFragment extends Fragment {
         // inflate the layout
         View view = inflater.inflate(R.layout.fragment_search, container, false);
 
-        // Recycler view that displays results
-
+        // Recycler view
         RecyclerView searchResultsRecycler = view.findViewById(R.id.search_results_recycler);
-        SearchResultsAdapter resultsAdapter = new SearchResultsAdapter(new ArrayList<>());
+
+        // Assign adapter to RecyclerView
         searchResultsRecycler.setAdapter(resultsAdapter);
         searchResultsRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
+        loadProductsFromFirestore(); // load the products from the firestore
 
-        //Search baer
+        //Search bar logic
         TextInputEditText searchBar = view.findViewById(R.id.Search_bar);
-
         searchBar.addTextChangedListener(new TextWatcher()
         {
             @Override
@@ -44,16 +59,118 @@ public class SearchFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence text, int start, int before, int count)
             {
-                String query = text.toString().trim();
-                searchResultsRecycler.setVisibility(query.isEmpty() ? View.GONE : View.VISIBLE );
 
+                currentQuery = text.toString().trim();
+                // Re-apply filters
+                applyFilters();
             }
 
             @Override
             public void afterTextChanged(Editable s) {}
         });
 
+        // filter chips
+        Chip chipSort = view.findViewById(R.id.chipSort);
+        Chip chipStores = view.findViewById(R.id.chipStores);
+        Chip chipSize = view.findViewById(R.id.chipSize);
+        Chip chipQuantity = view.findViewById(R.id.chipQuantity);
+
+        chipSort.setOnClickListener(v -> {
+            selectedSort = "price_low_high";   // Assign sort mode
+            applyFilters();
+        });
+
+        // STORE FILTER (example)
+        chipStores.setOnClickListener(v -> {
+            selectedStore = "Asda";            // Assign store filter
+            applyFilters();
+        });
+
+        // CATEGORY FILTER (example)
+        chipSize.setOnClickListener(v -> {
+            selectedCategory = "Snacks";       // Assign category filter
+            applyFilters();
+        });
+
+        // PRICE FILTER (example)
+        chipQuantity.setOnClickListener(v -> {
+            minPrice = 0;
+            maxPrice = 5;                      // Assign price range
+            applyFilters();
+        });
+
         return view;
     }
+
+    //Load the products field from the  products collection. Use it search filtering.
+    private void loadProductsFromFirestore()
+    {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("products").get().addOnSuccessListener(querySnapshot ->
+                {
+                    allProducts.clear(); // Reset list
+                    for (DocumentSnapshot doc : querySnapshot)
+                    {
+
+                        // Convert Firestore document into GroceryProducts object
+                        GroceryProducts product = doc.toObject(GroceryProducts.class);
+
+                        // Add object to local  list
+                        allProducts.add(product);
+                    }
+
+                    // After loading data, apply filters
+                    applyFilters();
+                });
+    }
+
+    //method to apply search filter
+    private  void applyFilters()
+    {
+        List<GroceryProducts> filtered = new ArrayList<>();
+
+        for (GroceryProducts p : allProducts)
+        {
+            if (!currentQuery.isEmpty())
+            {
+                if (!p.getNamefield().toLowerCase().contains(currentQuery.toLowerCase()))
+                {
+                    continue;
+                }
+            }
+
+            if (selectedStore != null && !p.getStoreName().equalsIgnoreCase(selectedStore))
+                continue; // store filter
+
+            double price = Double.parseDouble(p.getPricefield());// price filter
+            if (price < minPrice || price > maxPrice)
+                continue;
+
+            //add the products to the list after filtering
+            filtered.add(p);
+        }
+            // fetch the data if the user clicks the sort chip for High to low
+
+            if ("price_high_low".equals(selectedSort))
+            {
+                filtered.sort(Comparator.comparingDouble(item -> Double.parseDouble(item.getPricefield())));
+            }
+            // fetch the data if the user clicks the sort chip for low_high
+
+            if ("price_high_low".equals(selectedSort))
+            {
+                filtered.sort((a, b) ->
+                        Double.compare(Double.parseDouble(b.getPricefield()),
+                                Double.parseDouble(a.getPricefield())));
+            }
+
+            resultsAdapter.updateResults(filtered);
+            //'updateResults(java.util.List<java.lang.String>)' in 'com.example.getgroceries.SearchResultsAdapter' cannot be applied to '(java.util.List<com.example.getgroceries.GroceryProducts>)'
+
+
+        }
+
+
+
 
 }
