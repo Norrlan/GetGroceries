@@ -23,46 +23,17 @@ public class SearchFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-
+        // inflate the layout
         View view = inflater.inflate(R.layout.fragment_search, container, false);
 
-        // CATEGORY RECYCLER
-
-        RecyclerView categoryRecycler = view.findViewById(R.id.rvCategories);
-
-        List<Integer> categoryImages = Arrays.asList(
-                R.drawable.drinks_card,
-                R.drawable.snacks,
-                R.drawable.frozenfood,
-                R.drawable.condiment
-        );
-
-        List<String> categoryLabels = Arrays.asList(
-                "Drinks",
-                "Snacks",
-                "Frozen",
-                "Condiments"
-        );
-
-        Searchadapter adapter = new Searchadapter(categoryImages, categoryLabels, position -> {
-            openCategory(position);
-        });
-
-        categoryRecycler.setAdapter(adapter);
-        categoryRecycler.setLayoutManager(new GridLayoutManager(getContext(), 2));
-
-        // SEARCH RESULTS RECYCLER
+        // Recycler view that displays results
 
         RecyclerView searchResultsRecycler = view.findViewById(R.id.search_results_recycler);
         SearchResultsAdapter resultsAdapter = new SearchResultsAdapter(new ArrayList<>());
         searchResultsRecycler.setAdapter(resultsAdapter);
         searchResultsRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        // EMPTY STATE
-        View emptyState = view.findViewById(R.id.EmptyState);
-
-        // SEARCH BAR
-
+        //Search baer
         TextInputEditText searchBar = view.findViewById(R.id.Search_bar);
 
         searchBar.addTextChangedListener(new TextWatcher()
@@ -74,21 +45,8 @@ public class SearchFragment extends Fragment {
             public void onTextChanged(CharSequence text, int start, int before, int count)
             {
                 String query = text.toString().trim();
+                searchResultsRecycler.setVisibility(query.isEmpty() ? View.GONE : View.VISIBLE );
 
-                if (query.isEmpty())
-                {
-                    emptyState.setVisibility(View.VISIBLE);
-                    searchResultsRecycler.setVisibility(View.GONE);
-                }
-
-                else
-                {
-                    emptyState.setVisibility(View.GONE);
-                    searchResultsRecycler.setVisibility(View.VISIBLE);
-
-                    // API search will go here later
-                    resultsAdapter.updateResults(new ArrayList<>());
-                }
             }
 
             @Override
@@ -98,32 +56,4 @@ public class SearchFragment extends Fragment {
         return view;
     }
 
-    // CATEGORY NAVIGATION
-
-    private void openCategory(int position) {
-        Fragment fragment;
-
-        switch (position) {
-            case 0:
-                fragment = new DrinksFragment();
-                break;
-            case 1:
-                fragment = new SnacksFragment();
-                break;
-            case 2:
-                fragment = new FrozenFragment();
-                break;
-            case 3:
-                fragment = new CondimentsFragment();
-                break;
-            default:
-                return;
-        }
-
-        requireActivity().getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.fragment_container, fragment)
-                .addToBackStack(null)
-                .commit();
-    }
 }
