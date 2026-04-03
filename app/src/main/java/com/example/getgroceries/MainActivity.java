@@ -23,20 +23,25 @@ public class MainActivity extends AppCompatActivity
         // default fragment on start
         loadFragment(new HomeFragment());
 
-        bottomNav.setOnItemSelectedListener(item -> {
+        bottomNav.setOnItemSelectedListener(item ->
+        {
 
             Fragment selectedFragment = null;
 
-            if (item.getItemId() == R.id.navigation_home) {
+            if (item.getItemId() == R.id.navigation_home)
+            {
                 selectedFragment = new HomeFragment();
             }
-            else if (item.getItemId() == R.id.navigation_search) {
+            else if (item.getItemId() == R.id.navigation_search)
+            {
                 selectedFragment = new SearchFragment();
             }
-            else if (item.getItemId() == R.id.navigation_lists) {
+            else if (item.getItemId() == R.id.navigation_lists)
+            {
                 selectedFragment = new ListsFragment();
             }
-            else if (item.getItemId() == R.id.navigation_recipes) {
+            else if (item.getItemId() == R.id.navigation_recipes)
+            {
                 selectedFragment = new RecipesFragment();
             }
 

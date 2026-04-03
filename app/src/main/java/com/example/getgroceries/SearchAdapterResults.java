@@ -14,7 +14,8 @@ import com.bumptech.glide.Glide;
 
 import java.util.List;
 
-public class SearchAdapterResults extends RecyclerView.Adapter<SearchAdapterResults.ViewHolder> {
+public class SearchAdapterResults extends RecyclerView.Adapter<SearchAdapterResults.ViewHolder>
+{
 
     private List<GroceryProducts> results;
     private Context context;
@@ -25,14 +26,16 @@ public class SearchAdapterResults extends RecyclerView.Adapter<SearchAdapterResu
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
+    {
         context = parent.getContext();
         View view = LayoutInflater.from(context).inflate(R.layout.search_result_item, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position)
+    {
         GroceryProducts product = results.get(position);
 
         holder.name.setText(product.getNamefield());
@@ -49,17 +52,20 @@ public class SearchAdapterResults extends RecyclerView.Adapter<SearchAdapterResu
         return results.size();
     }
 
-    public void updateResults(List<GroceryProducts> newResults) {
+    public void updateResults(List<GroceryProducts> newResults)
+    {
         this.results = newResults;
         notifyDataSetChanged();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder
+    {
 
         ImageView image;
         TextView name, price, store;
 
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull View itemView)
+        {
             super(itemView);
 
             image = itemView.findViewById(R.id.search_item_image);
