@@ -63,18 +63,11 @@
             android:textStyle="bold"
             android:layout_marginTop="20dp"/>
 
-        <!-- Filters Row -->
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp">
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chipSort"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:text="Sort"/>
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chipStores"
@@ -84,15 +77,15 @@
                 android:layout_marginStart="8dp"/>
 
             <com.google.android.material.chip.Chip
-                android:id="@+id/chipSize"
-                android:text="Size"
+                android:id="@+id/chip_category"
+                android:text="Category"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:layout_marginStart="8dp"/>
 
             <com.google.android.material.chip.Chip
-                android:id="@+id/chipQuantity"
-                android:text="Quantity"
+                android:id="@+id/chip_prices"
+                android:text="Price"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:layout_marginStart="8dp"/>
@@ -115,7 +108,7 @@
             android:layout_height="wrap_content"
             android:nestedScrollingEnabled="false"
             android:paddingTop="12dp"
-            android:visibility="gone"/>
+            />
 
     </LinearLayout>
 

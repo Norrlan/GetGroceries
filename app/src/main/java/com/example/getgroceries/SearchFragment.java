@@ -25,14 +25,15 @@ import com.google.firebase.firestore.FirebaseFirestore;
 public class SearchFragment extends Fragment
 {
     //initialise the filters
-    private String selectedStore = null;
+    private List<String> selectedStores = new ArrayList<>();
+    private List<String> selectedCategories = new ArrayList<>();
     private String selectedSort = null;
-    private String selectedCategory = null;
     private int minPrice = 0;
     private int maxPrice = 999;
     private String currentQuery = "";
     private List<GroceryProducts> allProducts = new ArrayList<>();
     private SearchAdapterResults resultsAdapter;
+    private RecyclerView searchResultsRecycler;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -40,11 +41,11 @@ public class SearchFragment extends Fragment
         // inflate the layout
         View view = inflater.inflate(R.layout.fragment_search, container, false);
 
-        RecyclerView searchResultsRecycler = view.findViewById(R.id.search_results_recycler);
-        resultsAdapter = new SearchAdapterResults(new ArrayList<>()); //Initialise the adapter
-        searchResultsRecycler.setAdapter(resultsAdapter);   // Assign adapter to RecyclerView
-        // load the linear  layout to the search results recycler view
+        searchResultsRecycler = view.findViewById(R.id.search_results_recycler);
+        resultsAdapter = new SearchAdapterResults(getContext(), new ArrayList<>());
+        searchResultsRecycler.setAdapter(resultsAdapter);
         searchResultsRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
+
         loadProductsFromFirestore();
 
         //Search bar logic
@@ -67,60 +68,47 @@ public class SearchFragment extends Fragment
         });
 
         // The filters
-        Chip chipSort = view.findViewById(R.id.chipSort);
         Chip chipStores = view.findViewById(R.id.chipStores);
-        Chip chipSize = view.findViewById(R.id.chipSize);
-        Chip chipQuantity = view.findViewById(R.id.chipQuantity);
+        Chip chipCategory = view.findViewById(R.id.chip_category);
+        Chip chipPrice =  view.findViewById(R.id.chip_prices);
 
-        // Display dialog box when the sort filter chip is clicked
-        chipSort.setOnClickListener(v ->
-        {
-            selectedSort = "price_low_high";   // Assign sort mode
-            applyFilters();
-        });
 
         // Display a Alert Dialog with MultipleItemSelection when the store filter chip is clicked
-        chipStores.setOnClickListener(v ->
-        {
+        chipStores.setOnClickListener(v -> {
+
             String[] superstores = {"Asda", "Ebay", "Amazon", "Walmart", "Tesco"};
             boolean[] checkedItems = new boolean[superstores.length];
 
+            for (int i = 0; i < superstores.length; i++) {
+                checkedItems[i] = selectedStores.contains(superstores[i]);
+            }
+
             new AlertDialog.Builder(getContext())
                     .setTitle("Select Superstore")
-                    .setMultiChoiceItems(superstores, checkedItems, (dialog, which, isChecked) ->
-                    {
+                    .setMultiChoiceItems(superstores, checkedItems, (dialog, which, isChecked) -> {
                         checkedItems[which] = isChecked;
                     })
-                    .setPositiveButton("Done", (dialog, which) ->
-                    {
-                        List<String> selected = new ArrayList<>();
-                        for (int i = 0; i < checkedItems.length; i++)
-                        {
-                            if (checkedItems[i])
-                            {
-                                selected.add(superstores[i]);
+                    .setPositiveButton("Done", (dialog, which) -> {
+
+                        selectedStores.clear();
+                        for (int i = 0; i < checkedItems.length; i++) {
+                            if (checkedItems[i]) {
+                                selectedStores.add(superstores[i]);
                             }
                         }
 
-                        if (selected.isEmpty())
-                        {
-                            selectedStore = null;
+                        if (selectedStores.isEmpty()) {
                             chipStores.setText("Stores");
-                        }
-                        else
-                        {
-                            selectedStore = selected.get(0);
-                            chipStores.setText(selectedStore);
+                        } else {
+                            chipStores.setText(String.join(", ", selectedStores));
                         }
 
                         applyFilters();
-                        // cancel and clear all buttons in the dialog
                     })
                     .setNegativeButton("Cancel", null)
-                    .setNeutralButton("Clear All", (dialog, which) ->
-                    {
+                    .setNeutralButton("Clear All", (dialog, which) -> {
                         Arrays.fill(checkedItems, false);
-                        selectedStore = null;
+                        selectedStores.clear();
                         chipStores.setText("Stores");
                         applyFilters();
                     })
@@ -128,22 +116,57 @@ public class SearchFragment extends Fragment
         });
 
         // Display dialog box when the category filter chips is clicked
-        chipSize.setOnClickListener(v ->
-        {
+        chipCategory.setOnClickListener(v -> {
+
             String[] categories = {"Grocery", "Bakery", "Chilled Food", "Books","Fashion","Electronic","Meat & Poultry", "Makeup","Baby", "Drinks"};
+            boolean[] checkedItems = new boolean[categories.length];
+
+            for (int i = 0; i < categories.length; i++)
+            {
+                checkedItems[i] = selectedCategories.contains(categories[i]);
+            }
 
             new AlertDialog.Builder(getContext())
                     .setTitle("Select Category")
-                    .setItems(categories, (dialog1, which1) ->
+                    .setMultiChoiceItems(categories, checkedItems, (dialog, which, isChecked) ->
                     {
-                        selectedCategory = categories[which1];
-                        chipSize.setText(selectedCategory);
+                        checkedItems[which] = isChecked;
+                    })
+                    .setPositiveButton("Done", (dialog, which) ->
+                    {
+
+                        selectedCategories.clear();
+                        for (int i = 0; i < checkedItems.length; i++)
+                        {
+                            if (checkedItems[i])
+                            {
+                                selectedCategories.add(categories[i]);
+                            }
+                        }
+
+                        if (selectedCategories.isEmpty())
+                        {
+                            chipCategory.setText("Category");
+                        }
+                    else
+                        {
+                            chipCategory.setText(String.join(", ", selectedCategories));
+                        }
+
+                        applyFilters();
+                    })
+                    .setNegativeButton("Cancel", null)
+                    .setNeutralButton("Clear All", (dialog, which) ->
+                    {
+                        Arrays.fill(checkedItems, false);
+                        selectedCategories.clear();
+                        chipCategory.setText("Category");
                         applyFilters();
                     })
                     .show();
         });
 
-        chipQuantity.setOnClickListener(v ->
+        chipPrice.setOnClickListener(v ->
         {
             String[] priceOptions = {"Lowest to Highest", "Highest to Lowest"};
 
@@ -154,12 +177,12 @@ public class SearchFragment extends Fragment
                         if (which == 0)
                         {
                             selectedSort = "price_low_high";
-                            chipQuantity.setText("£ Low → High");
+                            chipPrice.setText("£ Low → High");
                         }
                         else
                         {
                             selectedSort = "price_high_low";
-                            chipQuantity.setText("£ High → Low");
+                            chipPrice.setText("£ High → Low");
                         }
 
                         applyFilters();
@@ -183,7 +206,8 @@ public class SearchFragment extends Fragment
                 GroceryProducts product = doc.toObject(GroceryProducts.class);
 
                 // Add object to local  list
-                allProducts.add(product);
+                if (product != null)
+                    allProducts.add(product);
             }
 
             applyFilters();
@@ -197,6 +221,12 @@ public class SearchFragment extends Fragment
 
         for (GroceryProducts p : allProducts)
         {
+            if (p.getNamefield() == null ||
+                p.getStoreName() == null ||
+                p.getProductcategory() == null ||
+                p.getPricefield() == null)
+                continue;
+
             if (!currentQuery.isEmpty())
             {
                 if (!p.getNamefield().toLowerCase().contains(currentQuery.toLowerCase()))
@@ -205,31 +235,45 @@ public class SearchFragment extends Fragment
                 }
             }
 
-            if (selectedStore != null && !p.getStoreName().equalsIgnoreCase(selectedStore))
-                continue;
-            if (selectedCategory != null && !p.getProductcategory().equalsIgnoreCase(selectedCategory))
+            if (!selectedStores.isEmpty() && !selectedStores.contains(p.getStoreName()))
                 continue;
 
-            double price = Double.parseDouble(p.getPricefield());// price filter
-            if (price < minPrice || price > maxPrice)
+            if (!selectedCategories.isEmpty() && !selectedCategories.contains(p.getProductcategory()))
                 continue;
+
+            // Price range
+            double price;
+            try { price = Double.parseDouble(p.getPricefield()); }
+            catch (NumberFormatException e) { continue; }
+            if (price < minPrice || price > maxPrice) continue;
 
             //add the products to the list after filtering
             filtered.add(p);
         }
 
-        // fetch the data if the user clicks the sort chip for High to low
-        if ("price_high_low".equals(selectedSort))
-        {
-            filtered.sort(Comparator.comparingDouble(item -> Double.parseDouble(item.getPricefield())));
-        }
-
-        // fetch the data if the user clicks the sort chip for low_high
+        // Sort
         if ("price_low_high".equals(selectedSort))
         {
             filtered.sort((a, b) ->
-                    Double.compare(Double.parseDouble(a.getPricefield()),
-                            Double.parseDouble(b.getPricefield())));
+            {
+                try
+                {
+                    return Double.compare(Double.parseDouble(a.getPricefield()),
+                        Double.parseDouble(b.getPricefield()));
+                }
+                catch (NumberFormatException e) { return 0; }
+            });
+        }
+        else if ("price_high_low".equals(selectedSort))
+        {
+            filtered.sort((a, b) ->
+            {
+                try
+                { return Double.compare(Double.parseDouble(b.getPricefield()),
+                        Double.parseDouble(a.getPricefield()));
+                }
+                catch (NumberFormatException e) { return 0; }
+            });
         }
 
         resultsAdapter.updateResults(filtered);

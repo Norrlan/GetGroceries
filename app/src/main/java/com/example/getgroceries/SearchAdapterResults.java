@@ -16,11 +16,13 @@ import java.util.List;
 
 public class SearchAdapterResults extends RecyclerView.Adapter<SearchAdapterResults.ViewHolder>
 {
-
     private List<GroceryProducts> results;
-    private Context context;
+    // FIX: context stored from constructor — no longer set lazily in onCreateViewHolder
+    private final Context context;
 
-    public SearchAdapterResults(List<GroceryProducts> results) {
+    public SearchAdapterResults(Context context, List<GroceryProducts> results)
+    {
+        this.context = context;
         this.results = results;
     }
 
@@ -28,7 +30,6 @@ public class SearchAdapterResults extends RecyclerView.Adapter<SearchAdapterResu
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
     {
-        context = parent.getContext();
         View view = LayoutInflater.from(context).inflate(R.layout.search_result_item, parent, false);
         return new ViewHolder(view);
     }
@@ -48,7 +49,8 @@ public class SearchAdapterResults extends RecyclerView.Adapter<SearchAdapterResu
     }
 
     @Override
-    public int getItemCount() {
+    public int getItemCount()
+    {
         return results.size();
     }
 
@@ -60,16 +62,14 @@ public class SearchAdapterResults extends RecyclerView.Adapter<SearchAdapterResu
 
     public static class ViewHolder extends RecyclerView.ViewHolder
     {
-
         ImageView image;
         TextView name, price, store;
 
         public ViewHolder(@NonNull View itemView)
         {
             super(itemView);
-
             image = itemView.findViewById(R.id.search_item_image);
-            name = itemView.findViewById(R.id.search_item_name);
+            name  = itemView.findViewById(R.id.search_item_name);
             price = itemView.findViewById(R.id.search_item_price);
             store = itemView.findViewById(R.id.search_item_store);
         }
