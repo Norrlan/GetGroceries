@@ -10,27 +10,20 @@
     <TextView
         android:id="@+id/item_title"
         android:textColor="@color/lime_green"
-        android:textSize="20sp"
+        android:textSize="16dp"
         android:textStyle="bold"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:id="@+id/item_preview"
-        android:textColor="@color/white"
-        android:textSize="14sp"
-        android:layout_marginTop="4dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
     <ImageView
         android:id="@+id/btnDelete"
-        android:layout_width="44dp"
-        android:layout_height="44dp"
+        android:layout_width="38dp"
+        android:layout_height="38dp"
         android:layout_gravity="end"
-        android:src="@drawable/ic_delete"
         android:padding="4dp"
+        android:src="@drawable/ic_delete"
         app:tint="@color/lime_green" />
+
 
 
 
