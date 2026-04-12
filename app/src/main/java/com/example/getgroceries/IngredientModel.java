@@ -16,8 +16,8 @@ public class IngredientModel
    @SerializedName("unit")
    public String unit;
 
-   @SerializedName("original")
-   public String original; // e.g. "2 cups of flour"
+   @SerializedName("original") // orginal ingredient data from the api
+   public String original;
 
    public IngredientModel() {}
 
@@ -26,14 +26,14 @@ public class IngredientModel
       return name;
    }
 
-   // Returns "2.0 cups" or just the original text from the API
+   // Method to get the original amount in each ingredient used  from the API.
    public String getAmount()
    {
       if (original != null && !original.isEmpty())
       {
          return original;
       }
-      if (unit != null && !unit.isEmpty())
+      if (unit != null && !unit.isEmpty()) // return the amount the user entered and the unit  if the
       {
          return amount + " " + unit;
       }

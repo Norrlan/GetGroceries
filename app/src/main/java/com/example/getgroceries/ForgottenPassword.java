@@ -29,19 +29,23 @@ public class ForgottenPassword extends AppCompatActivity
 
             mAuth = FirebaseAuth.getInstance();
 
+            //bind email and reset buttons to the appropriate xml elements
             EditText emailField = findViewById(R.id.emailField2);
             Button resetButton = findViewById(R.id.resetButton);
 
-            resetButton.setOnClickListener(v -> {
+            // method for reset button.
+            resetButton.setOnClickListener(v ->
+            {
                 String email = emailField.getText().toString().trim();
 
-                if (email.isEmpty()) {
+                if (email.isEmpty()) // empty  email field validation
+                {
                     emailField.setError("Email is required");
                     return;
                 }
 
-                mAuth.sendPasswordResetEmail(email)
-                        .addOnCompleteListener(task -> {
+                mAuth.sendPasswordResetEmail(email).addOnCompleteListener(task -> // Logic to send reset email to users email address.
+                        {
                             if (task.isSuccessful())
                             {
                                 Toast.makeText(ForgottenPassword.this, "Password reset email sent", Toast.LENGTH_SHORT).show();

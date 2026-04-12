@@ -20,11 +20,13 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class CreateRecipeFragment extends Fragment {
+public class CreateRecipeFragment extends Fragment
+{
 
-    private static final String API_KEY = "5c410c00a31c4958a650170e1db88d03";
-    private static final String BASE_URL = "https://api.spoonacular.com/";
+    private static final String API_KEY = "5c410c00a31c4958a650170e1db88d03"; // api key from spoonacular
+    private static final String BASE_URL = "https://api.spoonacular.com/"; // spoonacular api website
 
+    //initialise all  the fields  involved on the createRecipe Fragemnt
     private EditText recipeInput;
     private EditText urlInput;
     private Button generateButton;
@@ -37,17 +39,15 @@ public class CreateRecipeFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState)
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
-        return inflater.inflate(R.layout.fragment_create_recipe,
-                container, false);
+        //inflate the fragments layout
+        return inflater.inflate(R.layout.fragment_create_recipe, container, false);
     }
 
     @Override
-    public void onViewCreated(@NonNull View view,
-                              @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState)
+    {
         super.onViewCreated(view, savedInstanceState);
 
         // Bind views
@@ -57,14 +57,11 @@ public class CreateRecipeFragment extends Fragment {
         extractButton  = view.findViewById(R.id.extract_button);
         loadingBar    = view.findViewById(R.id.loading_bar);
 
-        // Build Retrofit once
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        apiService = retrofit.create(RecipeApiService.class);
+        // Build Retrofit
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
+        apiService = retrofit.create(RecipeApiService.class); // call the spoonacular api service
 
-        // Generate Recipe button
+        // Enable the Generate Recipe button
         generateButton.setOnClickListener(v ->
         {
             String recipeName = recipeInput.getText().toString().trim();
