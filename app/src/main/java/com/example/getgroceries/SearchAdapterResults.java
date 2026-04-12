@@ -16,8 +16,8 @@ import java.util.List;
 
 public class SearchAdapterResults extends RecyclerView.Adapter<SearchAdapterResults.ViewHolder>
 {
-    private List<GroceryProducts> results;
-    // FIX: context stored from constructor — no longer set lazily in onCreateViewHolder
+    private List<GroceryProducts> results; // Constructor for products
+
     private final Context context;
 
     public SearchAdapterResults(Context context, List<GroceryProducts> results)
@@ -30,12 +30,13 @@ public class SearchAdapterResults extends RecyclerView.Adapter<SearchAdapterResu
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
     {
+        // inflate the layout
         View view = LayoutInflater.from(context).inflate(R.layout.search_result_item, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position)
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) // setting text for the product data models taht will be displayed in the search results.
     {
         GroceryProducts product = results.get(position);
 
@@ -43,9 +44,8 @@ public class SearchAdapterResults extends RecyclerView.Adapter<SearchAdapterResu
         holder.price.setText("£" + product.getPricefield());
         holder.store.setText(product.getStoreName());
 
-        Glide.with(context)
-                .load(product.getImageUrl())
-                .into(holder.image);
+        Glide.with(context).load(product.getImageUrl()).into(holder.image); // using glide to load the images from link addreesses used in Firestore.
+        // Reference:
     }
 
     @Override
@@ -54,7 +54,7 @@ public class SearchAdapterResults extends RecyclerView.Adapter<SearchAdapterResu
         return results.size();
     }
 
-    public void updateResults(List<GroceryProducts> newResults)
+    public void updateResults(List<GroceryProducts> newResults) // method for updating the search results
     {
         this.results = newResults;
         notifyDataSetChanged();
@@ -62,9 +62,11 @@ public class SearchAdapterResults extends RecyclerView.Adapter<SearchAdapterResu
 
     public static class ViewHolder extends RecyclerView.ViewHolder
     {
+        // initializing xml elements in the recycler view
         ImageView image;
         TextView name, price, store;
 
+        // assigning the data models for each item to the search fragments layout
         public ViewHolder(@NonNull View itemView)
         {
             super(itemView);

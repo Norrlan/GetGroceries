@@ -40,7 +40,7 @@ public class SearchFragment extends Fragment
     {
         // inflate the layout
         View view = inflater.inflate(R.layout.fragment_search, container, false);
-
+// setting up the recycler view in the xml file to load products from Firestore
         searchResultsRecycler = view.findViewById(R.id.search_results_recycler);
         resultsAdapter = new SearchAdapterResults(getContext(), new ArrayList<>());
         searchResultsRecycler.setAdapter(resultsAdapter);
@@ -74,12 +74,14 @@ public class SearchFragment extends Fragment
 
 
         // Display a Alert Dialog with MultipleItemSelection when the store filter chip is clicked
-        chipStores.setOnClickListener(v -> {
+        chipStores.setOnClickListener(v ->
+        {
 
-            String[] superstores = {"Asda", "Ebay", "Amazon", "Walmart", "Tesco"};
+             final String[] superstores = {"Asda", "Ebay", "Amazon", "Walmart", "Tesco"}; // Store I will be using
             boolean[] checkedItems = new boolean[superstores.length];
 
-            for (int i = 0; i < superstores.length; i++) {
+            for (int i = 0; i < superstores.length; i++)  // loop through the array
+            {
                 checkedItems[i] = selectedStores.contains(superstores[i]);
             }
 
@@ -116,6 +118,7 @@ public class SearchFragment extends Fragment
         });
 
         // Display dialog box when the category filter chips is clicked
+        //Reference GeeksforGeeks.com
         chipCategory.setOnClickListener(v -> {
 
             String[] categories = {"Grocery", "Bakery", "Chilled Food", "Books","Fashion","Electronic","Meat & Poultry", "Makeup","Baby", "Drinks"};
@@ -170,9 +173,8 @@ public class SearchFragment extends Fragment
         {
             String[] priceOptions = {"Lowest to Highest", "Highest to Lowest"};
 
-            new AlertDialog.Builder(getContext())
-                    .setTitle("Sort by Price")
-                    .setItems(priceOptions, (dialog, which) ->
+            // Dialog box logic to apply the filters under the price chip.
+            new AlertDialog.Builder(getContext()).setTitle("Sort by Price").setItems(priceOptions, (dialog, which) ->
                     {
                         if (which == 0)
                         {
@@ -193,7 +195,7 @@ public class SearchFragment extends Fragment
         return view;
     }
 
-    //Load the products field from the  products collection. Use it search filtering.
+    //Load the products field from the  products collection. Use it in search filtering.
     private void loadProductsFromFirestore()
     {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -217,6 +219,7 @@ public class SearchFragment extends Fragment
     //method to apply search filters
     private void applyFilters()
     {
+        // produce a new list of products when a filter is clicked
         List<GroceryProducts> filtered = new ArrayList<>();
 
         for (GroceryProducts p : allProducts)
@@ -226,6 +229,8 @@ public class SearchFragment extends Fragment
                 p.getProductcategory() == null ||
                 p.getPricefield() == null)
                 continue;
+
+            // enable the search query
 
             if (!currentQuery.isEmpty())
             {
@@ -251,7 +256,7 @@ public class SearchFragment extends Fragment
             filtered.add(p);
         }
 
-        // Sort
+        // Sort for the prices filter if low to high. compare 2 values and present the products from lowest to highest
         if ("price_low_high".equals(selectedSort))
         {
             filtered.sort((a, b) ->
@@ -261,10 +266,10 @@ public class SearchFragment extends Fragment
                     return Double.compare(Double.parseDouble(a.getPricefield()),
                         Double.parseDouble(b.getPricefield()));
                 }
-                catch (NumberFormatException e) { return 0; }
+                catch (NumberFormatException e) { return 0; } // in case the number format is different e.g: int
             });
         }
-        else if ("price_high_low".equals(selectedSort))
+        else if ("price_high_low".equals(selectedSort)) // same as price low high but in reverse.
         {
             filtered.sort((a, b) ->
             {
@@ -276,6 +281,6 @@ public class SearchFragment extends Fragment
             });
         }
 
-        resultsAdapter.updateResults(filtered);
+        resultsAdapter.updateResults(filtered); // update  the adapter with the filtered results.
     }
 }

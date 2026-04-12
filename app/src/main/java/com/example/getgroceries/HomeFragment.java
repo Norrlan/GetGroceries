@@ -22,7 +22,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment
+{
 
     private FirebaseAuth mAuth;
     //initializing firestore
@@ -76,7 +77,7 @@ public class HomeFragment extends Fragment {
 
         // assign the recycler view to the ID in xml
        recyclerView = view.findViewById(R.id.HomeProducts);
-       // set the Layout manager toLinear ( I want the orientation to be vertical)
+       // fetch the products data into the layout of the recycler view on the Home screen.
        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
        adapter = new ProductAdapter(productsList, getActivity());
@@ -84,7 +85,7 @@ public class HomeFragment extends Fragment {
 
         fetchProducts();
     }
-    // method to Fetch the products data from Firestore
+    // method to Fetch the products data entered in manually  from Firestore
      private void fetchProducts()
      {
          //loop through the document

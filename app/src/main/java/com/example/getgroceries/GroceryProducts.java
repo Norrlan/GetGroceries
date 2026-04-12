@@ -1,13 +1,13 @@
 package com.example.getgroceries;
 
 public class GroceryProducts
-// This class is for 1 gorcery product stored in the Firestore database
+// This class represents a grocery product stored in the Firestore database
 
 {
     //initialize fields that match the Json models I need
     private String namefield;// name of the Product eg/: Pepperoni pizza
     private String productcategory; // e.g: Chilled food
-    private String  pricefield;//
+    private String  pricefield;// price of product
     private String currencyfield;// in pounds
     private String imageUrl;// for the picture of product
     private String storeLogo;
@@ -33,18 +33,28 @@ public class GroceryProducts
         return pricefield;
     }
     public String getCurrencyfield ()
-    {return currencyfield;}
-    public String getImageUrl ()
-    {return imageUrl;}
-    public String getStoreName ()
-    {return storeName;}
-    public String getStorelink ()
-    {return storelink;}
-    public String getProductcategory ()
-    {return productcategory;}
-    public int getStoreLogo ()
     {
-        // make sure the logo matches the storename
+       return currencyfield;
+    }
+    public String getImageUrl ()
+    {
+        return imageUrl;
+    }
+    public String getStoreName ()
+    {
+        return storeName;
+    }
+    public String getStorelink ()
+    {
+        return storelink;
+    }
+    public String getProductcategory ()
+    {
+        return productcategory;
+    }
+    public int getStoreLogo () // /  Method to match the store name with the logog
+    {
+
         if (storeName.equalsIgnoreCase("Amazon")) return R.drawable.amazon;
         if (storeName.equalsIgnoreCase("Walmart")) return R.drawable.walmart_logo;
         if (storeName.equalsIgnoreCase("Asda")) return R.drawable.asda_logo;
@@ -57,11 +67,13 @@ public class GroceryProducts
 
     public void setNamefield(String setnamefield)
     {
+
         this.namefield = setnamefield;
     }
     public void setPricefield (String setpricefield)
     {
-        this.pricefield = setpricefield ;
+
+        this.pricefield = setpricefield;
     }
     public void setCurrencyfield(String setcurrencyfield)
     {
@@ -86,7 +98,8 @@ public class GroceryProducts
     }
 
     public void  setStoreLogo(String setstoreLogo)
-    {this.storeLogo = setstoreLogo;
+    {
+        this.storeLogo = setstoreLogo;
     }
 
 
