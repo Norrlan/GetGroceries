@@ -174,6 +174,7 @@ public class RegisterScreen extends AppCompatActivity
     }
 
 
+    // method for users to register via the register button
     public void clickedregisterbtn(View view)
     {
         // call the fields needed
@@ -186,12 +187,10 @@ public class RegisterScreen extends AppCompatActivity
             return;
         }
 
-        // get the tetx typed in the password and the confirm password dield
         String pwd = password.getText().toString().trim();
         String confirmpwd = confirmPassword.getText().toString().trim();
 
-        //compare the contents in both fields together
-        // display error message if passwords do not match
+        //compare the contents in both fields together & display error message if passwords do not match
         if (!pwd.equals(confirmpwd))
         {
             confirmPassword.setError("Passwords do not match");
@@ -204,22 +203,32 @@ public class RegisterScreen extends AppCompatActivity
 
 }
 
-// Register button handler
-    /* public void clickedregisterbtn(View view)
+    /*
+    previous Firebase Rule
+     rules_version = '2';
+service cloud.firestore
+{
+  match /databases/{database}/documents
+  {
+    match /{document=**}
     {
-        EditText email = findViewById(R.id.emailField);
-        EditText password = findViewById(R.id.passwordField);
+      allow read: if true;
+      allow write: if true;
+    }
+  }
+}
+Current Firebase rule:
 
-        String sEmail = email.getText().toString().trim();
-        String sPassword = password.getText().toString().trim();
-
-        // Call validateInfor function on this button
-        if (!validateInfo(sEmail,sPassword))
-        {
-            email.setError("Invalid email");
-            password.setError("Invalid password ");
-            return;
-        }
-
-        register(sEmail, sPassword);
+rules_version = '2';
+service cloud.firestore
+{
+  match /databases/{database}/documents
+  {
+    match /{document=**}
+    {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+  }
+}
     }*/

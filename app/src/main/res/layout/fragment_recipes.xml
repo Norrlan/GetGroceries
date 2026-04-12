@@ -7,7 +7,6 @@
     android:background="@color/black"
     >
 
-    <!-- Header -->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -67,9 +66,7 @@
             android:layout_marginTop="4dp"/>
     </LinearLayout>
 
-    <!-- Recipe list -->
 
-    <!-- FAB Button-->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recipes_recycler"
         android:layout_width="match_parent"

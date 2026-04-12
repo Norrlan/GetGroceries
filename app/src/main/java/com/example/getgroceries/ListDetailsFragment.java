@@ -13,7 +13,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class ListDetailsFragment extends Fragment {
+public class ListDetailsFragment extends Fragment
+{
 
     private ListsView listsView;
     private RecyclerView recyclerView;
@@ -25,43 +26,51 @@ public class ListDetailsFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
 
-        if (getArguments() != null) {
+        if (getArguments() != null)
+        {
             listId = getArguments().getString("listId");
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+                             Bundle savedInstanceState)
+    {
+        //inflate layout
         return inflater.inflate(R.layout.fragment_list_details, container, false);
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState)
+    {
         super.onViewCreated(view, savedInstanceState);
 
+        // bind recycler view to the xml element
         recyclerView = view.findViewById(R.id.list_details_recycler);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext())); // set the recycler views layout
+        listsView = new ViewModelProvider(requireActivity()).get(ListsView.class); // open ListView activity that displays the Lists that have been created
 
-        listsView = new ViewModelProvider(requireActivity()).get(ListsView.class);
-
-        listsView.getLists().observe(getViewLifecycleOwner(), userLists -> {
+        listsView.getLists().observe(getViewLifecycleOwner(), userLists ->
+        {
             UserList selectedList = listsView.getListById(listId);
 
-            if (selectedList != null) {
+            if (selectedList != null)
+            {
                 adapter = new ListDetailsAdapter(
                         selectedList.getItems(),
-                        item -> deleteItem(item.getId())//Cannot resolve method 'getId()'
+                        item -> deleteItem(item.getId())
                 );
-                recyclerView.setAdapter(adapter);// 'setAdapter(androidx.recyclerview.widget.RecyclerView.Adapter)' in 'androidx.recyclerview.widget.RecyclerView' cannot be applied to '(com.example.getgroceries.ListDetailsAdapter)'
+                recyclerView.setAdapter(adapter);
             }
         });
     }
 
-    private void deleteItem(String itemId) {
+    private void deleteItem(String itemId)
+    {
         listsView.removeListItem(listId, itemId);
     }
 }

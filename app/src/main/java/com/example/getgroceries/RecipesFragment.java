@@ -25,27 +25,31 @@ public class RecipesFragment extends Fragment {
     private List<SavedRecipe> recipeList = new ArrayList<>();
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+    {
         return inflater.inflate(R.layout.fragment_recipes, container, false);
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState)
+    {
         super.onViewCreated(view, savedInstanceState);
 
         recyclerView = view.findViewById(R.id.recipes_recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        adapter = new SavedRecipeAdapter(recipeList, new SavedRecipeAdapter.OnRecipeClickListener() {
+        adapter = new SavedRecipeAdapter(recipeList, new SavedRecipeAdapter.OnRecipeClickListener()
+        {
             @Override
-            public void onRecipeClick(SavedRecipe recipe) {
+            public void onRecipeClick(SavedRecipe recipe)
+            {
                 Fragment details = RecipeDetailsFragment.newInstance(recipe.title);
                 ((MainActivity) requireActivity()).openFragment(details);
             }
 
             @Override
-            public void onDeleteClick(SavedRecipe recipe) {
+            public void onDeleteClick(SavedRecipe recipe)
+            {
                 deleteRecipe(recipe);
             }
         });
@@ -55,21 +59,25 @@ public class RecipesFragment extends Fragment {
         loadRecipesFromFirebase();
 
         FloatingActionButton fab = view.findViewById(R.id.fabAddRecipe);
-        fab.setOnClickListener(v -> {
+        fab.setOnClickListener(v ->
+        {
             Fragment createFragment = new CreateRecipeFragment();
             ((MainActivity) requireActivity()).openFragment(createFragment);
         });
     }
 
-    private void loadRecipesFromFirebase() {
+    private void loadRecipesFromFirebase()
+    {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         db.collection("recipes")
                 .get()
-                .addOnSuccessListener(queryDocumentSnapshots -> {
+                .addOnSuccessListener(queryDocumentSnapshots ->
+                {
                     recipeList.clear();
 
-                    for (QueryDocumentSnapshot doc : queryDocumentSnapshots) {
+                    for (QueryDocumentSnapshot doc : queryDocumentSnapshots)
+                    {
                         SavedRecipe recipe = doc.toObject(SavedRecipe.class);
                         recipe.id = doc.getId(); // attach Firestore ID
                         recipeList.add(recipe);
@@ -79,13 +87,12 @@ public class RecipesFragment extends Fragment {
                 });
     }
 
-    private void deleteRecipe(SavedRecipe recipe) {
+    private void deleteRecipe(SavedRecipe recipe)
+    {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        db.collection("recipes")
-                .document(recipe.id)
-                .delete()
-                .addOnSuccessListener(aVoid -> {
+        db.collection("recipes").document(recipe.id).delete().addOnSuccessListener(aVoid ->
+                {
                     recipeList.remove(recipe);
                     adapter.notifyDataSetChanged();
                 });
