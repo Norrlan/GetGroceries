@@ -11,6 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Groceries"
+        android:textColor="@color/black"
         android:textSize="18sp"
         android:textStyle="bold"/>
 
@@ -19,7 +20,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="10 items"
+        android:textColor="@color/black"
         android:textSize="14sp"
+        android:textStyle="bold"
         android:paddingTop="4dp"/>
 
 </LinearLayout>
