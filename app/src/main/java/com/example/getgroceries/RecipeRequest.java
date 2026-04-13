@@ -3,7 +3,8 @@ package com.example.getgroceries;
 import java.util.List;
 
 public class RecipeRequest {
-
+    // Model class representing a structured request for generating or filtering recipes.
+// This object groups all user-selected preferences (ingredients, restrictions, cuisine, etc.)
 
     private List<String> ingredients;
     private List<String> dietary_restrictions;

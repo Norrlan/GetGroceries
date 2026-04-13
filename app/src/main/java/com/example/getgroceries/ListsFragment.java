@@ -1,6 +1,8 @@
 package com.example.getgroceries;
 
 import android.os.Bundle;
+// Fragment responsible for displaying all user-created lists.
+// Uses a RecyclerView + ViewModel to load lists from Firestore in real time.
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -44,8 +46,10 @@ public class ListsFragment extends Fragment
 
         listsView = new ViewModelProvider(requireActivity()).get(ListsView.class);
 
+        // Firestore to load all user lists.
         listsView.loadLists();
 
+        // Prevent duplicate list and show a toast
         listsView.getListAlreadyExists().observe(getViewLifecycleOwner(), exists ->
         {
             if (exists != null && exists)
@@ -71,10 +75,12 @@ public class ListsFragment extends Fragment
         });
     }
 
+    //method to open the List details fragment for the selected list
     private void openListDetails(UserList list)
     {
         ListDetailsFragment fragment = new ListDetailsFragment();
 
+        // Pass the list ID to the details fragment.
         Bundle args = new Bundle();
         args.putString("listId", list.getId());
         fragment.setArguments(args);

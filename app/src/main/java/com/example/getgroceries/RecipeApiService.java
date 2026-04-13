@@ -5,9 +5,12 @@ import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
-public interface RecipeApiService {
+// Retrofit interface defining all API endpoints used for recipe search,
+// recipe details, and recipe extraction from external URLs.
 
-    // search by name, returns id + title + image
+public interface RecipeApiService
+{
+    // search by name, returns id , title and image
     @GET("recipes/complexSearch")
     Call<RecipeSearchResponse> searchRecipes(
             @Query("query") String query,

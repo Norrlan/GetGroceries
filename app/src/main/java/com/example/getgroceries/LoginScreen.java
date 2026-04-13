@@ -122,15 +122,6 @@ public class LoginScreen extends AppCompatActivity
             return false;
         }
 
-        // Email Character Length  is 8–20
-        /*
-        * if (email.length() < 8 || email.length() > 20) {
-            emailField.setError("Email must be 8–20 characters long");
-            return false;
-        } it is flagging every email I put into it even legit ones so we dodge this
-        * */
-
-
 
         // Password Validation
 
@@ -166,8 +157,6 @@ public class LoginScreen extends AppCompatActivity
 
         return true;
     }
-
-
 
     // method for login.
     public void login(String email, String password) // Login Function

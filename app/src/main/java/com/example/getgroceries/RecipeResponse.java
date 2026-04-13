@@ -1,6 +1,8 @@
 package com.example.getgroceries;
+// Simple wrapper class used when an API returns a single RecipeModel
 
-public class RecipeResponse {
+public class RecipeResponse
+{
 
     RecipeModel result;
 

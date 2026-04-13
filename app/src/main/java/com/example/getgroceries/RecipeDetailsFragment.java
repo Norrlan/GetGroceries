@@ -22,9 +22,11 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+// Fragment responsible for displaying full recipe details.
+// Users can also save the displayed recipe to Firestore.
 
-public class RecipeDetailsFragment extends Fragment {
-
+public class RecipeDetailsFragment extends Fragment
+{
     private static final String ARG_RECIPE_NAME = "recipe_name";
     private static final String API_KEY = "5c410c00a31c4958a650170e1db88d03";
     private static final String BASE_URL = "https://api.spoonacular.com/";
@@ -80,7 +82,8 @@ public class RecipeDetailsFragment extends Fragment {
         titleView.setText(recipeName);
 
         // Save button — stores displayed recipe data to Firestore
-        saveButton.setOnClickListener(v -> {
+        saveButton.setOnClickListener(v ->
+        {
             SavedRecipe savedRecipe = new SavedRecipe(
                     titleView.getText().toString(),
                     ingredientsView.getText().toString(),
@@ -92,9 +95,8 @@ public class RecipeDetailsFragment extends Fragment {
             db.collection("recipes")
                     .add(savedRecipe)
                     .addOnSuccessListener(ref ->
-                            Toast.makeText(getContext(),
-                                    "Recipe saved!", Toast.LENGTH_SHORT).show())
-                    .addOnFailureListener(e -> {
+                            Toast.makeText(getContext(), "Recipe saved!", Toast.LENGTH_SHORT).show()).addOnFailureListener(e ->
+                    {
                         Toast.makeText(getContext(),
                                 "Failed: " + e.getMessage(),
                                 Toast.LENGTH_LONG).show();

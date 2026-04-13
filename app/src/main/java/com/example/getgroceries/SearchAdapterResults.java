@@ -14,11 +14,16 @@ import com.bumptech.glide.Glide;
 
 import java.util.List;
 
+// Adapter responsible for displaying grocery products returned from a search query.
+// Each row shows the product image, name, price, and store name.
+
 public class SearchAdapterResults extends RecyclerView.Adapter<SearchAdapterResults.ViewHolder>
 {
     private List<GroceryProducts> results; // Constructor for products
 
     private final Context context;
+
+    // Constructor receives the context and the initial list of results
 
     public SearchAdapterResults(Context context, List<GroceryProducts> results)
     {

@@ -11,6 +11,12 @@ public class StepModel
     @SerializedName("step")
     private String step;
 
-    public int getNumber() { return number; }
-    public String getStep() { return step; }
+    public int getNumber()
+    {
+        return number;
+    }
+    public String getStep()
+    {
+        return step;
+    }
 }

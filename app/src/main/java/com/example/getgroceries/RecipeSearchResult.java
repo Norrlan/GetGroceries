@@ -3,6 +3,8 @@ package com.example.getgroceries;
 import com.google.gson.annotations.SerializedName;
 
 // Represents a single result from complexSearch
+
+
 public class RecipeSearchResult
 {
 

@@ -4,9 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 /**
  * Model class representing a single ingredient in a recipe.
- * Maps to the 'extendedIngredients' array returned by the Spoonacular API
- * in the Get Recipe Information endpoint.
- * Each field uses @SerializedName to match the exact JSON key from the API response.
+ Each field uses @SerializedName to match the exact JSON key from the API response.
  */
 public class IngredientModel
 {

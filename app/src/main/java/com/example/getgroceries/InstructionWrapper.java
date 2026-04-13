@@ -1,4 +1,5 @@
-// wrapper class for the  Steps Model.
+// Wrapper class used to map the "steps" array from the API response
+
 package com.example.getgroceries;
 
 import com.google.gson.annotations.SerializedName;

@@ -1,10 +1,13 @@
 package com.example.getgroceries;
-// This class hold the product id, name, price, image that will be stored in a List on the List page
-//
+// Model class representing a single product saved inside a user's list.
+// Each ListItem stores the essential product details needed for display
+// and for saving/retrieving items from Firestore.
+
 import java.util.UUID;
 
 public class ListItem
 {
+    // product details displayed in the list UI.
     private String id;
     private String productName;
     private String productImageUrl;

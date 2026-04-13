@@ -1,5 +1,8 @@
 package com.example.getgroceries;
 
+// Adapter responsible for displaying all user-created lists on the Lists screen.
+// Each row shows the list name, item count, and a delete button.
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +31,7 @@ public class ListsAdapter extends RecyclerView.Adapter<ListsAdapter.ListViewHold
         void onDeleteClick(UserList list);
     }
 
+    // Adapter constructor
     public ListsAdapter(List<UserList> lists, OnListClickListener listener, OnDeleteClickListener deleteListener)
     {
         this.lists = lists;
@@ -47,6 +51,7 @@ public class ListsAdapter extends RecyclerView.Adapter<ListsAdapter.ListViewHold
     public void onBindViewHolder(@NonNull ListViewHolder holder, int position)
     {
         UserList list = lists.get(position);
+        // Bind list name and item count.
 
         holder.listName.setText(list.getName());
         holder.listCount.setText(list.getItems().size() + " items");
@@ -61,6 +66,7 @@ public class ListsAdapter extends RecyclerView.Adapter<ListsAdapter.ListViewHold
         return lists.size();
     }
 
+        //mdthod to udate the adapter with new data and refresh the UI.
     public void updateLists(List<UserList> newLists)
     {
         this.lists = newLists;
@@ -70,6 +76,7 @@ public class ListsAdapter extends RecyclerView.Adapter<ListsAdapter.ListViewHold
     public static class ListViewHolder extends RecyclerView.ViewHolder
     {
 
+        // ViewHolder stores references to the views inside each row.
         TextView listName, listCount;
         ImageView deleteBtn;
 

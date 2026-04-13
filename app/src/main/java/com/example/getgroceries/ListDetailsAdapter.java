@@ -1,3 +1,5 @@
+// Adapter responsible for displaying the individual items inside a user's list.
+// Each row shows a product image, name, price, and a delete button.
 package com.example.getgroceries;
 
 import android.view.LayoutInflater;
@@ -35,8 +37,7 @@ public class ListDetailsAdapter extends RecyclerView.Adapter<ListDetailsAdapter.
     @Override
     public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
     {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.row_list_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_list_item, parent, false);
         return new ItemViewHolder(view);
     }
 

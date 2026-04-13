@@ -41,7 +41,7 @@ public class ListDetailsFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
-        //inflate layout
+        //inflate the layout
         return inflater.inflate(R.layout.fragment_list_details, container, false);
     }
 

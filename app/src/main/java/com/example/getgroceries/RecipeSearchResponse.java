@@ -3,7 +3,10 @@ package com.example.getgroceries;
 import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
-// Wraps the complexSearch response
+// Model class representing the response from Spoonacular's complexSearch endpoint.
+// This endpoint returns a list of lightweight recipe results (id, title, image)
+// along with the total number of results available.
+
 public class RecipeSearchResponse {
 
     @SerializedName("results")

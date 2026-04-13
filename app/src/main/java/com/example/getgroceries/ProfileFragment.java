@@ -18,6 +18,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+// Fragment responsible for displaying user profile information
+
 
 public class ProfileFragment extends Fragment
 {

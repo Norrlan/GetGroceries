@@ -17,6 +17,9 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
+// Fragment responsible for displaying all recipes saved by the user.
+// Recipes are loaded from Firestore and displayed in a RecyclerView.
+
 
 public class RecipesFragment extends Fragment {
 
@@ -66,6 +69,7 @@ public class RecipesFragment extends Fragment {
         });
     }
 
+    // Method to loads all saved recipes from Firestore and update the RecyclerView
     private void loadRecipesFromFirebase()
     {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -86,6 +90,8 @@ public class RecipesFragment extends Fragment {
                     adapter.notifyDataSetChanged();
                 });
     }
+
+    // Method to delete a recipe from Firestore and updates the UI
 
     private void deleteRecipe(SavedRecipe recipe)
     {

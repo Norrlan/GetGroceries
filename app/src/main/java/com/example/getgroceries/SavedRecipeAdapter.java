@@ -11,6 +11,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+// Adapter responsible for displaying all recipes saved by the user.
+// Each row shows the recipe title and includes a delete button.
+
 public class SavedRecipeAdapter extends RecyclerView.Adapter<SavedRecipeAdapter.ViewHolder>
 {
 
@@ -23,6 +26,7 @@ public class SavedRecipeAdapter extends RecyclerView.Adapter<SavedRecipeAdapter.
         void onDeleteClick(SavedRecipe recipe);
     }
 
+    // Adapter constructor
     public SavedRecipeAdapter(List<SavedRecipe> recipeList, OnRecipeClickListener listener)
     {
         this.recipeList = recipeList;
@@ -45,7 +49,8 @@ public class SavedRecipeAdapter extends RecyclerView.Adapter<SavedRecipeAdapter.
 
         holder.title.setText(recipe.title);
 
-        // Open recipe
+        // Open recipe details when row is clicked
+
         holder.itemView.setOnClickListener(v -> listener.onRecipeClick(recipe));
 
         holder.deleteBtn.setOnClickListener(v -> listener.onDeleteClick(recipe));
@@ -62,24 +67,13 @@ public class SavedRecipeAdapter extends RecyclerView.Adapter<SavedRecipeAdapter.
         TextView title, preview;
         ImageView deleteBtn;
 
+        // ViewHolder stores references to the views inside each row.
         public ViewHolder(@NonNull View itemView)
         {
             super(itemView);
             title = itemView.findViewById(R.id.item_title);
-            // removed cause its a bit unneccessary : preview = itemView.findViewById(R.id.item_preview);
+
             deleteBtn = itemView.findViewById(R.id.btnDelete);
         }
     }
 }
-/*
-* unneccesary feature:
-*  // Show first ingredient as preview
-        if (recipe.ingredients != null && recipe.ingredients.contains("\n"))
-        {
-            holder.preview.setText(recipe.ingredients.split("\n")[0]);
-        }
-        else
-        {
-            holder.preview.setText(recipe.ingredients);
-        }
-* */

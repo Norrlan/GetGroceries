@@ -24,6 +24,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 
 import java.util.List;
+// Adapter responsible for displaying grocery products returned from the API.
+// Each row shows product details and allows the user to save the item into a list.
+
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder>
 {

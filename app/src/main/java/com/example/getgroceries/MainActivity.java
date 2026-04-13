@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity
         // default fragment on start
         loadFragment(new HomeFragment());
 
+        // Handle bottom navigation item selection.
         bottomNav.setOnItemSelectedListener(item ->
         {
 
@@ -44,25 +45,26 @@ public class MainActivity extends AppCompatActivity
             {
                 selectedFragment = new RecipesFragment();
             }
+            // Replace the current fragment with the selected one.
 
             return loadFragment(selectedFragment);
         });
     }
-
+// mthod to load  by replacing the fragment in the main container.
     private boolean loadFragment(Fragment fragment)
     {
         if (fragment == null) return false;
 
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.fragment_container, fragment)
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment)
                 .commit();
 
         return true;
     }
 
+
     public void openFragment (Fragment fragment)
     {
+       // open new fragments and add them to the back stack.
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,fragment).addToBackStack(null)
                 .commit();
 

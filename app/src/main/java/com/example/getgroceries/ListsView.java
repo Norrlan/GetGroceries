@@ -10,10 +10,21 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListsView extends ViewModel {
+// ViewModel responsible for managing all list-related data.
+// Handles Firestore reads and writes
+// Get LiveData so the UI updates automatically.
+
+
+
+public class ListsView extends ViewModel
+{
+    // LiveData holding all user-created lists.
+    // Starts with an empty ArrayList to avoid null checks in the UI.
 
     private final MutableLiveData<List<UserList>> listsLiveData = new MutableLiveData<>(new ArrayList<>());
     private final MutableLiveData<Boolean> listAlreadyExistsLiveData = new MutableLiveData<>();
+
+    // Firestore instance used for all database operations.
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private boolean listenerRegistered = false;
 
@@ -27,7 +38,8 @@ public class ListsView extends ViewModel {
         return listAlreadyExistsLiveData;
     }
 
-    // Only register listener once
+    // method to load  all lists from Firestore using a real-time snapshot listener.
+    // The listener is only registered once to avoid duplicate updates.
     public void loadLists()
     {
         if (listenerRegistered) return; // ADD THIS CHECK
@@ -51,7 +63,7 @@ public class ListsView extends ViewModel {
         });
     }
 
-    // Create a new list and save to Firestore
+    // Method to create a new list and save to Firestore
     public void createList(String name, ListItem firstItem)
     {
         db.collection("lists").whereEqualTo("name", name).get().addOnSuccessListener(query -> {
@@ -67,7 +79,7 @@ public class ListsView extends ViewModel {
                 });
     }
 
-    // Add item to existing list in Firestore
+    // Method to add item to existing list in Firestore
     public void addItemToList(String listId, ListItem item) {
         DocumentReference ref = db.collection("lists").document(listId);
         ref.get().addOnSuccessListener(doc ->
@@ -80,7 +92,7 @@ public class ListsView extends ViewModel {
         });
     }
 
-    // Remove a specific item from a list in Firestore
+    // Method to remove a specific item from a list in Firestore
     public void removeListItem(String listId, String itemId)
     {
         DocumentReference ref = db.collection("lists").document(listId);
@@ -93,14 +105,15 @@ public class ListsView extends ViewModel {
         });
     }
 
-    // Delete an entire list from Firestore
+    // Method to delete an entire list from Firestore
     public void deleteList(String listId)
     {
         db.collection("lists").document(listId).delete();
 
     }
 
-    // Get a list by id from local LiveData
+// Retrieves a list from the current LiveData cache using its ID.
+
     public UserList getListById(String listId)
     {
         List<UserList> current = listsLiveData.getValue();

@@ -1,4 +1,7 @@
-// Model class representing a Recipe as defined in the spoonacular documentation
+// Model class representing a Recipe as defined in the Spoonacular API.
+// This class maps JSON fields into Java objects using Gson annotations
+
+
 package com.example.getgroceries;
 
 import com.google.gson.annotations.SerializedName;
@@ -7,6 +10,7 @@ import java.util.List;
 
 public class RecipeModel
 {
+    // Basic recipe metadata
 
     @SerializedName("id")
     private int id;
@@ -41,7 +45,6 @@ public class RecipeModel
     public List<IngredientModel> getIngredients() { return ingredients; }
 
     //method to extract the steps in the instruction from the Instruction wrapper.
-    // Then flatten the stpes into a List
     // display the formatted stpes with each iteration if it exists
     public List<String> getInstructions()
     {
