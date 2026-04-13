@@ -48,7 +48,7 @@ public class ListDetailsAdapter extends RecyclerView.Adapter<ListDetailsAdapter.
         holder.name.setText(item.getProductName());
         holder.price.setText("£" + item.getProductPrice());
 
-        Glide.with(holder.image.getContext()).load(item.getProductImageUrl()).placeholder(R.drawable.condiment).into(holder.image);// for the image url used in each product item
+        Glide.with(holder.image.getContext()).load(item.getProductImageUrl()).placeholder(R.drawable.tesco).into(holder.image);// for the image url used in each product item
 
         holder.delete.setOnClickListener(v -> deleteListener.onDelete(item));
     }

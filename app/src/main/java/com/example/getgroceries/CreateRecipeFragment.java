@@ -26,7 +26,7 @@ public class CreateRecipeFragment extends Fragment
     private static final String API_KEY = "5c410c00a31c4958a650170e1db88d03"; // api key from spoonacular
     private static final String BASE_URL = "https://api.spoonacular.com/"; // spoonacular api website
 
-    //initialise all  the fields  involved on the createRecipe Fragemnt
+    //initialise all  datafields  involved on the createRecipe Fragemnt
     private EditText recipeInput;
     private EditText urlInput;
     private Button generateButton;

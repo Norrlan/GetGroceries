@@ -65,14 +65,23 @@ public class LoginScreen extends AppCompatActivity
         //Logic to make the user move to Home Screen after successful login.
         mAuth = FirebaseAuth.getInstance();
 
-        // Auto Login: User stays logged in after Login
+        // Auto Login after user is verified
         FirebaseUser currentUser =mAuth.getCurrentUser();
         if (currentUser != null)
         {
-            // intent to move user to MainActivity screen
-            startActivity(new Intent(LoginScreen.this, MainActivity.class));
-            finish();
-            return;
+            if (currentUser.isEmailVerified())
+            {
+                // intent to move user to MainActivity screen
+                startActivity(new Intent(LoginScreen.this, MainActivity.class));
+                finish();
+                return;
+            }
+            else {
+                mAuth.signOut();
+                Toast.makeText(this, "Unverified email", Toast.LENGTH_LONG).show();
+            }
+
+
         }
 
 
@@ -137,7 +146,7 @@ public class LoginScreen extends AppCompatActivity
             return false;
         }
 
-        // Password Character Length  is 8–20
+        // Password Character Length  is 8–16
         if (password.length() < 8 || password.length() > 16) {
             passwordField.setError("Password must be 8–16 characters long");
             return false;
@@ -212,96 +221,3 @@ public class LoginScreen extends AppCompatActivity
 
 
 
-    /*
-        private  boolean validateInfo (String email, String password)
-    {
-        if (!email.matches("^[a-zA-Z0-9._]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"))
-        {
-            return  false;
-        } else if (!password.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\\W).{8,16}$"))
-        {
-             return false;
-        }
-        return true;
-    }
-
-        // Didnt need it cause the validation field handles it all:
-          // Empty field prevention
-        if (semail.isEmpty())
-        {
-            email.setError("This field is required!");
-        }
-
-        if (spassword.isEmpty())
-        {
-            password.setError("This field is required!");
-        }
-           private boolean validateField(EditText field, String type)
-    {
-
-        String value = field.getText().toString().trim();
-
-        // Prevent user from leaving emtpy fields
-        if (value.isEmpty())
-        {
-            if (type.equals("email"))
-            {
-                field.setError("Email is required");
-            } else if (type.equals("password"))
-            {
-                field.setError("Password is required");
-            } else
-            {
-                field.setError("This field is required");
-            }
-            return false;
-        }
-            // Email validation
-            if (type.equals("email"))
-            {
-                String emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
-                if (!value.matches(emailRegex))
-                {
-                    field.setError("Enter a valid email address");
-                    return false;
-                }
-            }
-
-            // Password validation
-            if (type.equals("password"))
-            {
-                if (value.length() < 8)
-                {
-                    field.setError("Password must be at least 8 characters");
-                    return false;
-                }
-            }
-
-        return true;
-    }
-
-     public void clickedloginbtn (View view)
-    {
-        EditText email= findViewById(R.id.Email2);
-        EditText password = findViewById(R.id.Password2);
-
-        // login after validation
-
-        String semail = email.getText().toString().trim();
-        String spassword = password.getText().toString().trim();
-
-
-        // Call validateInfor function on this button
-        if (!validateInfo(semail,spassword))
-        {
-            email.setError("Invalid email");
-            password.setError("Invalid password ");
-            return;
-        }
-
-
-        login(semail,spassword);
-
-    }
-
-        */

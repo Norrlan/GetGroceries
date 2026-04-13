@@ -44,7 +44,7 @@
         android:textStyle="bold"
         app:cornerRadius="12dp"/>
 
-    <!-- Divider -->
+    <!-- small divider -->
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"

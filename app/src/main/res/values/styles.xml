@@ -3,7 +3,7 @@
 
     <style name="BottomNavActiveIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
 
-        <item name="color">@color/bottom_nav_active_indicator_color</item>
+        <item name="indicatorColor">@color/bottom_nav_active_indicator_color</item>
         <item name="android:width">64dp</item>
         <item name="android:height">32dp</item>
         <item name="android:insetLeft">8dp</item>

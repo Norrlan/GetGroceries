@@ -57,63 +57,66 @@ public class RegisterScreen extends AppCompatActivity
         String password = passwordField.getText().toString().trim();
 
         // Empty
-        if (email.isEmpty()) {
+        if (email.isEmpty())
+        {
             emailField.setError("Email is required");
             return false;
         }
 
         // Spaces
-        if (email.contains(" ")) {
+        if (email.contains(" "))
+        {
             emailField.setError("Email cannot contain spaces");
             return false;
         }
 
-        // Lowercase only
-        if (!email.equals(email.toLowerCase())) {
+        // Ensure email is in Lowercase only
+        if (!email.equals(email.toLowerCase()))
+        {
             emailField.setError("Email must be in lowercase");
             return false;
         }
 
         // Must contain @
-        if (!email.contains("@")) {
+        if (!email.contains("@"))
+        {
             emailField.setError("Email must contain '@'");
             return false;
         }
 
-        /*
-           if (email.length() < 8 || email.length() > 16) {
-            emailField.setError("Email must be 8–16 characters long");
-            return false;
-        }*
-        */
-
+        // password validation
 
          // Empty
-        if (password.isEmpty()) {
+        if (password.isEmpty())
+        {
             passwordField.setError("Password is required");
             return false;
         }
 
         // Spaces
-        if (password.contains(" ")) {
+        if (password.contains(" "))
+        {
             passwordField.setError("Password cannot contain spaces");
             return false;
         }
 
         // Length 8–16
-        if (password.length() < 8 || password.length() > 16) {
+        if (password.length() < 8 || password.length() > 16)
+        {
             passwordField.setError("Password must be 8–16 characters long");
             return false;
         }
 
         // At least 1 uppercase
-        if (!password.matches(".*[A-Z].*")) {
+        if (!password.matches(".*[A-Z].*"))
+        {
             passwordField.setError("Password must contain at least one uppercase letter");
             return false;
         }
 
         // Contain at least 1 special character
-        if (!password.matches(".*[!@#$%^&*()_+=<>?/{}~|].*")) {
+        if (!password.matches(".*[!@#$%^&*()_+=<>?/{}~|].*"))
+        {
             passwordField.setError("Password must contain at least one special character");
             return false;
         }
@@ -131,8 +134,8 @@ public class RegisterScreen extends AppCompatActivity
         {
                     if (task.isSuccessful())
                     {
-                        // Check if the user is signed in (non-null) and update UI accordingly.
-                        // if the user isnt signed in display the Toast
+                        // Check if the user is signed in  and update UI accordingly.
+                        // if the user isnt signed and display the Toast
                         FirebaseUser user = mAuth.getCurrentUser();
                         if (user == null)
                         {
@@ -143,25 +146,30 @@ public class RegisterScreen extends AppCompatActivity
 
                         //get the unique id for the user.
                         String uid = user.getUid();
-
                         // Create profile object to be used in the user profile.
                         UserProfile profile = new UserProfile(email, uid);
+                            // save profile to firestore
+                        db.collection("users").document(uid).set(profile).addOnSuccessListener(aVoid -> {}).addOnFailureListener(e -> {});
 
-                        db.collection("users").document(uid).set(profile)
-                                .addOnSuccessListener(aVoid -> {})
-                                .addOnFailureListener(e -> {});
-
-                        Toast.makeText(RegisterScreen.this,
-                                "Registration Success", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RegisterScreen.this, "Registration Success", Toast.LENGTH_SHORT).show();
 
                         // Creating Collection reference for firebase firestore database called users
                         db.collection("users").document(uid).set(profile);
                         //send verifcation email to the users inbox
-                        user.sendEmailVerification();
+                        user.sendEmailVerification().addOnSuccessListener(aVoid ->
+                        {
+                            // force users to signout
+                            mAuth.signOut();
 
-                        // Move to LoginScreen
-                        startActivity(new Intent(this, LoginScreen.class));
-                        finish();// close Register screen
+                            Toast.makeText(RegisterScreen.this, "Verification email sent to " + email ,
+                                    Toast.LENGTH_LONG).show();
+
+                            // Move to LoginScreen
+                            startActivity(new Intent(this, LoginScreen.class));
+                            finish();
+                        }).addOnFailureListener(e -> {Toast.makeText(RegisterScreen.this, "Failed to send verification email: " + e.getMessage(),
+                                    Toast.LENGTH_LONG).show();
+                        });
 
                     }
 
