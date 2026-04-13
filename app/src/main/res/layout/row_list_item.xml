@@ -47,8 +47,7 @@
         android:layout_height="38dp"
         android:layout_gravity="end"
         android:padding="4dp"
-        android:src="@drawable/ic_delete"
-        app:tint="@color/lime_green"
+        android:src="@drawable/blc_delete"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/item_name"
         app:layout_constraintBottom_toBottomOf="@id/item_image"/>

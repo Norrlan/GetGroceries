@@ -13,8 +13,11 @@ public class ListItem
     private String productCategory;
     private String productCurrency;
 
+    public ListItem() {}
+
     public ListItem(GroceryProducts p) // ListItem constructor
     {
+        this.id = UUID.randomUUID().toString();
         this.productName = p.getNamefield();
         this.productImageUrl = p.getImageUrl();
         this.productPrice = p.getPricefield();
@@ -22,6 +25,7 @@ public class ListItem
         this.productCategory = p.getProductcategory();
         this.productCurrency = p.getCurrencyfield();
     }
+
 
     //Getters
 
@@ -56,5 +60,35 @@ public class ListItem
     public String getProductCategory()
     {
         return productCategory;
+    }
+
+    //setters
+    public void setId(String id)
+    {
+        this.id = id;
+    }
+    public void setProductName(String productName)
+    {
+        this.productName = productName;
+    }
+    public void setProductImageUrl(String productImageUrl)
+    {
+        this.productImageUrl = productImageUrl;
+    }
+    public void setProductPrice(String productPrice)
+    {
+        this.productPrice = productPrice;
+    }
+    public void setProductCurrency(String productCurrency)
+    {
+        this.productCurrency = productCurrency;
+    }
+    public void setStoreLink(String storeLink)
+    {
+        this.storeLink = storeLink;
+    }
+    public void setProductCategory(String productCategory)
+    {
+        this.productCategory = productCategory;
     }
 }

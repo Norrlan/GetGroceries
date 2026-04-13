@@ -1,30 +1,48 @@
-// this class holds the list name,id and a list item
 package com.example.getgroceries;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
 public class UserList
 {
+
     private String id;
     private String name;
     private List<ListItem> items;
 
-    public  UserList(String name)
+
+    public UserList()
+    {
+        this.items = new ArrayList<>();
+    }
+
+    public UserList(String name)
     {
         this.id = UUID.randomUUID().toString();
         this.name = name;
         this.items = new ArrayList<>();
     }
 
-    public  String getId()
+    public String getId()
     {
         return id;
     }
 
-    public  String getName()
+    // Firestore needs this setter
+    public void setId(String id)
     {
-        return  name;
+        this.id = id;
+    }
+
+    public String getName()
+    {
+        return name;
+    }
+
+    public void setName(String name)
+    {
+        this.name = name;
     }
 
     public List<ListItem> getItems()
@@ -32,14 +50,18 @@ public class UserList
         return items;
     }
 
+    public void setItems(List<ListItem> items)
+    {
+        this.items = items;
+    }
+
     public void addItem(ListItem item)
     {
         items.add(item);
     }
 
-    public void removeItem(String itemId) // for removing items in a list
+    public void removeItem(String itemId)
     {
-        items.removeIf(item -> getId().equals(itemId));
+        items.removeIf(item -> item.getId().equals(itemId));
     }
-
 }

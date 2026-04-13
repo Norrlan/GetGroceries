@@ -1,77 +1,111 @@
 package com.example.getgroceries;
-// this class is for holding and displaying the User Lists that have been created
 
-import  androidx.lifecycle.LiveData;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.getgroceries.ListItem;
-import com.example.getgroceries.UserList;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.List;
-public class ListsView extends ViewModel
 
-{
+public class ListsView extends ViewModel {
+
     private final MutableLiveData<List<UserList>> listsLiveData = new MutableLiveData<>(new ArrayList<>());
+    private final MutableLiveData<Boolean> listAlreadyExistsLiveData = new MutableLiveData<>();
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private boolean listenerRegistered = false;
 
     public LiveData<List<UserList>> getLists()
     {
         return listsLiveData;
     }
 
-    // method for creating Lists -
+    public LiveData<Boolean> getListAlreadyExists()
+    {
+        return listAlreadyExistsLiveData;
+    }
+
+    // Only register listener once
+    public void loadLists()
+    {
+        if (listenerRegistered) return; // ADD THIS CHECK
+        listenerRegistered = true;
+
+        db.collection("lists").addSnapshotListener((snapshot, error) ->
+        {
+            if (error != null || snapshot == null) return;
+
+            List<UserList> loaded = new ArrayList<>();
+            for (var doc : snapshot.getDocuments())
+            {
+                UserList list = doc.toObject(UserList.class);
+                if (list != null)
+                {
+                    list.setId(doc.getId());
+                    loaded.add(list);
+                }
+            }
+            listsLiveData.setValue(loaded);
+        });
+    }
+
+    // Create a new list and save to Firestore
     public void createList(String name, ListItem firstItem)
     {
-        List<UserList> current = listsLiveData.getValue();
-        if (current == null) current = new ArrayList<>();
+        db.collection("lists").whereEqualTo("name", name).get().addOnSuccessListener(query -> {
+                    if (!query.isEmpty())
+                    {
+                        listAlreadyExistsLiveData.setValue(true);
+                        return;
+                    }
+                    UserList newList = new UserList(name);
+                    newList.addItem(firstItem);
+                    db.collection("lists").add(newList);
 
-        UserList newList = new UserList(name);
-        newList.addItem(firstItem);
-
-        current.add(newList);
-        listsLiveData.setValue(current);
+                });
     }
-    // method for adding an item to the list
-    public void addItemToList(String listId, ListItem item)
-    {
-        List<UserList> current = listsLiveData.getValue();
-        if (current == null) return;
 
-        for (UserList list : current)
+    // Add item to existing list in Firestore
+    public void addItemToList(String listId, ListItem item) {
+        DocumentReference ref = db.collection("lists").document(listId);
+        ref.get().addOnSuccessListener(doc ->
         {
-            if (list.getId().equals(listId))
-            {
-                list.addItem(item);
-                break;
-            }
-        }
+            UserList list = doc.toObject(UserList.class);
+            if (list == null) return;
+            list.addItem(item);
+            ref.set(list);
 
-        listsLiveData.setValue(current);
+        });
     }
 
-    // method to remove Lists on the List Screen
-    public void  removeListItem(String listid, String itemId)
+    // Remove a specific item from a list in Firestore
+    public void removeListItem(String listId, String itemId)
     {
-        List<UserList> current = listsLiveData.getValue();
-        if (current == null ) return;
+        DocumentReference ref = db.collection("lists").document(listId);
+        ref.get().addOnSuccessListener(doc -> {
+            UserList list = doc.toObject(UserList.class);
+            if (list == null) return;
+            list.removeItem(itemId);
+            ref.set(list);
 
-        for (UserList list: current)
-        {
-            if (list.getId().equals(listid))
-            {
-                list.removeItem(itemId);
-                break;
-            }
-        }
+        });
     }
 
+    // Delete an entire list from Firestore
+    public void deleteList(String listId)
+    {
+        db.collection("lists").document(listId).delete();
+
+    }
+
+    // Get a list by id from local LiveData
     public UserList getListById(String listId)
     {
         List<UserList> current = listsLiveData.getValue();
         if (current == null) return null;
-
-        for (UserList list: current)
+        for (UserList list : current)
         {
             if (list.getId().equals(listId))
             {
@@ -80,6 +114,4 @@ public class ListsView extends ViewModel
         }
         return null;
     }
-
-
 }

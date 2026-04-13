@@ -21,7 +21,8 @@ public class ListDetailsFragment extends Fragment
     private ListDetailsAdapter adapter;
     private String listId;
 
-    public ListDetailsFragment() {
+    public ListDetailsFragment()
+    {
         // Required empty public constructor
     }
 

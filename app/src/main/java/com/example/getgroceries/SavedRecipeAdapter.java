@@ -44,20 +44,10 @@ public class SavedRecipeAdapter extends RecyclerView.Adapter<SavedRecipeAdapter.
         SavedRecipe recipe = recipeList.get(position);
 
         holder.title.setText(recipe.title);
-        // Show first ingredient as preview
-        if (recipe.ingredients != null && recipe.ingredients.contains("\n"))
-        {
-            holder.preview.setText(recipe.ingredients.split("\n")[0]);
-        }
-        else
-        {
-            holder.preview.setText(recipe.ingredients);
-        }
 
         // Open recipe
         holder.itemView.setOnClickListener(v -> listener.onRecipeClick(recipe));
 
-        // Delete recipe
         holder.deleteBtn.setOnClickListener(v -> listener.onDeleteClick(recipe));
     }
 
@@ -76,8 +66,20 @@ public class SavedRecipeAdapter extends RecyclerView.Adapter<SavedRecipeAdapter.
         {
             super(itemView);
             title = itemView.findViewById(R.id.item_title);
-            preview = itemView.findViewById(R.id.item_preview);
+            // removed cause its a bit unneccessary : preview = itemView.findViewById(R.id.item_preview);
             deleteBtn = itemView.findViewById(R.id.btnDelete);
         }
     }
 }
+/*
+* unneccesary feature:
+*  // Show first ingredient as preview
+        if (recipe.ingredients != null && recipe.ingredients.contains("\n"))
+        {
+            holder.preview.setText(recipe.ingredients.split("\n")[0]);
+        }
+        else
+        {
+            holder.preview.setText(recipe.ingredients);
+        }
+* */
