@@ -44,7 +44,8 @@ public class ForgottenPassword extends AppCompatActivity
                     return;
                 }
 
-                mAuth.sendPasswordResetEmail(email).addOnCompleteListener(task -> // Logic to send reset email to users email address.
+                // Logic to send reset email to users email address.
+     mAuth.sendPasswordResetEmail(email).addOnCompleteListener(task ->
                         {
                             if (task.isSuccessful())
                             {

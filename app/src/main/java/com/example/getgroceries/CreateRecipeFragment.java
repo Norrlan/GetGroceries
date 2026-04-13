@@ -26,7 +26,7 @@ public class CreateRecipeFragment extends Fragment
     private static final String API_KEY = "5c410c00a31c4958a650170e1db88d03"; // api key from spoonacular
     private static final String BASE_URL = "https://api.spoonacular.com/"; // spoonacular api website
 
-    //initialise all  datafields  involved on the createRecipe Fragemnt
+    //initialise all  data fields  involved in the createRecipe Fragemnt
     private EditText recipeInput;
     private EditText urlInput;
     private Button generateButton;
@@ -86,7 +86,7 @@ public class CreateRecipeFragment extends Fragment
         });
     }
 
-    // STEP 1: search by name → get id → STEP 2: get full info
+    // Method to Search& and Retrieve recipe data using name and id to get full info
     private void searchAndOpenRecipe(String recipeName)
     {
         setLoading(true);
@@ -121,7 +121,8 @@ public class CreateRecipeFragment extends Fragment
                 });
     }
 
-    // Get full recipe info by id and open details screen
+
+    //Method to Get full recipe info by id and open details screen
     private void getRecipeDetails(int recipeId)
     {
 
@@ -141,8 +142,8 @@ public class CreateRecipeFragment extends Fragment
                     }
 
                     @Override
-                    public void onFailure(Call<RecipeModel> call,
-                                          Throwable t) {
+                    public void onFailure(Call<RecipeModel> call, Throwable t)
+                    {
                         setLoading(false);
                         Toast.makeText(getContext(),
                                 "Failed: " + t.getMessage(),
@@ -151,7 +152,7 @@ public class CreateRecipeFragment extends Fragment
                 });
     }
 
-    // Extract recipe from a website URL
+    // Method to extract recipe from a website URL
     private void extractAndOpenRecipe(String url)
     {
         setLoading(true);
@@ -159,13 +160,13 @@ public class CreateRecipeFragment extends Fragment
         apiService.extractRecipeFromUrl(url, true, "5c410c00a31c4958a650170e1db88d03").enqueue(new Callback<RecipeModel>()
                 {
                     @Override
-                    public void onResponse(Call<RecipeModel> call,
-                                           Response<RecipeModel> response)
+                    public void onResponse(Call<RecipeModel> call, Response<RecipeModel> response)
                     {
                         setLoading(false);
 
                         //If it fails to produce the recipe as a result provide the response code as a Toast.
                         // Mainly to check if I have ran out of requests for the API. I might get 920 or 420 if the request I am allowed is 200
+                        // Spoonacular api is really generous with their request amounts
                         if (!response.isSuccessful() || response.body() == null)
                         {
                             Toast.makeText(getContext(), "Could not extract recipe from URL" + " Code: " + response.code(), Toast.LENGTH_LONG).show();
@@ -175,7 +176,7 @@ public class CreateRecipeFragment extends Fragment
                         openDetailsFragment(response.body());
                     }
 
-                    //same as above but its not API related
+
                     @Override
                     public void onFailure(Call<RecipeModel> call, Throwable t)
                     {
@@ -185,7 +186,7 @@ public class CreateRecipeFragment extends Fragment
                 });
     }
 
-    // Opens RecipeDetailsFragment passing the full RecipeModel
+    // Method to open RecipeDetailsFragment passing the full RecipeModel
     private void openDetailsFragment(RecipeModel recipe)
     {
         Fragment detailsFragment = RecipeDetailsFragment.newInstance(recipe.getTitle());

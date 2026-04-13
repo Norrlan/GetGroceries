@@ -2,11 +2,14 @@ package com.example.getgroceries;
 
 import com.google.gson.annotations.SerializedName;
 
-//Model for the ingredients that will be displayed in the RecipeDetailsFragment
-
+/**
+ * Model class representing a single ingredient in a recipe.
+ * Maps to the 'extendedIngredients' array returned by the Spoonacular API
+ * in the Get Recipe Information endpoint.
+ * Each field uses @SerializedName to match the exact JSON key from the API response.
+ */
 public class IngredientModel
 {
-
    @SerializedName("name")
    public String name;
 
@@ -16,7 +19,7 @@ public class IngredientModel
    @SerializedName("unit")
    public String unit;
 
-   @SerializedName("original") // orginal ingredient data from the api
+   @SerializedName("original")
    public String original;
 
    public IngredientModel() {}
@@ -33,7 +36,7 @@ public class IngredientModel
       {
          return original;
       }
-      if (unit != null && !unit.isEmpty()) // return the amount the user entered and the unit  if the
+      if (unit != null && !unit.isEmpty())
       {
          return amount + " " + unit;
       }

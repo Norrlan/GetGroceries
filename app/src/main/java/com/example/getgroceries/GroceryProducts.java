@@ -17,9 +17,7 @@ public class GroceryProducts
 
 
     public GroceryProducts()
-    {
-
-    }
+    {}
 
 
     //getters
@@ -52,7 +50,9 @@ public class GroceryProducts
     {
         return productcategory;
     }
-    public int getStoreLogo () // /  Method to match the store name with the logog
+
+    // Method to match the store name with the logo
+    public int getStoreLogo ()
     {
 
         if (storeName.equalsIgnoreCase("Amazon")) return R.drawable.amazon;
@@ -64,7 +64,6 @@ public class GroceryProducts
     }
 
     //setters
-
     public void setNamefield(String setnamefield)
     {
 

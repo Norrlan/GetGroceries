@@ -88,7 +88,7 @@ public class HomeFragment extends Fragment
     // method to Fetch the products data entered in manually  from Firestore
      private void fetchProducts()
      {
-         //loop through the document
+
          db.collection("products").get().addOnSuccessListener(queryDocumentSnapshots ->
          {
              productsList.clear();
@@ -98,8 +98,9 @@ public class HomeFragment extends Fragment
                  GroceryProducts products = doc.toObject(GroceryProducts.class);
                  productsList.add(products);
              }
-             adapter.notifyDataSetChanged(); // Notify any registered observers that the data set has changed.
-         }).addOnFailureListener(e -> android.util.Log.e("FIREBASE", "Erro loading products", e));
+             adapter.notifyDataSetChanged();
+         })
+         .addOnFailureListener(e -> android.util.Log.e("FIREBASE", "Error loading products", e));
      }
 
 
